@@ -3,10 +3,15 @@
 import Phaser from 'phaser';
 import { S } from './state.js';
 import { sfx } from './audio.js';
+import { G } from './ui.js';
 import { CREW, CREW_IDS } from './data/sols.js';
-import { ROOMS, LINKS, STATIONS, STARTS, REACH, walkable, findPath } from './data/map.js';
+import { ROOMS, LINKS, STATIONS, STARTS, REACH, walkable, findPath, roomAt } from './data/map.js';
+import { createRoomVisuals } from './room-visuals.js';
+import { atmosphere } from './environment.js';
+import { WORLD_W, WORLD_H, DEFAULT_ZOOM, zoomLimits, clampZoom, cameraScale, followFraming } from './data/base-camera.js';
+import { attachBaseZoomInput } from './base-zoom-input.js';
 
-const WORLD_W = 1672, WORLD_H = 941, SPEED = 190, K = 2; // K = texture resolution (2x for crisp zoom)
+const SPEED = 190, K = 2; // K = texture resolution (2x for crisp zoom)
 const QUERY = new URLSearchParams(location.search);
 const DEBUG = QUERY.has('debug');
 const SHAPES = ['map', 'shapes'].includes(QUERY.get('debug')); // walkable-area overlay, only on request
@@ -127,19 +132,30 @@ const GLOWS = [
 
 export function createBase(bridge) {
   let scene;
+  let zoomLevel = DEFAULT_ZOOM;
 
   class BaseScene extends Phaser.Scene {
     constructor() { super('base'); }
-    preload() { this.load.image('base', 'assets/base.webp'); }
+    preload() {
+      const assets = import.meta.env.BASE_URL + 'assets/';
+      this.load.image('base', assets + 'base.webp');
+      this.load.image('base-wilted', assets + 'visual/base-wilted.jpg');
+      this.load.image('base-night', assets + 'visual/base-night.jpg');
+      this.load.image('base-night-wilted', assets + 'visual/base-night-wilted.jpg');
+    }
 
     create() {
       scene = this;
       this.add.image(0, 0, 'base').setOrigin(0).setDisplaySize(WORLD_W, WORLD_H);
+      this.night = this.add.image(0, 0, 'base-night').setOrigin(0).setDisplaySize(WORLD_W, WORLD_H).setDepth(.05).setAlpha(atmosphere.night);
+      this.wind = this.add.graphics().setDepth(.2);
+      this.windTime = 0;
       this.cameras.main.setBounds(0, 0, WORLD_W, WORLD_H);
       this.keys = this.input.keyboard.addKeys('W,A,S,D,UP,DOWN,LEFT,RIGHT', false);
       sharedTextures(this);
       this.fx = []; this.emitters = [];
       this.buildAmbience();
+      this.rooms = createRoomVisuals(this);
 
       // Stations: a glowing floor pad + a floating icon badge.
       this.markers = {};
@@ -150,23 +166,34 @@ export function createBase(bridge) {
         const badge = this.add.container(st.x, st.y - 44, [bg, icon]).setDepth(4000);
         this.markers[id] = { pad, bg, badge, st, seed: Math.random() * 6, state: 'none' };
       }
+      this.airlockSign = this.add.text(STATIONS.airlock.x, STATIONS.airlock.labelY, '↓ AIRLOCK · ROVER EXIT', {
+        fontFamily: 'Trebuchet MS', fontSize: '13px', fontStyle: 'bold', backgroundColor: '#102b42', color: '#d3fbff',
+        padding: { x: 12, y: 7 }, stroke: '#102b42', strokeThickness: 1,
+      }).setOrigin(.5).setDepth(4002);
 
       // Astronauts
       this.astros = {};
       for (const id of CREW_IDS) this.astros[id] = this.makeAstro(id);
 
       this.input.on('pointerdown', (p) => {
-        if (bridge.paused()) return;
+        if (bridge.paused() || p.wasTouch) return;
         const w = p.positionToCamera(this.cameras.main);
-        if (DEBUG) console.log('map point', Math.round(w.x), Math.round(w.y));
-        const a = this.astros[S.current];
-        // Tapping a station walks next to it (never teleports, never auto-completes).
-        let tx = w.x, ty = w.y;
-        for (const st of Object.values(STATIONS)) if (Math.hypot(st.x - w.x, st.y - w.y) < 40 || Math.hypot(st.x - w.x, st.y - 62 - w.y) < 26) { tx = st.x; ty = st.y; }
-        a.path = findPath(a.c.x, a.c.y, tx, ty);
-        const end = a.path[a.path.length - 1];
-        this.spawn('ripple', end.x, end.y, { life: 500, s0: 0.15, s1: 0.75, a: 0.9, depth: 3 });
+        this.walkTo(w);
       });
+      const detachZoom = attachBaseZoomInput(this.game.canvas, {
+        canTap: () => !bridge.paused() && !bridge.hidden?.(),
+        canZoom: () => !bridge.paused() && !bridge.hidden?.() && (bridge.canZoom?.() ?? true),
+        getZoom: () => zoomLevel,
+        setZoom: value => this.setViewZoom(value),
+        tap: (x, y) => {
+          const rect = this.game.canvas.getBoundingClientRect();
+          const point = this.cameras.main.getWorldPoint((x - rect.left) * this.scale.width / rect.width, (y - rect.top) * this.scale.height / rect.height);
+          const picked = Object.values(this.astros).find(a => Math.abs(point.x - a.c.x) <= 26 && point.y >= a.c.y - 90 && point.y <= a.c.y + 5);
+          if (picked && picked.id !== S.current) bridge.select(picked.id);
+          else this.walkTo(point);
+        },
+      });
+      this.events.once('shutdown', detachZoom);
 
       if (SHAPES) {
         const g = this.add.graphics().setDepth(5000);
@@ -176,16 +203,82 @@ export function createBase(bridge) {
       }
 
       this.scale.on('resize', () => this.fitCamera());
+      const layout = new ResizeObserver(() => this.fitCamera());
+      for (const id of ['hud', 'tasks', 'mission-dock']) {
+        const el = document.getElementById(id);
+        if (el) layout.observe(el);
+      }
+      this.events.once('shutdown', () => layout.disconnect());
+      const ui = document.getElementById('ui');
+      let uiVisible = ui && !ui.classList.contains('hidden');
+      const visibilityLayout = new MutationObserver(() => {
+        const visible = ui && !ui.classList.contains('hidden');
+        if (visible !== uiVisible) { uiVisible = visible; this.fitCamera(); }
+      });
+      if (ui) visibilityLayout.observe(ui, { attributes: true, attributeFilter: ['class'] });
+      this.events.once('shutdown', () => visibilityLayout.disconnect());
       this.fitCamera();
       this.select(S.current);
       this.refresh();
       bridge.ready();
+      this.routeLine = this.add.graphics().setDepth(2);
+      const sync = () => {
+        if (bridge.hidden?.()) { this.lastRoom = null; bridge.room?.(null); this.game.loop.sleep(); this.game.canvas.style.visibility = 'hidden'; }
+        else { this.game.canvas.style.visibility = ''; this.game.loop.wake(); }
+      };
+      this.syncVisibility = sync;
+      const observer = new MutationObserver(sync);
+      for (const id of ['landing','overlay','rover','pause']) observer.observe(document.getElementById(id), { attributes: true, attributeFilter: ['class'] });
+      document.addEventListener('visibilitychange', sync);
+      window.addEventListener('blur', () => this.input.keyboard.resetKeys());
+      sync();
+    }
+
+    walkTo(w) {
+        if (DEBUG) console.log('map point', Math.round(w.x), Math.round(w.y));
+        const a = this.astros[S.current];
+        // Tapping a station walks next to it (never teleports, never auto-completes).
+        let tx = w.x, ty = w.y;
+        for (const st of Object.values(STATIONS)) if (Math.hypot(st.x - w.x, st.y - w.y) < (st.tapRadius || 40) || Math.hypot(st.x - w.x, st.y - 62 - w.y) < 26 || st.labelY && Math.abs(st.x - w.x) < 108 && Math.abs(st.labelY - w.y) < 22) { tx = st.x; ty = st.y; }
+        a.path = findPath(a.c.x, a.c.y, tx, ty);
+        const end = a.path[a.path.length - 1];
+        if (end) this.spawn('ripple', end.x, end.y, { life: 500, s0: 0.15, s1: 0.75, a: 0.9, depth: 3 });
     }
 
     fitCamera() {
       const { width, height } = this.scale;
+      if (this.overviewMode) {
+        const reserved = width <= 760 ? 340 : height <= 500 ? 170 : 280;
+        this.cameras.main.setZoom(Math.min((width - 24) / WORLD_W, Math.max(100, height - reserved) / WORLD_H));
+        this.cameras.main.centerOn(WORLD_W / 2, WORLD_H / 2);
+        bridge.cameraChanged?.();
+        return;
+      }
       if (QUERY.get('debug') === 'map') return this.cameras.main.setZoom(Math.min(width / WORLD_W, height / WORLD_H));
-      this.cameras.main.setZoom(Math.max(width / 1150, height / 660, 0.6));
+      zoomLevel = clampZoom(zoomLevel, width, height);
+      this.cameras.main.setZoom(cameraScale(zoomLevel, width, height));
+      this.frameCrew();
+      bridge.cameraChanged?.();
+    }
+
+    frameCrew() {
+      const { width, height } = this.scale;
+      const box = id => document.getElementById(id)?.getBoundingClientRect();
+      const hud = box('hud'), tasks = box('tasks'), dock = box('mission-dock');
+      // The task card spans the phone. On desktop it stays to the left of the crew.
+      const top = Math.max(hud?.bottom || 0, width <= 760 ? tasks?.bottom || 0 : 0) + 12;
+      const bottom = dock?.height ? dock.top - (width <= 760 ? 72 : 16) : height;
+      const frame = followFraming(width, height, this.cameras.main.zoom, { top, bottom, edgeY: STATIONS.airlock.y });
+      this.followOffsetY = frame.offsetY;
+      this.cameras.main.setBounds(0, frame.boundsY, WORLD_W, frame.boundsHeight);
+      this.cameras.main.setFollowOffset(0, frame.offsetY);
+    }
+
+    setViewZoom(value, reset = false) {
+      if (this.overviewMode && value <= zoomLevel && !reset) return;
+      zoomLevel = clampZoom(value, this.scale.width, this.scale.height);
+      if (this.overviewMode) this.select(S.current);
+      else this.fitCamera();
     }
 
     // ---------- Astronaut rig: separate legs, arms, body and helmet so they can be animated ----------
@@ -207,12 +300,13 @@ export function createBase(bridge) {
       const pick = img('pick', 0, -112).setVisible(false);
       const c = this.add.container(x, y, [ring, shadow, rig, tag, pick]);
       c.setSize(52, 90).setInteractive(new Phaser.Geom.Rectangle(-26, -86, 52, 90), Phaser.Geom.Rectangle.Contains);
-      c.on('pointerdown', (p, lx, ly, ev) => { if (id !== S.current) { ev.stopPropagation(); bridge.select(id); } });
+      c.on('pointerdown', (p, lx, ly, ev) => { if (!p.wasTouch && !bridge.paused() && id !== S.current) { ev.stopPropagation(); bridge.select(id); } });
       return { id, c, rig, upper, legL, legR, armL, armR, torso, head, eyes, ring, shadow, pick, path: null,
         ph: 0, walk: 0, face: 'down', back: false, idle: 0, wave: 0, nextWave: 2500 + Math.random() * 6000, blink: 0, nextBlink: 1500 + Math.random() * 2500, hop: 0, seed: Math.random() * 10 };
     }
 
     animate(o, time, dt, vx, vy) {
+      if (G.reducedMotion) { time = 0; o.wave = 0; o.hop = 0; }
       const moving = !!(vx || vy), selected = o.id === S.current;
       o.walk += ((moving ? 1 : 0) - o.walk) * Math.min(1, dt / 110);
       if (moving) {
@@ -246,13 +340,31 @@ export function createBase(bridge) {
     }
 
     select(id) {
+      this.overviewMode = false;
+      this.cameras.main.setBounds(0, 0, WORLD_W, WORLD_H);
+      this.cameras.main.setBackgroundColor(0xc2452d);
+      this.fitCamera();
       for (const [k, a] of Object.entries(this.astros)) if (k !== id) a.path = null;
       this.astros[id].hop = 260;
-      this.cameras.main.startFollow(this.astros[id].c, true, 0.1, 0.1, 0, 30);
+      const follow = G.reducedMotion ? 1 : 0.1;
+      this.cameras.main.startFollow(this.astros[id].c, true, follow, follow, 0, this.followOffsetY || 0);
       this.lastNear = undefined;
     }
 
     refresh() {
+      this.syncVisibility?.();
+      this.rooms?.setState(S);
+      if (!this.worldLabels) {
+        this.worldLabels = {};
+        for (const id of ['generator','greenhouse','air','command']) {
+          const st = STATIONS[id];
+          this.worldLabels[id] = this.add.text(st.x, st.y + 25, '', { fontFamily: 'Trebuchet MS', fontSize: '12px', backgroundColor: '#101a3c', color: '#baffd4', padding: { x: 7, y: 4 } }).setOrigin(.5).setDepth(4001);
+        }
+      }
+      this.worldLabels.generator.setText(S.flags.panelsDirty ? '☁ DUSTY SOLAR · +5' : '☀ SOLAR READY · +15');
+      this.worldLabels.greenhouse.setText(S.flags.greenhouseRestored ? '🌱 RECOVERED · WATER FLOWING' : S.sol >= 3 ? '⚠ PLANT NEEDS HELP' : '🌱 GREENHOUSE');
+      this.worldLabels.air.setText(S.flags.pipesRepaired ? '✓ SUPPLY RESTORED' : S.sol >= 3 ? '⚠ SUPPLY FROZEN' : 'WATER RECYCLING');
+      this.worldLabels.command.setText(S.res.shield < 40 ? '⚠ SHIELDING LOW' : '✓ SHIELDING SAFE');
       for (const [id, m] of Object.entries(this.markers)) {
         const state = bridge.stationState(id); // 'mine' | 'other' | 'info' | 'none'
         m.state = state;
@@ -288,7 +400,7 @@ export function createBase(bridge) {
       // Engineering: steam from the pipes
       this.every(520, () => this.spawn('dot-steam', 437 + R(-3, 3), 452, { life: 1700, vy: -20, vx: R(-6, 10), s0: 0.2, s1: 0.75, a: 0.5, depth: 1 }));
       // Greenhouse: sparkles on the leaves
-      this.every(330, () => { const a = Math.random() * TAU, r = Math.sqrt(Math.random()); this.spawn('spark', 1500 + Math.cos(a) * r * 125, 486 + Math.sin(a) * r * 56, { life: 900, s0: 0.1, s1: 0.5, a: 0.9, spin: 1.2, pop: true, add: true, depth: 1 }); });
+      // The greenhouse uses water/crop state instead of unconditional sparkles.
       // Antenna: radio waves going up to Earth
       this.every(1100, () => this.spawn('wave', 1447, 62, { life: 1600, s0: 0.25, s1: 1.1, a: 0.85, vy: -14, vx: 9, depth: 1 }));
       // Solar panels: glints of sunlight
@@ -299,8 +411,33 @@ export function createBase(bridge) {
     }
 
     update(time, dt) {
+      if (bridge.hidden?.()) return;
+      // Lighting can be previewed from its menu; it never advances campaign time.
+      const night = G.reducedMotion ? atmosphere.night : Phaser.Math.Linear(this.night.alpha, atmosphere.night, Math.min(1, dt / 350));
+      this.night.setAlpha(night);
+      if (G.reducedMotion || bridge.paused()) this.tweens.pauseAll(); else this.tweens.resumeAll();
       dt = Math.min(dt, 50);
+      if (!bridge.paused()) this.windTime += dt;
+      this.wind.clear();
+      if (!G.reducedMotion) {
+        const storm = S.sol === 2, t = this.windTime / 1000;
+        this.wind.lineStyle(storm ? 2 : 1, night > .5 ? 0xd6c2c0 : 0xffd3a0, storm ? .35 : .17);
+        for (let i = 0; i < (storm ? 22 : 7); i++) {
+          const right = i % 2, left = right ? 1350 : 12, width = right ? 270 : 190;
+          const x = left + (i * 47 + t * (storm ? 85 : 24)) % width, y = 655 + (i * 39 % 235);
+          this.wind.lineBetween(x, y, Math.min(left + width, x + (storm ? 38 : 16)), y - 3);
+        }
+      }
+      this.rooms?.update(dt, bridge.paused(), G.reducedMotion);
       const a = this.astros[S.current];
+      const currentRoom = bridge.paused() ? null : roomAt(a.c.x, a.c.y);
+      if (currentRoom !== this.lastRoom) { this.lastRoom = currentRoom; bridge.room?.(currentRoom); }
+      this.routeLine?.clear();
+      if (a.path?.length && this.routeLine) {
+        this.routeLine.lineStyle(3, 0xffd23f, .7); this.routeLine.beginPath(); this.routeLine.moveTo(a.c.x, a.c.y);
+        for (const p of a.path) this.routeLine.lineTo(p.x, p.y);
+        this.routeLine.strokePath();
+      }
       let vx = 0, vy = 0, free = false;
       if (!bridge.paused()) {
         const k = this.keys;
@@ -340,7 +477,7 @@ export function createBase(bridge) {
         if (m.pad.visible) { m.pad.setScale((1 + Math.sin(time / 330 + m.seed) * 0.1) / K); m.pad.alpha = 0.75 + Math.sin(time / 330 + m.seed) * 0.25; }
       }
 
-      for (const e of this.emitters) { e.acc += dt; if (e.acc >= e.ms) { e.acc = 0; e.fn(); } }
+      if (!G.reducedMotion && !bridge.paused()) for (const e of this.emitters) { e.acc += dt; if (e.acc >= e.ms) { e.acc = 0; e.fn(); } }
       for (let i = this.fx.length - 1; i >= 0; i--) {
         const f = this.fx[i]; f.t += dt;
         const p = f.t / f.life;
@@ -360,8 +497,29 @@ export function createBase(bridge) {
   });
 
   return {
+    stationRect: id => {
+      if (!scene || !STATIONS[id]) return null;
+      const camera = scene.cameras.main, point = STATIONS[id], bounds = scene.game.canvas.getBoundingClientRect();
+      const sx = bounds.width / scene.scale.width, sy = bounds.height / scene.scale.height;
+      return { left: bounds.left + ((point.x - camera.worldView.x) * camera.zoom - 34) * sx, top: bounds.top + ((point.y - camera.worldView.y) * camera.zoom - 50) * sy, width: 68 * sx, height: 65 * sy };
+    },
+    taskComplete: task => scene?.rooms?.complete(task),
+    describeRooms: () => scene?.rooms?.describe() || [],
+    isOverview: () => !!scene?.overviewMode,
+    zoomState: () => ({ value: zoomLevel, ...zoomLimits(scene?.scale.width || window.innerWidth, scene?.scale.height || window.innerHeight), overview: !!scene?.overviewMode }),
+    zoomBy: amount => scene?.setViewZoom(zoomLevel + amount),
+    resetZoom: () => scene?.setViewZoom(DEFAULT_ZOOM, true),
+    overview: () => {
+      if (!scene) return;
+      scene.overviewMode = true;
+      scene.cameras.main.removeBounds();
+      scene.cameras.main.setBackgroundColor(0x101e30);
+      scene.cameras.main.stopFollow();
+      scene.fitCamera();
+    },
+    navigate: id => { if (scene && STATIONS[id]) { const a = scene.astros[S.current], target = STATIONS[id]; a.path = findPath(a.c.x, a.c.y, target.x, target.y); } },
     select: (id) => scene?.select(id),
     refresh: () => scene?.refresh(),
-    resetPositions: () => { if (scene) for (const id of CREW_IDS) { const a = scene.astros[id]; [a.c.x, a.c.y] = STARTS[id]; a.path = null; a.face = 'down'; } },
+    resetPositions: () => { if (scene) { scene.rooms?.reset(); for (const id of CREW_IDS) { const a = scene.astros[id]; [a.c.x, a.c.y] = STARTS[id]; a.path = null; a.face = 'down'; } } },
   };
 }

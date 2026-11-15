@@ -3,6 +3,7 @@
 import { h, shuffle, sfx } from '../ui.js';
 import { ask, SRC } from './index.js';
 import { cv, loop, rnd, rr, ink, lg, rg, label, star, TAU } from '../art.js';
+export { greenhouseRescue as greenhouse } from './greenhouse-rescue.js';
 
 const mix = (a, b, k) => { const p = (c, i) => parseInt(c.slice(1 + i * 2, 3 + i * 2), 16); return `rgb(${[0, 1, 2].map((i) => Math.round(p(a, i) + (p(b, i) - p(a, i)) * k)).join(',')})`; };
 
@@ -169,7 +170,7 @@ function tray(stressed) {
   return c;
 }
 
-export async function greenhouse(body, params, api) {
+async function soilExperiment(body, params, api) {
   await ask(body, api, 'MARS SOIL EXPERIMENT, day 14. Two trays of ryegrass got the same light and water. Which tray is STRESSED?', [
     { node: tray(false), label: 'Tray A', why: 'Tray A looks green and upright. Look at the other one!' },
     { node: tray(true), label: 'Tray B', correct: true, why: 'Yes. The grass is alive, but it is struggling in the Mars-like soil.' },
@@ -233,7 +234,7 @@ export async function dna(body, params, api) {
     };
     const btns = 'ATCG'.split('').map((b) => h('button', { class: 'px-btn dna-btn', style: `--c:${BCOL[b]}`, onclick: () => {
       if (g >= gaps.length) return;
-      if (PAIR[top[gaps[g]]] === b) { g++; sfx('zip'); draw(); if (g === gaps.length) { sfx('sparkle'); msg.textContent = '✨ DNA repaired!'; setTimeout(resolve, 1200); } }
+      if (PAIR[top[gaps[g]]] === b) { g++; sfx('zip'); draw(); if (g === gaps.length) { sfx('sparkle'); msg.textContent = '✨ DNA repaired!'; api.later(resolve, 1200); } }
       else { api.miss(); msg.textContent = `Not ${b}. Look at the letter above the white box: A↔T, C↔G.`; }
     } }, b));
     draw();

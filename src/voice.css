@@ -1,0 +1,27 @@
+/* One optional sound switch; the speech itself is already visible in the bubble. */
+.voice-controls { display:inline-flex; align-items:center; gap:8px; padding:0; border:0; background:none; color:#f1f6ff; }
+.voice-toggle { display:grid; place-items:center; width:44px; height:44px; flex:0 0 44px; padding:0; border:1px solid #a8d6ee55; border-radius:11px; background:#ffffff0b; color:#f1f6ff; font:700 18px var(--font); cursor:pointer; touch-action:manipulation; }
+.voice-toggle[aria-pressed=false] { opacity:.7; }
+.voice-toggle:focus-visible { outline:3px solid #a8e5ff; outline-offset:2px; }
+.voice-controls.with-transcript { display:flex; flex-wrap:wrap; justify-content:flex-end; width:100%; }
+.voice-transcript { flex-basis:100%; margin:0; line-height:1.5; }
+.voice-controls [hidden], .voice-controls[hidden] { display:none; }
+.rocky-nav .voice-controls, .ld-nav .voice-controls, .tour-actions .voice-controls { flex:0 0 auto; margin:0; }
+#rocky .rocky-nav .voice-toggle { min-width:44px; font-size:18px; }
+.coach-bar { position:relative; z-index:5; display:flex; margin:8px; }
+.coach-bar[hidden] { display:none; }
+.coach-bar .btn { min-height:44px; font-size:13px; padding:6px 12px; box-shadow:none; }
+#rover > .coach-bar { position:absolute; left:12px; bottom:100px; max-width:calc(100% - 24px); }
+.coach-help { position:fixed; inset:0; z-index:1500; background:#080e21ed; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:24px; gap:16px; overflow-y:auto; }
+.coach-help .voice-controls { width:min(560px,100%); padding:24px; border:1px solid #9cc9ff55; border-radius:18px; background:#102039; }
+.coach-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:8px; max-width:560px; }
+.coach-actions .btn { min-height:44px; }
+.voice-settings { display:grid; gap:10px; padding-top:12px; }
+.voice-settings select { color:#fff; background:#172746; padding:8px; }
+#rv-mission { width:auto; min-width:170px; max-width:230px; display:flex; flex-wrap:wrap; align-items:center; gap:4px 12px; }
+#rv-mission b { font-size:14px; }
+#rv-mission .rv-progress { font-size:13px; color:#d3e7f1; }
+#rv-mission small { flex-basis:100%; font-size:12px; }
+@media (max-width:480px) { .coach-help { padding:16px; } .coach-help .voice-controls { padding:18px; } .coach-actions .btn { font-size:13px; padding:6px 10px; } }
+.tour-card .tour-actions .voice-controls { margin:0; }
+.tour-card .voice-controls .voice-toggle { font-size:18px; }

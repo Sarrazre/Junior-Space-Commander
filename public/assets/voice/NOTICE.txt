@@ -1,0 +1,27 @@
+Junior Space Commander — prepared narration credits
+
+The game plays authored, pre-recorded MP3 narration only. It contains no voice
+cloning, voice synthesis, downloadable inference model, browser worker, or
+personalized-voice feature. It never records a microphone.
+
+The prepared recordings were created offline with Tiny Voca and Dizione by
+Muhammed Nazeem (n4ze3m):
+https://github.com/n4ze3m/tiny-voca
+https://github.com/n4ze3m/dizione
+Code and model weights: Apache License 2.0.
+Tiny Voca source reference: 28e0722c6ad040d74a1f6e63d77621272477a71f
+Voice-generation weights reference: a46fbe0c8514cb32f5e80be987e6c96ef0540f8d
+Dizione reference: f8629fe989f3d0db5f440f9b3c6f0154f2e6110f
+Rocky uses the synthetic M2 voice. Mission Control uses F2.
+All dialogue is authored game content. No dataset or training is included.
+
+Provenance and license texts retained in licenses/:
+- tiny-voca.txt and dizione.txt (Apache-2.0)
+- LICENSE.cmudict and LICENSE.homograph-data (pronunciation sources)
+- onnxruntime.txt and onnxruntime-third-party.txt
+- pyodide.txt, python.txt and numpy-1.26.4.txt
+
+The model, pronunciation data and inference runtimes are not distributed with
+this game. Their license notices are retained to document the offline tools
+used to create the existing recordings. Source asset downloads contain only
+prepared narration and these notices.

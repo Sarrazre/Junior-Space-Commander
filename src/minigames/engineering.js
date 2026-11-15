@@ -44,11 +44,11 @@ export function wires(body, { pairs = 4, label: name = 'Generator' } = {}, api) 
     if (sel.dataset.i === b.dataset.i) {
       const [x1, y1] = at(sel, 'L'), [x2, y2] = at(b, 'R'), d = curve(x1, y1, x2, y2), col = set[b.dataset.i][0];
       svg.append(svgEl('path', { d, fill: 'none', stroke: '#10152e', 'stroke-width': 15, 'stroke-linecap': 'round' }), svgEl('path', { d, fill: 'none', stroke: col, 'stroke-width': 10, 'stroke-linecap': 'round' }), svgEl('path', { d, fill: 'none', stroke: '#ffffff66', 'stroke-width': 3, 'stroke-linecap': 'round', transform: 'translate(0 -3)' }));
-      const zap = h('span', { class: 'zap', style: `left:${x2}px;top:${y2}px` }); box.append(zap); setTimeout(() => zap.remove(), 500);
+      const zap = h('span', { class: 'zap', style: `left:${x2}px;top:${y2}px` }); box.append(zap); api.later(() => zap.remove(), 500);
       sel.disabled = b.disabled = true; sel.classList.remove('sel'); sel = null; preview.setAttribute('d', ''); api.ok();
       lamps.children[pairs - left].classList.add('on'); left--; power = (pairs - left) / pairs;
       msg.textContent = left ? 'Connected! Power is rising.' : 'All wires connected. Full power!';
-      if (left === 0) setTimeout(() => api.finish(`${name} wiring is safe. Engineers check their systems every day, because a small loose wire can become a big problem.`), 1100);
+      if (left === 0) api.later(() => api.finish(`${name} wiring is safe. Engineers check their systems every day, because a small loose wire can become a big problem.`), 1100);
     } else { api.miss(); msg.textContent = 'Those do not match. Same colour AND same shape!'; }
   });
   body.replaceChildren(h('p', {}, `${name.toUpperCase()}: reconnect every wire to its matching socket.`), h('div', { class: 'row', style: 'align-items:center' }, meter, lamps), box, msg);
@@ -100,17 +100,17 @@ export function panels(body, params, api) {
   const clean = h('i', { style: 'width:0%' }), air = h('i', { style: 'width:100%;background:linear-gradient(90deg,#2a8fd8,#9fe8ff)' });
   const msg = h('p', { class: 'msg' });
   let t = TIME;
-  const timer = setInterval(() => {
+  const timer = api.every(() => {
     if (finished) return;
     const px = d.getImageData(0, 0, W, H).data; let clear = 0, n = 0;
     for (let i = 3; i < px.length; i += 4 * 97) { n++; if (px[i] < 60) clear++; }
     const pct = Math.round(100 * clear / n);
     clean.style.width = pct + '%';
     t -= 0.25; air.style.width = Math.max(0, 100 * t / TIME) + '%';
-    if (pct >= 90) { finished = true; d.clearRect(0, 0, W, H); clean.style.width = '100%'; msg.textContent = '✨ Sparkling clean!'; setTimeout(() => api.finish('The panels shine again and solar power is back to normal! Outdoor work on Mars is risky, so astronauts work quickly and carefully.', 'Mars fact: gravity on Mars is only 38% of Earth\'s. Source: NASA Mars facts.'), 1300); }
+    if (pct >= 90) { finished = true; d.clearRect(0, 0, W, H); clean.style.width = '100%'; msg.textContent = '✨ Sparkling clean!'; api.later(() => api.finish('The panels shine again and solar power is back to normal! Outdoor work on Mars is risky, so astronauts work quickly and carefully.', 'Mars fact: gravity on Mars is only 38% of Earth\'s. Source: NASA Mars facts.'), 1300); }
     else if (t <= 0) { api.miss(); t = TIME; msg.textContent = 'Suit air ran low! Max took a break to refill. Keep wiping!'; }
   }, 250);
-  api.onCleanup(() => clearInterval(timer));
+  api.onCleanup(() => api.cancelTimer(timer));
   body.replaceChildren(
     h('p', {}, 'Wipe ALL the dust off the solar panels before the suit air runs out. Drag your finger or mouse!'),
     h('p', { style: 'color:#ffd23f' }, '💡 Super Jumps: Mars gravity is only 38% of Earth\'s, so Max bounces to the panels in big leaps!'),
@@ -144,9 +144,9 @@ function signalScene(get) {
 }
 
 export function report(body, params, api) {
+  const findings = params.discoveries?.length ? [...new Set(params.discoveries)] : ['Our crew recorded observations in the discovery cabinet.'];
   const items = shuffle([
-    ['💧 Rock samples show that water once flowed on Mars', true], ['🌱 Plants can grow in Mars-like soil, but they get stressed', true],
-    ['☢️ Radiation went up during the solar storm', true], ['🤖 Rocky told 14 robot jokes', false], ['🧦 Max lost one sock in the Airlock', false],
+    ...findings.map(text => [text, true]), ['🤖 Rocky told 14 robot jokes', false], ['🧦 Max lost one sock in the Airlock', false],
   ]);
   const picked = new Set();
   const msg = h('p', { class: 'msg' });
@@ -157,18 +157,18 @@ export function report(body, params, api) {
   } }, text));
   const send = () => {
     const good = items.every(([, real], i) => picked.has(i) === real);
-    if (!good) { api.miss(); msg.textContent = 'Mission Control only needs the 3 science findings. Check your choices!'; return; }
+    if (!good) { api.miss(); msg.textContent = `Mission Control needs the ${findings.length} recorded science findings. Leave out the jokes!`; return; }
     api.ok();
     const bar = h('i', { style: 'width:0%' }), status = h('p', { class: 'msg' }, 'Signal leaving Mars...');
     body.replaceChildren(h('p', {}, '📡 SENDING REPORT TO EARTH'), view, h('div', { class: 'gauge', style: 'margin-top:10px' }, bar), status,
       h('p', { style: 'color:#ffd23f' }, 'A radio message takes 4 to 24 minutes to travel from Mars to Earth, depending on where the planets are. We are speeding it up!'));
-    const timer = setInterval(() => {
+    const timer = api.every(() => {
       p += 1.25; bar.style.width = p + '%';
       status.textContent = p < 50 ? `Signal travelling through space... ${Math.round(p * 0.24)} min` : p < 100 ? `Almost at Earth... ${Math.round(p * 0.24)} min` : 'Earth received the report!';
-      if (p >= 100) { clearInterval(timer); setTimeout(() => api.finish('Mission Control says: "Great work, Astro Base!" Because of the delay, Mars astronauts cannot chat live with Earth. They must solve many problems on their own.', 'Source: NASA Mars communications facts.'), 1300); }
+      if (p >= 100) { api.cancelTimer(timer); api.later(() => api.finish('Mission Control says: "Great work, Astro Base!" Because of the delay, Mars astronauts cannot chat live with Earth. They must solve many problems on their own.', 'Source: NASA Mars communications facts.'), 1300); }
     }, 60);
-    api.onCleanup(() => clearInterval(timer));
+    api.onCleanup(() => api.cancelTimer(timer));
   };
-  body.replaceChildren(h('p', {}, 'Choose the 3 real science findings to send to Mission Control on Earth.'), view, h('div', { class: 'row' }, cards), msg,
+  body.replaceChildren(h('p', {}, `Choose the ${findings.length} findings from YOUR discovery cabinet to send to Mission Control.`), view, h('div', { class: 'row' }, cards), msg,
     h('div', { class: 'row' }, h('button', { class: 'px-btn ok', onclick: send }, '📡 SEND REPORT')));
 }

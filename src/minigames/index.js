@@ -1,6 +1,6 @@
 // Mini-game shell: opens the lab terminal, runs one game, returns { done, mistakes }.
 // Every game is a function (body, params, api) that builds its own screen inside `body`.
-import { $, h, sfx, onAbort } from '../ui.js';
+import { $, h, sfx, onAbort, toast } from '../ui.js';
 import { cv, loop, star, rg, drawAstro, confetti, TAU } from '../art.js';
 import { CREW } from '../data/sols.js';
 import { wires, panels, report } from './engineering.js';
@@ -9,39 +9,90 @@ import { vitals, cells, dose, fitness } from './medlab.js';
 import { bones, medical } from './medical.js';
 import { rocks, gravity, biosensor } from './science.js';
 import { plants, harvest, greenhouse, dna } from './botany.js';
-import { runRover } from '../rover.js';
 import { music } from '../audio.js';
+import { G } from '../ui.js';
+import { createGameClock } from '../game-clock.js';
+import { createCoach } from '../voice-ui.js';
+import { narration } from '../narration.js';
 
 const GAMES = { wires, panels, report, pipes, sequence, charge, vitals, cells, dose, fitness, bones, medical, rocks, gravity, biosensor, plants, harvest, greenhouse, dna };
 
+async function loadRover(params, prev) {
+  let active = true;
+  const ov = $('#overlay');
+  const panel = h('div', { class: 'term' }, h('p', {}, 'Preparing the rover…'));
+  const close = () => { if (ov.contains(panel)) { ov.replaceChildren(); ov.classList.add('hidden'); } };
+  const unAbort = onAbort(() => { active = false; close(); });
+  ov.replaceChildren(panel); ov.classList.remove('hidden');
+  try {
+    const { runRover, runInstrumentMission } = await import('../rover.js');
+    if (!active) return { done: false, cancelled: true, mistakes: 0 };
+    close();
+    const result = await (G.instrumentMode || params.instrumentOnly ? runInstrumentMission(params) : runRover(params));
+    if (active && !result.cancelled) music.play(prev);
+    return result;
+  } catch (error) {
+    if (!active) return { done: false, cancelled: true, mistakes: 0 };
+    console.warn('Rover could not load', error);
+    close();
+    const root = $('#rover');
+    root.replaceChildren(); root.classList.add('hidden'); document.body.classList.remove('in-rover');
+    toast('The rover could not load. Check your connection and try again.');
+    music.play(prev);
+    return { done: false, error: 'The rover could not load. Please try again.', mistakes: 0 };
+  } finally { unAbort(); }
+}
+
 export function runGame(id, params = {}, meta = {}) {
   const prev = music.current;
-  if (id === 'rover') return runRover(params).then((r) => { music.play(prev); return r; });
+  if (id === 'rover') return loadRover(params, prev);
   return new Promise((resolve) => {
     const ov = $('#overlay');
     let mistakes = 0;
+    let active = true, completed = false;
+    let helpOpen = false, readingReport = false, coach;
+    const clock = createGameClock();
+    let previous = performance.now();
+    const timer = setInterval(() => {
+      const now = performance.now();
+      clock.tick(Math.min(100, now - previous), G.paused || document.hidden || helpOpen || readingReport);
+      previous = now;
+    }, 16);
     const cleanups = [];
     const colour = Object.values(CREW).find((c) => c.name === meta.who)?.css || '#4aa8ff';
     const body = h('div', { class: 'term-body' });
-    const teardown = () => { cleanups.forEach((f) => f()); ov.classList.add('hidden'); ov.replaceChildren(); };
-    const unAbort = onAbort(teardown);
-    const close = (done) => { unAbort(); teardown(); sfx('close'); music.play(prev); resolve({ done, mistakes }); };
+    const teardown = () => { active = false; coach?.dispose(); narration.stop(); clearInterval(timer); clock.clear(); cleanups.forEach((f) => f()); ov.classList.add('hidden'); ov.replaceChildren(); };
+    const unAbort = onAbort(() => { teardown(); resolve({ done: false, cancelled: true, mistakes }); });
+    const close = (done) => { if (!active) return; unAbort(); teardown(); sfx('close'); music.play(prev); resolve({ done, mistakes }); };
     const term = h('div', { class: 'term' },
-      h('div', { class: 'term-bar' }, h('span', { class: 'leds' }, h('i'), h('i'), h('i')), h('span', { class: 'who', style: `background:${colour}` }, meta.who || ''), h('span', { class: 'title' }, meta.title || ''), h('button', { class: 'x', onclick: () => close(false) }, '✕ LEAVE')),
+      h('div', { class: 'term-bar' }, h('span', { class: 'leds' }, h('i'), h('i'), h('i')), h('span', { class: 'who', style: `background:${colour}` }, meta.who || ''), h('span', { class: 'title' }, meta.title || ''), h('button', { class: 'x', onclick: () => close(completed) }, '✕ LEAVE')),
       body);
+    for (const event of ['click', 'pointerdown', 'pointermove', 'keydown']) term.addEventListener(event, (e) => {
+      if (!active || G.paused || document.hidden || helpOpen && !e.target.closest('.coach-help')) { e.preventDefault(); e.stopImmediatePropagation(); }
+    }, true);
     ov.replaceChildren(term);
     ov.classList.remove('hidden');
+    if (meta.science) coach = createCoach({ mission: id, owner: 'mission-help', host: term, pause: on => { helpOpen = on; body.inert = on; } });
     sfx('open'); music.play('game');
     const api = {
-      miss() { mistakes++; sfx('bad'); term.classList.remove('oops'); void term.offsetWidth; term.classList.add('oops'); },
-      ok() { sfx('ok'); },
+      setCoachStage: (stage, context) => coach?.setStage(stage, context),
+      later: (fn, ms) => active && clock.schedule(() => { if (active) fn(); }, ms),
+      every: (fn, ms) => active && clock.schedule(() => { if (active) fn(); }, ms, true),
+      cancelTimer: (id) => clock.cancel(id),
+      miss() { if (!active || completed) return; mistakes++; sfx('bad'); term.classList.remove('oops'); void term.offsetWidth; term.classList.add('oops'); },
+      ok() { if (active && !completed) sfx('ok'); },
       onCleanup(f) { cleanups.push(f); },
       /** Show the "complete" screen with what was learned and where the science comes from. */
       finish(text, source) {
+        if (!active || completed) return;
+        completed = true;
+        coach?.dispose();
+        clock.clear();
         sfx('win');
         const stars = mistakes === 0 ? 3 : mistakes <= 2 ? 2 : 1;
         const { c } = cv(170, 130);
         loop(c, (g, t) => {
+          if (G.reducedMotion) t = 0;
           g.clearRect(0, 0, 170, 130);
           g.fillStyle = rg(g, 85, 66, 6, 80, ['#ffd23f55', '#ffd23f00']); g.fillRect(0, 0, 170, 130);
           g.save(); g.translate(85, 66); g.rotate(t * 0.4); g.fillStyle = '#ffd23f22'; for (let i = 0; i < 10; i++) { g.rotate(TAU / 10); g.beginPath(); g.moveTo(0, 0); g.lineTo(-9, -80); g.lineTo(9, -80); g.fill(); } g.restore();
@@ -55,8 +106,16 @@ export function runGame(id, params = {}, meta = {}) {
           h('p', { style: 'text-align:center' }, mistakes === 0 ? 'Perfect, no mistakes!' : `Mistakes: ${mistakes}. Scientists learn from mistakes too.`),
           text && h('p', {}, text),
           source && h('p', { class: 'src' }, source),
-          h('div', { class: 'row' }, h('button', { class: 'px-btn ok', onclick: () => close(true) }, 'CONTINUE ▶')));
+          h('div', { class: 'row' },
+            h('button', { class: 'btn small', 'aria-pressed': 'false', onclick: e => {
+              readingReport = !readingReport;
+              e.currentTarget.textContent = readingReport ? 'Return automatically' : 'Keep reading';
+              e.currentTarget.setAttribute('aria-pressed', String(readingReport));
+            } }, 'Keep reading'),
+            h('button', { class: 'px-btn ok', onclick: () => close(true) }, 'CONTINUE ▶')));
         confetti(term);
+        // Return without another required click; pause and hidden tabs freeze this clock.
+        clock.schedule(() => close(true), 5000);
       },
     };
     GAMES[id](body, params, api);

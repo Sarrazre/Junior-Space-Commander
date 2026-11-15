@@ -1,0 +1,3701 @@
+[
+  {
+    "key": "rocky|Hi, I'm Rocky, the robot of Astro Base! Welcome to Mars! This is Astro Base, our home.",
+    "text": "Hi, I'm Rocky, the robot of Astro Base! Welcome to Mars! This is Astro Base, our home.",
+    "normalized": "Hi, I'm Rocky, the robot of Astro Base! Welcome to Mars! This is Astro Base, our home.",
+    "sentences": [
+      "Hi, I'm Rocky, the robot of Astro Base!",
+      "Welcome to Mars!",
+      "This is Astro Base, our home."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/f0c7dba8de1ba4da7dcb.mp3"
+  },
+  {
+    "key": "rocky|You are the Commander! Meet your crew: Max, Elsa, Charles and Lea.",
+    "text": "You are the Commander! Meet your crew: Max, Elsa, Charles and Lea.",
+    "normalized": "You are the Commander! Meet your crew: Max, Elsa, Charles and Lea.",
+    "sentences": [
+      "You are the Commander!",
+      "Meet your crew: Max, Elsa, Charles and Lea."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/8fc30da137dded2cd15f.mp3"
+  },
+  {
+    "key": "rocky|Every sol: solve a problem, finish the crew jobs and keep power, shielding, food and health up.",
+    "text": "Every sol: solve a problem, finish the crew jobs and keep power, shielding, food and health up.",
+    "normalized": "Every sol: solve a problem, finish the crew jobs and keep power, shielding, food and health up.",
+    "sentences": [
+      "Every sol: solve a problem, finish the crew jobs and keep power, shielding, food and health up."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/3be1439bce42b1be3bd7.mp3"
+  },
+  {
+    "key": "rocky|Five sols. Fifty science points. Ready for launch, Commander?",
+    "text": "Five sols. Fifty science points. Ready for launch, Commander?",
+    "normalized": "Five sols. Fifty science points. Ready for launch, Commander?",
+    "sentences": [
+      "Five sols.",
+      "Fifty science points.",
+      "Ready for launch, Commander?"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/c6256f54a237135e78e9.mp3"
+  },
+  {
+    "key": "rocky|Mission complete, Commander! Your careful observations helped the crew.",
+    "text": "Mission complete, Commander! Your careful observations helped the crew.",
+    "normalized": "Mission complete, Commander! Your careful observations helped the crew.",
+    "sentences": [
+      "Mission complete, Commander!",
+      "Your careful observations helped the crew."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/481a85dc74f35f701cc7.mp3"
+  },
+  {
+    "key": "rocky|Check the highlighted task and its station. Your mission list shows who can help next.",
+    "text": "Check the highlighted task and its station. Your mission list shows who can help next.",
+    "normalized": "Check the highlighted task and its station. Your mission list shows who can help next.",
+    "sentences": [
+      "Check the highlighted task and its station.",
+      "Your mission list shows who can help next."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/9acc13db3c002e8aae4a.mp3"
+  },
+  {
+    "key": "rocky|These meters show power, shielding, food and crew health. Decisions change them. There is no countdown: take your time.",
+    "text": "These meters show power, shielding, food and crew health. Decisions change them. There is no countdown: take your time.",
+    "normalized": "These meters show power, shielding, food and crew health. Decisions change them. There is no countdown: take your time.",
+    "sentences": [
+      "These meters show power, shielding, food and crew health.",
+      "Decisions change them.",
+      "There is no countdown: take your time."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/de9ddb639db600f18d54.mp3"
+  },
+  {
+    "key": "rocky|Max fixes systems, Elsa cares for the crew, Charles studies Mars, and Lea grows food. These buttons switch who you control.",
+    "text": "Max fixes systems, Elsa cares for the crew, Charles studies Mars, and Lea grows food. These buttons switch who you control.",
+    "normalized": "Max fixes systems, Elsa cares for the crew, Charles studies Mars, and Lea grows food. These buttons switch who you control.",
+    "sentences": [
+      "Max fixes systems, Elsa cares for the crew, Charles studies Mars, and Lea grows food.",
+      "These buttons switch who you control."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/0fb4f38298967a389cb0.mp3"
+  },
+  {
+    "key": "rocky|DO FIRST marks today’s decision. Tap this task and the right astronaut walks there. Later, URGENT marks tasks that can help low supplies.",
+    "text": "DO FIRST marks today’s decision. Tap this task and the right astronaut walks there. Later, URGENT marks tasks that can help low supplies.",
+    "normalized": "DO FIRST marks today’s decision. Tap this task and the right astronaut walks there. Later, URGENT marks tasks that can help low supplies.",
+    "sentences": [
+      "DO FIRST marks today’s decision.",
+      "Tap this task and the right astronaut walks there.",
+      "Later, URGENT marks tasks that can help low supplies."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/1ed3d7e8f2f7859022e3.mp3"
+  },
+  {
+    "key": "rocky|The dotted route shows where Max is going. You can also walk with the arrow keys, WASD, or a tap on the floor.",
+    "text": "The dotted route shows where Max is going. You can also walk with the arrow keys, WASD, or a tap on the floor.",
+    "normalized": "The dotted route shows where Max is going. You can also walk with the arrow keys, WASD, or a tap on the floor.",
+    "sentences": [
+      "The dotted route shows where Max is going.",
+      "You can also walk with the arrow keys, WASD, or a tap on the floor."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/cb151df98516b9c36677.mp3"
+  },
+  {
+    "key": "rocky|Tap the green Interact button to begin. At Command, choose today’s decision. After that, your science mission unlocks. Ask Rocky whenever you need help.",
+    "text": "Tap the green Interact button to begin. At Command, choose today’s decision. After that, your science mission unlocks. Ask Rocky whenever you need help.",
+    "normalized": "Tap the green Interact button to begin. At Command, choose today’s decision. After that, your science mission unlocks. Ask Rocky whenever you need help.",
+    "sentences": [
+      "Tap the green Interact button to begin.",
+      "At Command, choose today’s decision.",
+      "After that, your science mission unlocks.",
+      "Ask Rocky whenever you need help."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/8e71a8d4035489c50f9a.mp3"
+  },
+  {
+    "key": "rocky|Ready to fix anything!",
+    "text": "Ready to fix anything!",
+    "normalized": "Ready to fix anything!",
+    "sentences": [
+      "Ready to fix anything!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/9b12ccb9f7e0e436aaab.mp3"
+  },
+  {
+    "key": "control|A healthy crew is a happy crew!",
+    "text": "A healthy crew is a happy crew!",
+    "normalized": "A healthy crew is a happy crew!",
+    "sentences": [
+      "A healthy crew is a happy crew!"
+    ],
+    "speaker": "control",
+    "voice": "F2",
+    "file": "clips/5118dd450a67f9f4af33.mp3"
+  },
+  {
+    "key": "rocky|There is always something to discover!",
+    "text": "There is always something to discover!",
+    "normalized": "There is always something to discover!",
+    "sentences": [
+      "There is always something to discover!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/e1a3ecf6df2ee3d286c5.mp3"
+  },
+  {
+    "key": "control|Let’s grow something amazing!",
+    "text": "Let’s grow something amazing!",
+    "normalized": "Let’s grow something amazing!",
+    "sentences": [
+      "Let’s grow something amazing!"
+    ],
+    "speaker": "control",
+    "voice": "F2",
+    "file": "clips/eeaf90b5c86cd5f4be95.mp3"
+  },
+  {
+    "key": "rocky|Beep boop! Ready when you are, Commander!",
+    "text": "Beep boop! Ready when you are, Commander!",
+    "normalized": "Beep boop! Ready when you are, Commander!",
+    "sentences": [
+      "Beep boop!",
+      "Ready when you are, Commander!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/d2028eedeee48702dbfd.mp3"
+  },
+  {
+    "key": "rocky|First things first: walk Max to the Command Center to decide about today's problem: \"Power overload!\"",
+    "text": "First things first: walk Max to the Command Center 🖥️ to decide about today's problem: \"Power overload!\"",
+    "normalized": "First things first: walk Max to the Command Center to decide about today's problem: \"Power overload!\"",
+    "sentences": [
+      "First things first: walk Max to the Command Center to decide about today's problem: \"Power overload!\""
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6b7783d948470c448874.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Max for: \"Inspect the generator wiring\".",
+    "text": "Max is all done! Switch to Max for: \"Inspect the generator wiring\".",
+    "normalized": "Max is all done! Switch to Max for: \"Inspect the generator wiring\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Max for: \"Inspect the generator wiring\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/5e794cc3af2c1e8bff23.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Elsa for: \"Bone health scan\".",
+    "text": "Max is all done! Switch to Elsa for: \"Bone health scan\".",
+    "normalized": "Max is all done! Switch to Elsa for: \"Bone health scan\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Elsa for: \"Bone health scan\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/31ceb7c4403316988241.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Charles for: \"Rock scanner\".",
+    "text": "Max is all done! Switch to Charles for: \"Rock scanner\".",
+    "normalized": "Max is all done! Switch to Charles for: \"Rock scanner\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Charles for: \"Rock scanner\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/47b5735de4fe8e22e6fd.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Lea for: \"Check plants and temperature\".",
+    "text": "Max is all done! Switch to Lea for: \"Check plants and temperature\".",
+    "normalized": "Max is all done! Switch to Lea for: \"Check plants and temperature\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Lea for: \"Check plants and temperature\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/0fda54a0cc1d58491eac.mp3"
+  },
+  {
+    "key": "rocky|First things first: switch to Max and walk him to the Command Center to decide about today's problem: \"Power overload!\"",
+    "text": "First things first: switch to Max and walk him to the Command Center 🖥️ to decide about today's problem: \"Power overload!\"",
+    "normalized": "First things first: switch to Max and walk him to the Command Center to decide about today's problem: \"Power overload!\"",
+    "sentences": [
+      "First things first: switch to Max and walk him to the Command Center to decide about today's problem: \"Power overload!\""
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/5eb7beaef05c116c8ca9.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Max for: \"Inspect the generator wiring\".",
+    "text": "Elsa is all done! Switch to Max for: \"Inspect the generator wiring\".",
+    "normalized": "Elsa is all done! Switch to Max for: \"Inspect the generator wiring\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Max for: \"Inspect the generator wiring\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a8ba10f5208e4f383d87.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Elsa for: \"Bone health scan\".",
+    "text": "Elsa is all done! Switch to Elsa for: \"Bone health scan\".",
+    "normalized": "Elsa is all done! Switch to Elsa for: \"Bone health scan\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Elsa for: \"Bone health scan\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/2dfcfd2e4fb27cf73b79.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Charles for: \"Rock scanner\".",
+    "text": "Elsa is all done! Switch to Charles for: \"Rock scanner\".",
+    "normalized": "Elsa is all done! Switch to Charles for: \"Rock scanner\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Charles for: \"Rock scanner\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/17efcf7ae0fd1ca35eab.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Lea for: \"Check plants and temperature\".",
+    "text": "Elsa is all done! Switch to Lea for: \"Check plants and temperature\".",
+    "normalized": "Elsa is all done! Switch to Lea for: \"Check plants and temperature\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Lea for: \"Check plants and temperature\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/c36987d73fb2f296cc9a.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Max for: \"Inspect the generator wiring\".",
+    "text": "Charles is all done! Switch to Max for: \"Inspect the generator wiring\".",
+    "normalized": "Charles is all done! Switch to Max for: \"Inspect the generator wiring\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Max for: \"Inspect the generator wiring\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/41813c9109171ae6e252.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Elsa for: \"Bone health scan\".",
+    "text": "Charles is all done! Switch to Elsa for: \"Bone health scan\".",
+    "normalized": "Charles is all done! Switch to Elsa for: \"Bone health scan\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Elsa for: \"Bone health scan\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/7049d8111bcc23620815.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Charles for: \"Rock scanner\".",
+    "text": "Charles is all done! Switch to Charles for: \"Rock scanner\".",
+    "normalized": "Charles is all done! Switch to Charles for: \"Rock scanner\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Charles for: \"Rock scanner\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/0a8fd16cc66aa321c26c.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Lea for: \"Check plants and temperature\".",
+    "text": "Charles is all done! Switch to Lea for: \"Check plants and temperature\".",
+    "normalized": "Charles is all done! Switch to Lea for: \"Check plants and temperature\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Lea for: \"Check plants and temperature\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/74bac175615038ac989f.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Max for: \"Inspect the generator wiring\".",
+    "text": "Lea is all done! Switch to Max for: \"Inspect the generator wiring\".",
+    "normalized": "Lea is all done! Switch to Max for: \"Inspect the generator wiring\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Max for: \"Inspect the generator wiring\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/e84457969b55ea8dab26.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Elsa for: \"Bone health scan\".",
+    "text": "Lea is all done! Switch to Elsa for: \"Bone health scan\".",
+    "normalized": "Lea is all done! Switch to Elsa for: \"Bone health scan\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Elsa for: \"Bone health scan\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6bfb71ebdc7c15d633ae.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Charles for: \"Rock scanner\".",
+    "text": "Lea is all done! Switch to Charles for: \"Rock scanner\".",
+    "normalized": "Lea is all done! Switch to Charles for: \"Rock scanner\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Charles for: \"Rock scanner\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/81e089fc1a38f2f83f5e.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Lea for: \"Check plants and temperature\".",
+    "text": "Lea is all done! Switch to Lea for: \"Check plants and temperature\".",
+    "normalized": "Lea is all done! Switch to Lea for: \"Check plants and temperature\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Lea for: \"Check plants and temperature\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/3368912d83b1f41001ef.mp3"
+  },
+  {
+    "key": "rocky|Max's next job: \"Inspect the generator wiring\". Walk to the Generator and press Interact!",
+    "text": "Max's next job: \"Inspect the generator wiring\". Walk to the Generator ⚡ and press Interact!",
+    "normalized": "Max's next job: \"Inspect the generator wiring\". Walk to the Generator and press Interact!",
+    "sentences": [
+      "Max's next job: \"Inspect the generator wiring\".",
+      "Walk to the Generator and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/7223abe232753ffe33a9.mp3"
+  },
+  {
+    "key": "rocky|That is Max's job: \"Inspect the generator wiring\". Switch to Max!",
+    "text": "That is Max's job: \"Inspect the generator wiring\". Switch to Max!",
+    "normalized": "That is Max's job: \"Inspect the generator wiring\". Switch to Max!",
+    "sentences": [
+      "That is Max's job: \"Inspect the generator wiring\".",
+      "Switch to Max!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/5f67521cd0722f103fda.mp3"
+  },
+  {
+    "key": "rocky|Max needs to finish “Inspect the generator wiring” first. Tap that task in the mission list to go there.",
+    "text": "Max needs to finish “Inspect the generator wiring” first. Tap that task in the mission list to go there.",
+    "normalized": "Max needs to finish “Inspect the generator wiring” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Max needs to finish “Inspect the generator wiring” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/3874f3bb9fa65323a009.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Inspect the generator wiring\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Inspect the generator wiring\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Inspect the generator wiring\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Inspect the generator wiring\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/c27ea71a2ed3998f32f6.mp3"
+  },
+  {
+    "key": "rocky|Elsa's next job: \"Bone health scan\". Walk to the Medical station and press Interact!",
+    "text": "Elsa's next job: \"Bone health scan\". Walk to the Medical station 🩺 and press Interact!",
+    "normalized": "Elsa's next job: \"Bone health scan\". Walk to the Medical station and press Interact!",
+    "sentences": [
+      "Elsa's next job: \"Bone health scan\".",
+      "Walk to the Medical station and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/523df8a68513f5d50c14.mp3"
+  },
+  {
+    "key": "rocky|That is Elsa's job: \"Bone health scan\". Switch to Elsa!",
+    "text": "That is Elsa's job: \"Bone health scan\". Switch to Elsa!",
+    "normalized": "That is Elsa's job: \"Bone health scan\". Switch to Elsa!",
+    "sentences": [
+      "That is Elsa's job: \"Bone health scan\".",
+      "Switch to Elsa!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a7d91f07c9e6815d4eda.mp3"
+  },
+  {
+    "key": "rocky|Elsa needs to finish “Bone health scan” first. Tap that task in the mission list to go there.",
+    "text": "Elsa needs to finish “Bone health scan” first. Tap that task in the mission list to go there.",
+    "normalized": "Elsa needs to finish “Bone health scan” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Elsa needs to finish “Bone health scan” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/77f9a267a3b9a72518a0.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Bone health scan\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Bone health scan\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Bone health scan\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Bone health scan\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/91486e819e5d40489fd3.mp3"
+  },
+  {
+    "key": "rocky|Charles's next job: \"Rock scanner\". Walk to the Science scanner and press Interact!",
+    "text": "Charles's next job: \"Rock scanner\". Walk to the Science scanner 🔬 and press Interact!",
+    "normalized": "Charles's next job: \"Rock scanner\". Walk to the Science scanner and press Interact!",
+    "sentences": [
+      "Charles's next job: \"Rock scanner\".",
+      "Walk to the Science scanner and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/f9e8dd236531675326a1.mp3"
+  },
+  {
+    "key": "rocky|That is Charles's job: \"Rock scanner\". Switch to Charles!",
+    "text": "That is Charles's job: \"Rock scanner\". Switch to Charles!",
+    "normalized": "That is Charles's job: \"Rock scanner\". Switch to Charles!",
+    "sentences": [
+      "That is Charles's job: \"Rock scanner\".",
+      "Switch to Charles!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/1b5c570fcf47d757b246.mp3"
+  },
+  {
+    "key": "rocky|Charles needs to finish “Rock scanner” first. Tap that task in the mission list to go there.",
+    "text": "Charles needs to finish “Rock scanner” first. Tap that task in the mission list to go there.",
+    "normalized": "Charles needs to finish “Rock scanner” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Charles needs to finish “Rock scanner” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/b9eee4a2f4aa20b55ec7.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Rock scanner\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Rock scanner\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Rock scanner\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Rock scanner\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/9534552201027da6dc48.mp3"
+  },
+  {
+    "key": "rocky|Lea's next job: \"Check plants and temperature\". Walk to the Greenhouse and press Interact!",
+    "text": "Lea's next job: \"Check plants and temperature\". Walk to the Greenhouse 🌱 and press Interact!",
+    "normalized": "Lea's next job: \"Check plants and temperature\". Walk to the Greenhouse and press Interact!",
+    "sentences": [
+      "Lea's next job: \"Check plants and temperature\".",
+      "Walk to the Greenhouse and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6686aa1bc93ab7ce1f25.mp3"
+  },
+  {
+    "key": "rocky|That is Lea's job: \"Check plants and temperature\". Switch to Lea!",
+    "text": "That is Lea's job: \"Check plants and temperature\". Switch to Lea!",
+    "normalized": "That is Lea's job: \"Check plants and temperature\". Switch to Lea!",
+    "sentences": [
+      "That is Lea's job: \"Check plants and temperature\".",
+      "Switch to Lea!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/1b6c32395f7c7e5e591f.mp3"
+  },
+  {
+    "key": "rocky|Lea needs to finish “Check plants and temperature” first. Tap that task in the mission list to go there.",
+    "text": "Lea needs to finish “Check plants and temperature” first. Tap that task in the mission list to go there.",
+    "normalized": "Lea needs to finish “Check plants and temperature” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Lea needs to finish “Check plants and temperature” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/ec6f08ec55afaf52525d.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Check plants and temperature\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Check plants and temperature\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Check plants and temperature\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Check plants and temperature\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/fc1cbb5f60e2f5de15db.mp3"
+  },
+  {
+    "key": "rocky|First things first: walk Max to the Command Center to decide about today's problem: \"Dusty solar panels\"",
+    "text": "First things first: walk Max to the Command Center 🖥️ to decide about today's problem: \"Dusty solar panels\"",
+    "normalized": "First things first: walk Max to the Command Center to decide about today's problem: \"Dusty solar panels\"",
+    "sentences": [
+      "First things first: walk Max to the Command Center to decide about today's problem: \"Dusty solar panels\""
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/aea346c75a6631f2be69.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Max for: \"Clean the solar panels\".",
+    "text": "Max is all done! Switch to Max for: \"Clean the solar panels\".",
+    "normalized": "Max is all done! Switch to Max for: \"Clean the solar panels\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Max for: \"Clean the solar panels\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/86ceb0f5964ab89bac3d.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Elsa for: \"Routine crew checkup\".",
+    "text": "Max is all done! Switch to Elsa for: \"Routine crew checkup\".",
+    "normalized": "Max is all done! Switch to Elsa for: \"Routine crew checkup\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Elsa for: \"Routine crew checkup\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a0e93ee826852f94414a.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Charles for: \"Rover: collect soil samples\".",
+    "text": "Max is all done! Switch to Charles for: \"Rover: collect soil samples\".",
+    "normalized": "Max is all done! Switch to Charles for: \"Rover: collect soil samples\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Charles for: \"Rover: collect soil samples\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/23c757dcd8b47203912e.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Lea for: \"Test the lettuce harvest\".",
+    "text": "Max is all done! Switch to Lea for: \"Test the lettuce harvest\".",
+    "normalized": "Max is all done! Switch to Lea for: \"Test the lettuce harvest\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Lea for: \"Test the lettuce harvest\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/301cc55b1ea6b0df8108.mp3"
+  },
+  {
+    "key": "rocky|First things first: switch to Max and walk him to the Command Center to decide about today's problem: \"Dusty solar panels\"",
+    "text": "First things first: switch to Max and walk him to the Command Center 🖥️ to decide about today's problem: \"Dusty solar panels\"",
+    "normalized": "First things first: switch to Max and walk him to the Command Center to decide about today's problem: \"Dusty solar panels\"",
+    "sentences": [
+      "First things first: switch to Max and walk him to the Command Center to decide about today's problem: \"Dusty solar panels\""
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/92535ef64e9dd15d61ab.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Max for: \"Clean the solar panels\".",
+    "text": "Elsa is all done! Switch to Max for: \"Clean the solar panels\".",
+    "normalized": "Elsa is all done! Switch to Max for: \"Clean the solar panels\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Max for: \"Clean the solar panels\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/7d04b188a8c83954188c.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Elsa for: \"Routine crew checkup\".",
+    "text": "Elsa is all done! Switch to Elsa for: \"Routine crew checkup\".",
+    "normalized": "Elsa is all done! Switch to Elsa for: \"Routine crew checkup\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Elsa for: \"Routine crew checkup\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/1640385805cc2f8f9b98.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Charles for: \"Rover: collect soil samples\".",
+    "text": "Elsa is all done! Switch to Charles for: \"Rover: collect soil samples\".",
+    "normalized": "Elsa is all done! Switch to Charles for: \"Rover: collect soil samples\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Charles for: \"Rover: collect soil samples\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/c6547bfa36e1b4dee898.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Lea for: \"Test the lettuce harvest\".",
+    "text": "Elsa is all done! Switch to Lea for: \"Test the lettuce harvest\".",
+    "normalized": "Elsa is all done! Switch to Lea for: \"Test the lettuce harvest\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Lea for: \"Test the lettuce harvest\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a41da782fa059f82fa70.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Max for: \"Clean the solar panels\".",
+    "text": "Charles is all done! Switch to Max for: \"Clean the solar panels\".",
+    "normalized": "Charles is all done! Switch to Max for: \"Clean the solar panels\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Max for: \"Clean the solar panels\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/96a70914d627dd42e882.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Elsa for: \"Routine crew checkup\".",
+    "text": "Charles is all done! Switch to Elsa for: \"Routine crew checkup\".",
+    "normalized": "Charles is all done! Switch to Elsa for: \"Routine crew checkup\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Elsa for: \"Routine crew checkup\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/db41da59fc83ea60b25c.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Charles for: \"Rover: collect soil samples\".",
+    "text": "Charles is all done! Switch to Charles for: \"Rover: collect soil samples\".",
+    "normalized": "Charles is all done! Switch to Charles for: \"Rover: collect soil samples\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Charles for: \"Rover: collect soil samples\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/b8ff02cfd7af3bdaca7d.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Lea for: \"Test the lettuce harvest\".",
+    "text": "Charles is all done! Switch to Lea for: \"Test the lettuce harvest\".",
+    "normalized": "Charles is all done! Switch to Lea for: \"Test the lettuce harvest\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Lea for: \"Test the lettuce harvest\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/dad261a33f078593f33c.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Max for: \"Clean the solar panels\".",
+    "text": "Lea is all done! Switch to Max for: \"Clean the solar panels\".",
+    "normalized": "Lea is all done! Switch to Max for: \"Clean the solar panels\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Max for: \"Clean the solar panels\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/b6f0a9b74045394285c6.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Elsa for: \"Routine crew checkup\".",
+    "text": "Lea is all done! Switch to Elsa for: \"Routine crew checkup\".",
+    "normalized": "Lea is all done! Switch to Elsa for: \"Routine crew checkup\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Elsa for: \"Routine crew checkup\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/0ecf81f59e39ae6ca80b.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Charles for: \"Rover: collect soil samples\".",
+    "text": "Lea is all done! Switch to Charles for: \"Rover: collect soil samples\".",
+    "normalized": "Lea is all done! Switch to Charles for: \"Rover: collect soil samples\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Charles for: \"Rover: collect soil samples\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a2712c9ae78f1d622650.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Lea for: \"Test the lettuce harvest\".",
+    "text": "Lea is all done! Switch to Lea for: \"Test the lettuce harvest\".",
+    "normalized": "Lea is all done! Switch to Lea for: \"Test the lettuce harvest\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Lea for: \"Test the lettuce harvest\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/2d3ba1c93ae3f9e9c1fe.mp3"
+  },
+  {
+    "key": "rocky|Max's next job: \"Clean the solar panels\". Walk to the Airlock and press Interact!",
+    "text": "Max's next job: \"Clean the solar panels\". Walk to the Airlock 🚪 and press Interact!",
+    "normalized": "Max's next job: \"Clean the solar panels\". Walk to the Airlock and press Interact!",
+    "sentences": [
+      "Max's next job: \"Clean the solar panels\".",
+      "Walk to the Airlock and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/5b1203a3bcc430437d31.mp3"
+  },
+  {
+    "key": "rocky|That is Max's job: \"Clean the solar panels\". Switch to Max!",
+    "text": "That is Max's job: \"Clean the solar panels\". Switch to Max!",
+    "normalized": "That is Max's job: \"Clean the solar panels\". Switch to Max!",
+    "sentences": [
+      "That is Max's job: \"Clean the solar panels\".",
+      "Switch to Max!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/382b51d6341445b4e0be.mp3"
+  },
+  {
+    "key": "rocky|Max needs to finish “Clean the solar panels” first. Tap that task in the mission list to go there.",
+    "text": "Max needs to finish “Clean the solar panels” first. Tap that task in the mission list to go there.",
+    "normalized": "Max needs to finish “Clean the solar panels” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Max needs to finish “Clean the solar panels” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/cbe1428663be4de562ad.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Clean the solar panels\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Clean the solar panels\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Clean the solar panels\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Clean the solar panels\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/cce0ad28ad01143b40fa.mp3"
+  },
+  {
+    "key": "rocky|Elsa's next job: \"Routine crew checkup\". Walk to the Medical station and press Interact!",
+    "text": "Elsa's next job: \"Routine crew checkup\". Walk to the Medical station 🩺 and press Interact!",
+    "normalized": "Elsa's next job: \"Routine crew checkup\". Walk to the Medical station and press Interact!",
+    "sentences": [
+      "Elsa's next job: \"Routine crew checkup\".",
+      "Walk to the Medical station and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/1bf7fe81b75a36f54365.mp3"
+  },
+  {
+    "key": "rocky|That is Elsa's job: \"Routine crew checkup\". Switch to Elsa!",
+    "text": "That is Elsa's job: \"Routine crew checkup\". Switch to Elsa!",
+    "normalized": "That is Elsa's job: \"Routine crew checkup\". Switch to Elsa!",
+    "sentences": [
+      "That is Elsa's job: \"Routine crew checkup\".",
+      "Switch to Elsa!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/e2af04686855e7e6b5f0.mp3"
+  },
+  {
+    "key": "rocky|Elsa needs to finish “Routine crew checkup” first. Tap that task in the mission list to go there.",
+    "text": "Elsa needs to finish “Routine crew checkup” first. Tap that task in the mission list to go there.",
+    "normalized": "Elsa needs to finish “Routine crew checkup” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Elsa needs to finish “Routine crew checkup” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/c437d840da2921d1767e.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Routine crew checkup\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Routine crew checkup\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Routine crew checkup\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Routine crew checkup\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/9c4ed9a72c927f56a299.mp3"
+  },
+  {
+    "key": "rocky|Charles's next job: \"Rover: collect soil samples\". Walk to the Airlock and press Interact!",
+    "text": "Charles's next job: \"Rover: collect soil samples\". Walk to the Airlock 🚪 and press Interact!",
+    "normalized": "Charles's next job: \"Rover: collect soil samples\". Walk to the Airlock and press Interact!",
+    "sentences": [
+      "Charles's next job: \"Rover: collect soil samples\".",
+      "Walk to the Airlock and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/aaad11aa771dea1d4d14.mp3"
+  },
+  {
+    "key": "rocky|That is Charles's job: \"Rover: collect soil samples\". Switch to Charles!",
+    "text": "That is Charles's job: \"Rover: collect soil samples\". Switch to Charles!",
+    "normalized": "That is Charles's job: \"Rover: collect soil samples\". Switch to Charles!",
+    "sentences": [
+      "That is Charles's job: \"Rover: collect soil samples\".",
+      "Switch to Charles!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/66b5737c4d6d1da9748d.mp3"
+  },
+  {
+    "key": "rocky|Charles needs to finish “Rover: collect soil samples” first. Tap that task in the mission list to go there.",
+    "text": "Charles needs to finish “Rover: collect soil samples” first. Tap that task in the mission list to go there.",
+    "normalized": "Charles needs to finish “Rover: collect soil samples” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Charles needs to finish “Rover: collect soil samples” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/72522dab234214c3e39e.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Rover: collect soil samples\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Rover: collect soil samples\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Rover: collect soil samples\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Rover: collect soil samples\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/5a3880367840e6e4c6c0.mp3"
+  },
+  {
+    "key": "rocky|Lea's next job: \"Test the lettuce harvest\". Walk to the Greenhouse and press Interact!",
+    "text": "Lea's next job: \"Test the lettuce harvest\". Walk to the Greenhouse 🌱 and press Interact!",
+    "normalized": "Lea's next job: \"Test the lettuce harvest\". Walk to the Greenhouse and press Interact!",
+    "sentences": [
+      "Lea's next job: \"Test the lettuce harvest\".",
+      "Walk to the Greenhouse and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/1aa37c9215e1c97ef7c0.mp3"
+  },
+  {
+    "key": "rocky|That is Lea's job: \"Test the lettuce harvest\". Switch to Lea!",
+    "text": "That is Lea's job: \"Test the lettuce harvest\". Switch to Lea!",
+    "normalized": "That is Lea's job: \"Test the lettuce harvest\". Switch to Lea!",
+    "sentences": [
+      "That is Lea's job: \"Test the lettuce harvest\".",
+      "Switch to Lea!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/9e2bf89a35117cfb0395.mp3"
+  },
+  {
+    "key": "rocky|Lea needs to finish “Test the lettuce harvest” first. Tap that task in the mission list to go there.",
+    "text": "Lea needs to finish “Test the lettuce harvest” first. Tap that task in the mission list to go there.",
+    "normalized": "Lea needs to finish “Test the lettuce harvest” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Lea needs to finish “Test the lettuce harvest” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a8178f6e126e99ec5938.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Test the lettuce harvest\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Test the lettuce harvest\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Test the lettuce harvest\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Test the lettuce harvest\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/19a0428305749cae3c59.mp3"
+  },
+  {
+    "key": "rocky|First things first: walk Max to the Command Center to decide about today's problem: \"Cold night on Mars\"",
+    "text": "First things first: walk Max to the Command Center 🖥️ to decide about today's problem: \"Cold night on Mars\"",
+    "normalized": "First things first: walk Max to the Command Center to decide about today's problem: \"Cold night on Mars\"",
+    "sentences": [
+      "First things first: walk Max to the Command Center to decide about today's problem: \"Cold night on Mars\""
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/3981b0ca334703a7a56c.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Max for: \"Restore greenhouse water supply\".",
+    "text": "Max is all done! Switch to Max for: \"Restore greenhouse water supply\".",
+    "normalized": "Max is all done! Switch to Max for: \"Restore greenhouse water supply\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Max for: \"Restore greenhouse water supply\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/68c5d50203457ee8c719.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Elsa for: \"Analyse a blood sample\".",
+    "text": "Max is all done! Switch to Elsa for: \"Analyse a blood sample\".",
+    "normalized": "Max is all done! Switch to Elsa for: \"Analyse a blood sample\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Elsa for: \"Analyse a blood sample\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/f0e9a994c8fbe1d7501f.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Charles for: \"Gravity Garden experiment\".",
+    "text": "Max is all done! Switch to Charles for: \"Gravity Garden experiment\".",
+    "normalized": "Max is all done! Switch to Charles for: \"Gravity Garden experiment\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Charles for: \"Gravity Garden experiment\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/005ab9868945304fbc9e.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Lea for: \"Save the Mars greenhouse\".",
+    "text": "Max is all done! Switch to Lea for: \"Save the Mars greenhouse\".",
+    "normalized": "Max is all done! Switch to Lea for: \"Save the Mars greenhouse\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Lea for: \"Save the Mars greenhouse\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/0f22309edea1cf46f00b.mp3"
+  },
+  {
+    "key": "rocky|First, Max needs to finish \"Restore greenhouse water supply\" at the Air & Water. Then Max can continue.",
+    "text": "First, Max needs to finish \"Restore greenhouse water supply\" at the Air & Water. Then Max can continue.",
+    "normalized": "First, Max needs to finish \"Restore greenhouse water supply\" at the Air & Water. Then Max can continue.",
+    "sentences": [
+      "First, Max needs to finish \"Restore greenhouse water supply\" at the Air & Water.",
+      "Then Max can continue."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/d2abf66321e5f6725b9e.mp3"
+  },
+  {
+    "key": "rocky|First things first: switch to Max and walk him to the Command Center to decide about today's problem: \"Cold night on Mars\"",
+    "text": "First things first: switch to Max and walk him to the Command Center 🖥️ to decide about today's problem: \"Cold night on Mars\"",
+    "normalized": "First things first: switch to Max and walk him to the Command Center to decide about today's problem: \"Cold night on Mars\"",
+    "sentences": [
+      "First things first: switch to Max and walk him to the Command Center to decide about today's problem: \"Cold night on Mars\""
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/81fb797a149c6ce5b485.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Max for: \"Restore greenhouse water supply\".",
+    "text": "Elsa is all done! Switch to Max for: \"Restore greenhouse water supply\".",
+    "normalized": "Elsa is all done! Switch to Max for: \"Restore greenhouse water supply\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Max for: \"Restore greenhouse water supply\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6b92cca0861c1102c712.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Elsa for: \"Analyse a blood sample\".",
+    "text": "Elsa is all done! Switch to Elsa for: \"Analyse a blood sample\".",
+    "normalized": "Elsa is all done! Switch to Elsa for: \"Analyse a blood sample\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Elsa for: \"Analyse a blood sample\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/465b0adf2ed120ceb117.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Charles for: \"Gravity Garden experiment\".",
+    "text": "Elsa is all done! Switch to Charles for: \"Gravity Garden experiment\".",
+    "normalized": "Elsa is all done! Switch to Charles for: \"Gravity Garden experiment\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Charles for: \"Gravity Garden experiment\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/e33901428431a2bf350c.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Lea for: \"Save the Mars greenhouse\".",
+    "text": "Elsa is all done! Switch to Lea for: \"Save the Mars greenhouse\".",
+    "normalized": "Elsa is all done! Switch to Lea for: \"Save the Mars greenhouse\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Lea for: \"Save the Mars greenhouse\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/bbb18f6a15ce13c990ce.mp3"
+  },
+  {
+    "key": "rocky|First, Max needs to finish \"Restore greenhouse water supply\" at the Air & Water. Then Elsa can continue.",
+    "text": "First, Max needs to finish \"Restore greenhouse water supply\" at the Air & Water. Then Elsa can continue.",
+    "normalized": "First, Max needs to finish \"Restore greenhouse water supply\" at the Air & Water. Then Elsa can continue.",
+    "sentences": [
+      "First, Max needs to finish \"Restore greenhouse water supply\" at the Air & Water.",
+      "Then Elsa can continue."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/494a6951502ab35d49f3.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Max for: \"Restore greenhouse water supply\".",
+    "text": "Charles is all done! Switch to Max for: \"Restore greenhouse water supply\".",
+    "normalized": "Charles is all done! Switch to Max for: \"Restore greenhouse water supply\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Max for: \"Restore greenhouse water supply\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/17f4bd6bc4e8df474712.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Elsa for: \"Analyse a blood sample\".",
+    "text": "Charles is all done! Switch to Elsa for: \"Analyse a blood sample\".",
+    "normalized": "Charles is all done! Switch to Elsa for: \"Analyse a blood sample\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Elsa for: \"Analyse a blood sample\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/32ec512e6a20898a91e1.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Charles for: \"Gravity Garden experiment\".",
+    "text": "Charles is all done! Switch to Charles for: \"Gravity Garden experiment\".",
+    "normalized": "Charles is all done! Switch to Charles for: \"Gravity Garden experiment\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Charles for: \"Gravity Garden experiment\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/7fa565c46c917a056f23.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Lea for: \"Save the Mars greenhouse\".",
+    "text": "Charles is all done! Switch to Lea for: \"Save the Mars greenhouse\".",
+    "normalized": "Charles is all done! Switch to Lea for: \"Save the Mars greenhouse\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Lea for: \"Save the Mars greenhouse\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/d66cfe7904e083ac28a8.mp3"
+  },
+  {
+    "key": "rocky|First, Max needs to finish \"Restore greenhouse water supply\" at the Air & Water. Then Charles can continue.",
+    "text": "First, Max needs to finish \"Restore greenhouse water supply\" at the Air & Water. Then Charles can continue.",
+    "normalized": "First, Max needs to finish \"Restore greenhouse water supply\" at the Air & Water. Then Charles can continue.",
+    "sentences": [
+      "First, Max needs to finish \"Restore greenhouse water supply\" at the Air & Water.",
+      "Then Charles can continue."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/f551838ab73ff0dadd04.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Max for: \"Restore greenhouse water supply\".",
+    "text": "Lea is all done! Switch to Max for: \"Restore greenhouse water supply\".",
+    "normalized": "Lea is all done! Switch to Max for: \"Restore greenhouse water supply\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Max for: \"Restore greenhouse water supply\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/7f0ac691602d8f252b3d.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Elsa for: \"Analyse a blood sample\".",
+    "text": "Lea is all done! Switch to Elsa for: \"Analyse a blood sample\".",
+    "normalized": "Lea is all done! Switch to Elsa for: \"Analyse a blood sample\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Elsa for: \"Analyse a blood sample\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/02c7e4196d2946b24494.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Charles for: \"Gravity Garden experiment\".",
+    "text": "Lea is all done! Switch to Charles for: \"Gravity Garden experiment\".",
+    "normalized": "Lea is all done! Switch to Charles for: \"Gravity Garden experiment\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Charles for: \"Gravity Garden experiment\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6adfd4fcb33e03c86ed1.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Lea for: \"Save the Mars greenhouse\".",
+    "text": "Lea is all done! Switch to Lea for: \"Save the Mars greenhouse\".",
+    "normalized": "Lea is all done! Switch to Lea for: \"Save the Mars greenhouse\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Lea for: \"Save the Mars greenhouse\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/666926875e5da303abc7.mp3"
+  },
+  {
+    "key": "rocky|First, Max needs to finish \"Restore greenhouse water supply\" at the Air & Water. Then Lea can continue.",
+    "text": "First, Max needs to finish \"Restore greenhouse water supply\" at the Air & Water. Then Lea can continue.",
+    "normalized": "First, Max needs to finish \"Restore greenhouse water supply\" at the Air & Water. Then Lea can continue.",
+    "sentences": [
+      "First, Max needs to finish \"Restore greenhouse water supply\" at the Air & Water.",
+      "Then Lea can continue."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/899b2245a95d58453330.mp3"
+  },
+  {
+    "key": "rocky|Max's next job: \"Restore greenhouse water supply\". Walk to the Air & Water and press Interact!",
+    "text": "Max's next job: \"Restore greenhouse water supply\". Walk to the Air & Water 💧 and press Interact!",
+    "normalized": "Max's next job: \"Restore greenhouse water supply\". Walk to the Air & Water and press Interact!",
+    "sentences": [
+      "Max's next job: \"Restore greenhouse water supply\".",
+      "Walk to the Air & Water and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/60af5e0102c28e8d9692.mp3"
+  },
+  {
+    "key": "rocky|That is Max's job: \"Restore greenhouse water supply\". Switch to Max!",
+    "text": "That is Max's job: \"Restore greenhouse water supply\". Switch to Max!",
+    "normalized": "That is Max's job: \"Restore greenhouse water supply\". Switch to Max!",
+    "sentences": [
+      "That is Max's job: \"Restore greenhouse water supply\".",
+      "Switch to Max!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/094e3e8220c4704750c5.mp3"
+  },
+  {
+    "key": "rocky|Max needs to finish “Restore greenhouse water supply” first. Tap that task in the mission list to go there.",
+    "text": "Max needs to finish “Restore greenhouse water supply” first. Tap that task in the mission list to go there.",
+    "normalized": "Max needs to finish “Restore greenhouse water supply” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Max needs to finish “Restore greenhouse water supply” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/d561a816675c8e21a173.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Restore greenhouse water supply\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Restore greenhouse water supply\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Restore greenhouse water supply\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Restore greenhouse water supply\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/d9bdbe7f2cf587ae8fe7.mp3"
+  },
+  {
+    "key": "rocky|Elsa's next job: \"Analyse a blood sample\". Walk to the Medical station and press Interact!",
+    "text": "Elsa's next job: \"Analyse a blood sample\". Walk to the Medical station 🩺 and press Interact!",
+    "normalized": "Elsa's next job: \"Analyse a blood sample\". Walk to the Medical station and press Interact!",
+    "sentences": [
+      "Elsa's next job: \"Analyse a blood sample\".",
+      "Walk to the Medical station and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/80018d6b2525f25b7f16.mp3"
+  },
+  {
+    "key": "rocky|That is Elsa's job: \"Analyse a blood sample\". Switch to Elsa!",
+    "text": "That is Elsa's job: \"Analyse a blood sample\". Switch to Elsa!",
+    "normalized": "That is Elsa's job: \"Analyse a blood sample\". Switch to Elsa!",
+    "sentences": [
+      "That is Elsa's job: \"Analyse a blood sample\".",
+      "Switch to Elsa!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6172b75135c7e6bf172c.mp3"
+  },
+  {
+    "key": "rocky|Elsa needs to finish “Analyse a blood sample” first. Tap that task in the mission list to go there.",
+    "text": "Elsa needs to finish “Analyse a blood sample” first. Tap that task in the mission list to go there.",
+    "normalized": "Elsa needs to finish “Analyse a blood sample” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Elsa needs to finish “Analyse a blood sample” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/025e2dd25996a0f1f5c1.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Analyse a blood sample\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Analyse a blood sample\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Analyse a blood sample\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Analyse a blood sample\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/d09a1b948b98d92996fb.mp3"
+  },
+  {
+    "key": "rocky|Charles's next job: \"Gravity Garden experiment\". Walk to the Science scanner and press Interact!",
+    "text": "Charles's next job: \"Gravity Garden experiment\". Walk to the Science scanner 🔬 and press Interact!",
+    "normalized": "Charles's next job: \"Gravity Garden experiment\". Walk to the Science scanner and press Interact!",
+    "sentences": [
+      "Charles's next job: \"Gravity Garden experiment\".",
+      "Walk to the Science scanner and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/46d6449261b91f6f19dc.mp3"
+  },
+  {
+    "key": "rocky|That is Charles's job: \"Gravity Garden experiment\". Switch to Charles!",
+    "text": "That is Charles's job: \"Gravity Garden experiment\". Switch to Charles!",
+    "normalized": "That is Charles's job: \"Gravity Garden experiment\". Switch to Charles!",
+    "sentences": [
+      "That is Charles's job: \"Gravity Garden experiment\".",
+      "Switch to Charles!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/4eeb9c01a0b4211d2c7f.mp3"
+  },
+  {
+    "key": "rocky|Charles needs to finish “Gravity Garden experiment” first. Tap that task in the mission list to go there.",
+    "text": "Charles needs to finish “Gravity Garden experiment” first. Tap that task in the mission list to go there.",
+    "normalized": "Charles needs to finish “Gravity Garden experiment” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Charles needs to finish “Gravity Garden experiment” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/3554806a84837eef2c1a.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Gravity Garden experiment\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Gravity Garden experiment\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Gravity Garden experiment\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Gravity Garden experiment\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/3e6d6880eb3a57b012ad.mp3"
+  },
+  {
+    "key": "rocky|Lea's next job: \"Save the Mars greenhouse\". Walk to the Greenhouse and press Interact!",
+    "text": "Lea's next job: \"Save the Mars greenhouse\". Walk to the Greenhouse 🌱 and press Interact!",
+    "normalized": "Lea's next job: \"Save the Mars greenhouse\". Walk to the Greenhouse and press Interact!",
+    "sentences": [
+      "Lea's next job: \"Save the Mars greenhouse\".",
+      "Walk to the Greenhouse and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a4254633517d5300f135.mp3"
+  },
+  {
+    "key": "rocky|That is Lea's job: \"Save the Mars greenhouse\". Switch to Lea!",
+    "text": "That is Lea's job: \"Save the Mars greenhouse\". Switch to Lea!",
+    "normalized": "That is Lea's job: \"Save the Mars greenhouse\". Switch to Lea!",
+    "sentences": [
+      "That is Lea's job: \"Save the Mars greenhouse\".",
+      "Switch to Lea!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/ddc0828df54ef3389861.mp3"
+  },
+  {
+    "key": "rocky|Lea needs to finish “Save the Mars greenhouse” first. Tap that task in the mission list to go there.",
+    "text": "Lea needs to finish “Save the Mars greenhouse” first. Tap that task in the mission list to go there.",
+    "normalized": "Lea needs to finish “Save the Mars greenhouse” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Lea needs to finish “Save the Mars greenhouse” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6f8cf0b2527e45da6cc0.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Save the Mars greenhouse\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Save the Mars greenhouse\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Save the Mars greenhouse\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Save the Mars greenhouse\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/dff1f3c60a96e44ee37b.mp3"
+  },
+  {
+    "key": "rocky|First things first: walk Max to the Command Center to decide about today's problem: \"Radiation storm\"",
+    "text": "First things first: walk Max to the Command Center 🖥️ to decide about today's problem: \"Radiation storm\"",
+    "normalized": "First things first: walk Max to the Command Center to decide about today's problem: \"Radiation storm\"",
+    "sentences": [
+      "First things first: walk Max to the Command Center to decide about today's problem: \"Radiation storm\""
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/c8c53652971c5f421fce.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Max for: \"Start up the shield generator\".",
+    "text": "Max is all done! Switch to Max for: \"Start up the shield generator\".",
+    "normalized": "Max is all done! Switch to Max for: \"Start up the shield generator\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Max for: \"Start up the shield generator\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/e64db9da14b9d2346d9f.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Elsa for: \"Read the radiation badges\".",
+    "text": "Max is all done! Switch to Elsa for: \"Read the radiation badges\".",
+    "normalized": "Max is all done! Switch to Elsa for: \"Read the radiation badges\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Elsa for: \"Read the radiation badges\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/dc18b4ea1ccc1196deb5.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Charles for: \"Radiation biosensor terminal\".",
+    "text": "Max is all done! Switch to Charles for: \"Radiation biosensor terminal\".",
+    "normalized": "Max is all done! Switch to Charles for: \"Radiation biosensor terminal\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Charles for: \"Radiation biosensor terminal\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/551b3477e8dd374a3d05.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Lea for: \"Plant D N A Repair Lab\".",
+    "text": "Max is all done! Switch to Lea for: \"Plant DNA Repair Lab\".",
+    "normalized": "Max is all done! Switch to Lea for: \"Plant D N A Repair Lab\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Lea for: \"Plant D N A Repair Lab\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/b347a5e39a5f207c10e5.mp3"
+  },
+  {
+    "key": "rocky|First things first: switch to Max and walk him to the Command Center to decide about today's problem: \"Radiation storm\"",
+    "text": "First things first: switch to Max and walk him to the Command Center 🖥️ to decide about today's problem: \"Radiation storm\"",
+    "normalized": "First things first: switch to Max and walk him to the Command Center to decide about today's problem: \"Radiation storm\"",
+    "sentences": [
+      "First things first: switch to Max and walk him to the Command Center to decide about today's problem: \"Radiation storm\""
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/c3e088ec7bae729e83fd.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Max for: \"Start up the shield generator\".",
+    "text": "Elsa is all done! Switch to Max for: \"Start up the shield generator\".",
+    "normalized": "Elsa is all done! Switch to Max for: \"Start up the shield generator\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Max for: \"Start up the shield generator\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/7ccb8f866de2f16f0cb5.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Elsa for: \"Read the radiation badges\".",
+    "text": "Elsa is all done! Switch to Elsa for: \"Read the radiation badges\".",
+    "normalized": "Elsa is all done! Switch to Elsa for: \"Read the radiation badges\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Elsa for: \"Read the radiation badges\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/4252a39e81c493adc747.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Charles for: \"Radiation biosensor terminal\".",
+    "text": "Elsa is all done! Switch to Charles for: \"Radiation biosensor terminal\".",
+    "normalized": "Elsa is all done! Switch to Charles for: \"Radiation biosensor terminal\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Charles for: \"Radiation biosensor terminal\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/234bb50918d4494de1b7.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Lea for: \"Plant D N A Repair Lab\".",
+    "text": "Elsa is all done! Switch to Lea for: \"Plant DNA Repair Lab\".",
+    "normalized": "Elsa is all done! Switch to Lea for: \"Plant D N A Repair Lab\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Lea for: \"Plant D N A Repair Lab\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/623ba72c47a295463e9d.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Max for: \"Start up the shield generator\".",
+    "text": "Charles is all done! Switch to Max for: \"Start up the shield generator\".",
+    "normalized": "Charles is all done! Switch to Max for: \"Start up the shield generator\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Max for: \"Start up the shield generator\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/94a766d6207413815142.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Elsa for: \"Read the radiation badges\".",
+    "text": "Charles is all done! Switch to Elsa for: \"Read the radiation badges\".",
+    "normalized": "Charles is all done! Switch to Elsa for: \"Read the radiation badges\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Elsa for: \"Read the radiation badges\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/9d61b49ee2207b87c973.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Charles for: \"Radiation biosensor terminal\".",
+    "text": "Charles is all done! Switch to Charles for: \"Radiation biosensor terminal\".",
+    "normalized": "Charles is all done! Switch to Charles for: \"Radiation biosensor terminal\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Charles for: \"Radiation biosensor terminal\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/fbffc821d0db51dc92ad.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Lea for: \"Plant D N A Repair Lab\".",
+    "text": "Charles is all done! Switch to Lea for: \"Plant DNA Repair Lab\".",
+    "normalized": "Charles is all done! Switch to Lea for: \"Plant D N A Repair Lab\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Lea for: \"Plant D N A Repair Lab\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/bd92b673da2d79ef8b93.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Max for: \"Start up the shield generator\".",
+    "text": "Lea is all done! Switch to Max for: \"Start up the shield generator\".",
+    "normalized": "Lea is all done! Switch to Max for: \"Start up the shield generator\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Max for: \"Start up the shield generator\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/344448eb0e3cc123416c.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Elsa for: \"Read the radiation badges\".",
+    "text": "Lea is all done! Switch to Elsa for: \"Read the radiation badges\".",
+    "normalized": "Lea is all done! Switch to Elsa for: \"Read the radiation badges\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Elsa for: \"Read the radiation badges\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/5cc2feffd17420b0ec12.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Charles for: \"Radiation biosensor terminal\".",
+    "text": "Lea is all done! Switch to Charles for: \"Radiation biosensor terminal\".",
+    "normalized": "Lea is all done! Switch to Charles for: \"Radiation biosensor terminal\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Charles for: \"Radiation biosensor terminal\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/d73f816b32f95c1e4914.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Lea for: \"Plant D N A Repair Lab\".",
+    "text": "Lea is all done! Switch to Lea for: \"Plant DNA Repair Lab\".",
+    "normalized": "Lea is all done! Switch to Lea for: \"Plant D N A Repair Lab\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Lea for: \"Plant D N A Repair Lab\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/fef198a416e58fcc1371.mp3"
+  },
+  {
+    "key": "rocky|Max's next job: \"Start up the shield generator\". Walk to the Generator and press Interact!",
+    "text": "Max's next job: \"Start up the shield generator\". Walk to the Generator ⚡ and press Interact!",
+    "normalized": "Max's next job: \"Start up the shield generator\". Walk to the Generator and press Interact!",
+    "sentences": [
+      "Max's next job: \"Start up the shield generator\".",
+      "Walk to the Generator and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/c3b1ee66aa275afc71a3.mp3"
+  },
+  {
+    "key": "rocky|That is Max's job: \"Start up the shield generator\". Switch to Max!",
+    "text": "That is Max's job: \"Start up the shield generator\". Switch to Max!",
+    "normalized": "That is Max's job: \"Start up the shield generator\". Switch to Max!",
+    "sentences": [
+      "That is Max's job: \"Start up the shield generator\".",
+      "Switch to Max!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6a899b74210c4592ff8d.mp3"
+  },
+  {
+    "key": "rocky|Max needs to finish “Start up the shield generator” first. Tap that task in the mission list to go there.",
+    "text": "Max needs to finish “Start up the shield generator” first. Tap that task in the mission list to go there.",
+    "normalized": "Max needs to finish “Start up the shield generator” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Max needs to finish “Start up the shield generator” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/740c0dc4917992f40c4b.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Start up the shield generator\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Start up the shield generator\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Start up the shield generator\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Start up the shield generator\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/7ace2cefbc8ca68ce2d9.mp3"
+  },
+  {
+    "key": "rocky|Elsa's next job: \"Read the radiation badges\". Walk to the Medical station and press Interact!",
+    "text": "Elsa's next job: \"Read the radiation badges\". Walk to the Medical station 🩺 and press Interact!",
+    "normalized": "Elsa's next job: \"Read the radiation badges\". Walk to the Medical station and press Interact!",
+    "sentences": [
+      "Elsa's next job: \"Read the radiation badges\".",
+      "Walk to the Medical station and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/58afe6351d8c5d0b8e1d.mp3"
+  },
+  {
+    "key": "rocky|That is Elsa's job: \"Read the radiation badges\". Switch to Elsa!",
+    "text": "That is Elsa's job: \"Read the radiation badges\". Switch to Elsa!",
+    "normalized": "That is Elsa's job: \"Read the radiation badges\". Switch to Elsa!",
+    "sentences": [
+      "That is Elsa's job: \"Read the radiation badges\".",
+      "Switch to Elsa!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/bb30a399d49155db8ebd.mp3"
+  },
+  {
+    "key": "rocky|Elsa needs to finish “Read the radiation badges” first. Tap that task in the mission list to go there.",
+    "text": "Elsa needs to finish “Read the radiation badges” first. Tap that task in the mission list to go there.",
+    "normalized": "Elsa needs to finish “Read the radiation badges” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Elsa needs to finish “Read the radiation badges” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/ee4b2c345d3dde20fb8c.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Read the radiation badges\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Read the radiation badges\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Read the radiation badges\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Read the radiation badges\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a8aa39b6414e90baaa1b.mp3"
+  },
+  {
+    "key": "rocky|Charles's next job: \"Radiation biosensor terminal\". Walk to the Science scanner and press Interact!",
+    "text": "Charles's next job: \"Radiation biosensor terminal\". Walk to the Science scanner 🔬 and press Interact!",
+    "normalized": "Charles's next job: \"Radiation biosensor terminal\". Walk to the Science scanner and press Interact!",
+    "sentences": [
+      "Charles's next job: \"Radiation biosensor terminal\".",
+      "Walk to the Science scanner and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6ecbaff080ac5eb039e5.mp3"
+  },
+  {
+    "key": "rocky|That is Charles's job: \"Radiation biosensor terminal\". Switch to Charles!",
+    "text": "That is Charles's job: \"Radiation biosensor terminal\". Switch to Charles!",
+    "normalized": "That is Charles's job: \"Radiation biosensor terminal\". Switch to Charles!",
+    "sentences": [
+      "That is Charles's job: \"Radiation biosensor terminal\".",
+      "Switch to Charles!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/4352c13f6ebe996d8da3.mp3"
+  },
+  {
+    "key": "rocky|Charles needs to finish “Radiation biosensor terminal” first. Tap that task in the mission list to go there.",
+    "text": "Charles needs to finish “Radiation biosensor terminal” first. Tap that task in the mission list to go there.",
+    "normalized": "Charles needs to finish “Radiation biosensor terminal” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Charles needs to finish “Radiation biosensor terminal” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/cd88dd0cd408e65352f9.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Radiation biosensor terminal\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Radiation biosensor terminal\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Radiation biosensor terminal\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Radiation biosensor terminal\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/d05aae8e6387ce29cb7a.mp3"
+  },
+  {
+    "key": "rocky|Lea's next job: \"Plant D N A Repair Lab\". Walk to the Greenhouse and press Interact!",
+    "text": "Lea's next job: \"Plant DNA Repair Lab\". Walk to the Greenhouse 🌱 and press Interact!",
+    "normalized": "Lea's next job: \"Plant D N A Repair Lab\". Walk to the Greenhouse and press Interact!",
+    "sentences": [
+      "Lea's next job: \"Plant D N A Repair Lab\".",
+      "Walk to the Greenhouse and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/91e7f88c27c7ea5f05fd.mp3"
+  },
+  {
+    "key": "rocky|That is Lea's job: \"Plant D N A Repair Lab\". Switch to Lea!",
+    "text": "That is Lea's job: \"Plant DNA Repair Lab\". Switch to Lea!",
+    "normalized": "That is Lea's job: \"Plant D N A Repair Lab\". Switch to Lea!",
+    "sentences": [
+      "That is Lea's job: \"Plant D N A Repair Lab\".",
+      "Switch to Lea!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/ed02c1e1982821cb4b26.mp3"
+  },
+  {
+    "key": "rocky|Lea needs to finish “Plant D N A Repair Lab” first. Tap that task in the mission list to go there.",
+    "text": "Lea needs to finish “Plant DNA Repair Lab” first. Tap that task in the mission list to go there.",
+    "normalized": "Lea needs to finish “Plant D N A Repair Lab” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Lea needs to finish “Plant D N A Repair Lab” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a144dfc47dc9b392e0bf.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Plant D N A Repair Lab\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Plant DNA Repair Lab\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Plant D N A Repair Lab\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Plant D N A Repair Lab\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/3361a7e602d4e42f1d3a.mp3"
+  },
+  {
+    "key": "rocky|First things first: walk Max to the Command Center to decide about today's problem: \"Choose the rover route\"",
+    "text": "First things first: walk Max to the Command Center 🖥️ to decide about today's problem: \"Choose the rover route\"",
+    "normalized": "First things first: walk Max to the Command Center to decide about today's problem: \"Choose the rover route\"",
+    "sentences": [
+      "First things first: walk Max to the Command Center to decide about today's problem: \"Choose the rover route\""
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/11f3f1b5c0ec855534c4.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Max for: \"Charge the rover fuel cells\".",
+    "text": "Max is all done! Switch to Max for: \"Charge the rover fuel cells\".",
+    "normalized": "Max is all done! Switch to Max for: \"Charge the rover fuel cells\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Max for: \"Charge the rover fuel cells\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/20df9bd563a05997be84.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Elsa for: \"Mars gravity fitness test\".",
+    "text": "Max is all done! Switch to Elsa for: \"Mars gravity fitness test\".",
+    "normalized": "Max is all done! Switch to Elsa for: \"Mars gravity fitness test\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Elsa for: \"Mars gravity fitness test\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/068c21898c7db08c96f7.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Charles for: \"Rover expedition\".",
+    "text": "Max is all done! Switch to Charles for: \"Rover expedition\".",
+    "normalized": "Max is all done! Switch to Charles for: \"Rover expedition\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Charles for: \"Rover expedition\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/dd1d5c337cb618983390.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Lea for: \"Keep the food systems stable\".",
+    "text": "Max is all done! Switch to Lea for: \"Keep the food systems stable\".",
+    "normalized": "Max is all done! Switch to Lea for: \"Keep the food systems stable\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Lea for: \"Keep the food systems stable\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/c02b1c49d39bb2fd9c7e.mp3"
+  },
+  {
+    "key": "rocky|Max is all done! Switch to Max for: \"Send our discoveries to Earth\".",
+    "text": "Max is all done! Switch to Max for: \"Send our discoveries to Earth\".",
+    "normalized": "Max is all done! Switch to Max for: \"Send our discoveries to Earth\".",
+    "sentences": [
+      "Max is all done!",
+      "Switch to Max for: \"Send our discoveries to Earth\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/60aa490f007bd666a20f.mp3"
+  },
+  {
+    "key": "rocky|First, Charles needs to finish \"Rover expedition\" at the Airlock. Then Max can continue.",
+    "text": "First, Charles needs to finish \"Rover expedition\" at the Airlock. Then Max can continue.",
+    "normalized": "First, Charles needs to finish \"Rover expedition\" at the Airlock. Then Max can continue.",
+    "sentences": [
+      "First, Charles needs to finish \"Rover expedition\" at the Airlock.",
+      "Then Max can continue."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/4c95c3975c3df7990965.mp3"
+  },
+  {
+    "key": "rocky|First things first: switch to Max and walk him to the Command Center to decide about today's problem: \"Choose the rover route\"",
+    "text": "First things first: switch to Max and walk him to the Command Center 🖥️ to decide about today's problem: \"Choose the rover route\"",
+    "normalized": "First things first: switch to Max and walk him to the Command Center to decide about today's problem: \"Choose the rover route\"",
+    "sentences": [
+      "First things first: switch to Max and walk him to the Command Center to decide about today's problem: \"Choose the rover route\""
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/482f592afb3780b78d18.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Max for: \"Charge the rover fuel cells\".",
+    "text": "Elsa is all done! Switch to Max for: \"Charge the rover fuel cells\".",
+    "normalized": "Elsa is all done! Switch to Max for: \"Charge the rover fuel cells\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Max for: \"Charge the rover fuel cells\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/897866f803045eb2ae61.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Elsa for: \"Mars gravity fitness test\".",
+    "text": "Elsa is all done! Switch to Elsa for: \"Mars gravity fitness test\".",
+    "normalized": "Elsa is all done! Switch to Elsa for: \"Mars gravity fitness test\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Elsa for: \"Mars gravity fitness test\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/d5e306ac0c989f7d9c58.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Charles for: \"Rover expedition\".",
+    "text": "Elsa is all done! Switch to Charles for: \"Rover expedition\".",
+    "normalized": "Elsa is all done! Switch to Charles for: \"Rover expedition\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Charles for: \"Rover expedition\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/5be428d3d2d2697420b2.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Lea for: \"Keep the food systems stable\".",
+    "text": "Elsa is all done! Switch to Lea for: \"Keep the food systems stable\".",
+    "normalized": "Elsa is all done! Switch to Lea for: \"Keep the food systems stable\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Lea for: \"Keep the food systems stable\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/09c933f92f4d48dbc317.mp3"
+  },
+  {
+    "key": "rocky|Elsa is all done! Switch to Max for: \"Send our discoveries to Earth\".",
+    "text": "Elsa is all done! Switch to Max for: \"Send our discoveries to Earth\".",
+    "normalized": "Elsa is all done! Switch to Max for: \"Send our discoveries to Earth\".",
+    "sentences": [
+      "Elsa is all done!",
+      "Switch to Max for: \"Send our discoveries to Earth\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6446ab1c2f8dba029108.mp3"
+  },
+  {
+    "key": "rocky|First, Charles needs to finish \"Rover expedition\" at the Airlock. Then Elsa can continue.",
+    "text": "First, Charles needs to finish \"Rover expedition\" at the Airlock. Then Elsa can continue.",
+    "normalized": "First, Charles needs to finish \"Rover expedition\" at the Airlock. Then Elsa can continue.",
+    "sentences": [
+      "First, Charles needs to finish \"Rover expedition\" at the Airlock.",
+      "Then Elsa can continue."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/50fdcc2e0d95ca870166.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Max for: \"Charge the rover fuel cells\".",
+    "text": "Charles is all done! Switch to Max for: \"Charge the rover fuel cells\".",
+    "normalized": "Charles is all done! Switch to Max for: \"Charge the rover fuel cells\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Max for: \"Charge the rover fuel cells\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/b81249027052c3e182c7.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Elsa for: \"Mars gravity fitness test\".",
+    "text": "Charles is all done! Switch to Elsa for: \"Mars gravity fitness test\".",
+    "normalized": "Charles is all done! Switch to Elsa for: \"Mars gravity fitness test\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Elsa for: \"Mars gravity fitness test\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/226851080aa8fd98a72b.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Charles for: \"Rover expedition\".",
+    "text": "Charles is all done! Switch to Charles for: \"Rover expedition\".",
+    "normalized": "Charles is all done! Switch to Charles for: \"Rover expedition\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Charles for: \"Rover expedition\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/ebf93f7c26486d1395c8.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Lea for: \"Keep the food systems stable\".",
+    "text": "Charles is all done! Switch to Lea for: \"Keep the food systems stable\".",
+    "normalized": "Charles is all done! Switch to Lea for: \"Keep the food systems stable\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Lea for: \"Keep the food systems stable\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/77e06a8545461ecb483b.mp3"
+  },
+  {
+    "key": "rocky|Charles is all done! Switch to Max for: \"Send our discoveries to Earth\".",
+    "text": "Charles is all done! Switch to Max for: \"Send our discoveries to Earth\".",
+    "normalized": "Charles is all done! Switch to Max for: \"Send our discoveries to Earth\".",
+    "sentences": [
+      "Charles is all done!",
+      "Switch to Max for: \"Send our discoveries to Earth\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/65c66e7f32fd3c21560b.mp3"
+  },
+  {
+    "key": "rocky|First, Charles needs to finish \"Rover expedition\" at the Airlock. Then Charles can continue.",
+    "text": "First, Charles needs to finish \"Rover expedition\" at the Airlock. Then Charles can continue.",
+    "normalized": "First, Charles needs to finish \"Rover expedition\" at the Airlock. Then Charles can continue.",
+    "sentences": [
+      "First, Charles needs to finish \"Rover expedition\" at the Airlock.",
+      "Then Charles can continue."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6a14906d5eec68841de7.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Max for: \"Charge the rover fuel cells\".",
+    "text": "Lea is all done! Switch to Max for: \"Charge the rover fuel cells\".",
+    "normalized": "Lea is all done! Switch to Max for: \"Charge the rover fuel cells\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Max for: \"Charge the rover fuel cells\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/794dc7dc68c5b80a7a45.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Elsa for: \"Mars gravity fitness test\".",
+    "text": "Lea is all done! Switch to Elsa for: \"Mars gravity fitness test\".",
+    "normalized": "Lea is all done! Switch to Elsa for: \"Mars gravity fitness test\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Elsa for: \"Mars gravity fitness test\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/87a658d643cf5c540f2d.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Charles for: \"Rover expedition\".",
+    "text": "Lea is all done! Switch to Charles for: \"Rover expedition\".",
+    "normalized": "Lea is all done! Switch to Charles for: \"Rover expedition\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Charles for: \"Rover expedition\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/480435b5ee4b760cf14a.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Lea for: \"Keep the food systems stable\".",
+    "text": "Lea is all done! Switch to Lea for: \"Keep the food systems stable\".",
+    "normalized": "Lea is all done! Switch to Lea for: \"Keep the food systems stable\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Lea for: \"Keep the food systems stable\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/252019daa091a9e77853.mp3"
+  },
+  {
+    "key": "rocky|Lea is all done! Switch to Max for: \"Send our discoveries to Earth\".",
+    "text": "Lea is all done! Switch to Max for: \"Send our discoveries to Earth\".",
+    "normalized": "Lea is all done! Switch to Max for: \"Send our discoveries to Earth\".",
+    "sentences": [
+      "Lea is all done!",
+      "Switch to Max for: \"Send our discoveries to Earth\"."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/9dca56374d8695e834bc.mp3"
+  },
+  {
+    "key": "rocky|First, Charles needs to finish \"Rover expedition\" at the Airlock. Then Lea can continue.",
+    "text": "First, Charles needs to finish \"Rover expedition\" at the Airlock. Then Lea can continue.",
+    "normalized": "First, Charles needs to finish \"Rover expedition\" at the Airlock. Then Lea can continue.",
+    "sentences": [
+      "First, Charles needs to finish \"Rover expedition\" at the Airlock.",
+      "Then Lea can continue."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/14ba6bf3ec63682a65be.mp3"
+  },
+  {
+    "key": "rocky|Max's next job: \"Charge the rover fuel cells\". Walk to the Generator and press Interact!",
+    "text": "Max's next job: \"Charge the rover fuel cells\". Walk to the Generator ⚡ and press Interact!",
+    "normalized": "Max's next job: \"Charge the rover fuel cells\". Walk to the Generator and press Interact!",
+    "sentences": [
+      "Max's next job: \"Charge the rover fuel cells\".",
+      "Walk to the Generator and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/18c2d7eef7afac6bf4d1.mp3"
+  },
+  {
+    "key": "rocky|That is Max's job: \"Charge the rover fuel cells\". Switch to Max!",
+    "text": "That is Max's job: \"Charge the rover fuel cells\". Switch to Max!",
+    "normalized": "That is Max's job: \"Charge the rover fuel cells\". Switch to Max!",
+    "sentences": [
+      "That is Max's job: \"Charge the rover fuel cells\".",
+      "Switch to Max!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/2dc51129cf0ee67946a9.mp3"
+  },
+  {
+    "key": "rocky|Max needs to finish “Charge the rover fuel cells” first. Tap that task in the mission list to go there.",
+    "text": "Max needs to finish “Charge the rover fuel cells” first. Tap that task in the mission list to go there.",
+    "normalized": "Max needs to finish “Charge the rover fuel cells” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Max needs to finish “Charge the rover fuel cells” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/adb649690e404545917e.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Charge the rover fuel cells\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Charge the rover fuel cells\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Charge the rover fuel cells\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Charge the rover fuel cells\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/f5aca789dae4719c93be.mp3"
+  },
+  {
+    "key": "rocky|Elsa's next job: \"Mars gravity fitness test\". Walk to the Medical station and press Interact!",
+    "text": "Elsa's next job: \"Mars gravity fitness test\". Walk to the Medical station 🩺 and press Interact!",
+    "normalized": "Elsa's next job: \"Mars gravity fitness test\". Walk to the Medical station and press Interact!",
+    "sentences": [
+      "Elsa's next job: \"Mars gravity fitness test\".",
+      "Walk to the Medical station and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/fe904acc1a4a3430c837.mp3"
+  },
+  {
+    "key": "rocky|That is Elsa's job: \"Mars gravity fitness test\". Switch to Elsa!",
+    "text": "That is Elsa's job: \"Mars gravity fitness test\". Switch to Elsa!",
+    "normalized": "That is Elsa's job: \"Mars gravity fitness test\". Switch to Elsa!",
+    "sentences": [
+      "That is Elsa's job: \"Mars gravity fitness test\".",
+      "Switch to Elsa!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6c9082fd299325bb8b0f.mp3"
+  },
+  {
+    "key": "rocky|Elsa needs to finish “Mars gravity fitness test” first. Tap that task in the mission list to go there.",
+    "text": "Elsa needs to finish “Mars gravity fitness test” first. Tap that task in the mission list to go there.",
+    "normalized": "Elsa needs to finish “Mars gravity fitness test” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Elsa needs to finish “Mars gravity fitness test” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/2ad7e027f3b19659630f.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Mars gravity fitness test\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Mars gravity fitness test\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Mars gravity fitness test\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Mars gravity fitness test\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/39f4ba42c15ad7ce99f7.mp3"
+  },
+  {
+    "key": "rocky|Charles's next job: \"Rover expedition\". Walk to the Airlock and press Interact!",
+    "text": "Charles's next job: \"Rover expedition\". Walk to the Airlock 🚪 and press Interact!",
+    "normalized": "Charles's next job: \"Rover expedition\". Walk to the Airlock and press Interact!",
+    "sentences": [
+      "Charles's next job: \"Rover expedition\".",
+      "Walk to the Airlock and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/fb38494d50dbab6aa4a4.mp3"
+  },
+  {
+    "key": "rocky|That is Charles's job: \"Rover expedition\". Switch to Charles!",
+    "text": "That is Charles's job: \"Rover expedition\". Switch to Charles!",
+    "normalized": "That is Charles's job: \"Rover expedition\". Switch to Charles!",
+    "sentences": [
+      "That is Charles's job: \"Rover expedition\".",
+      "Switch to Charles!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/8f0139a3864ca6a7cfd9.mp3"
+  },
+  {
+    "key": "rocky|Charles needs to finish “Rover expedition” first. Tap that task in the mission list to go there.",
+    "text": "Charles needs to finish “Rover expedition” first. Tap that task in the mission list to go there.",
+    "normalized": "Charles needs to finish “Rover expedition” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Charles needs to finish “Rover expedition” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/84d2f12b6fb3d3427830.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Rover expedition\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Rover expedition\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Rover expedition\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Rover expedition\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/8827e1ce9acb767751d1.mp3"
+  },
+  {
+    "key": "rocky|Lea's next job: \"Keep the food systems stable\". Walk to the Greenhouse and press Interact!",
+    "text": "Lea's next job: \"Keep the food systems stable\". Walk to the Greenhouse 🌱 and press Interact!",
+    "normalized": "Lea's next job: \"Keep the food systems stable\". Walk to the Greenhouse and press Interact!",
+    "sentences": [
+      "Lea's next job: \"Keep the food systems stable\".",
+      "Walk to the Greenhouse and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/715ef3e07bd8330482ee.mp3"
+  },
+  {
+    "key": "rocky|That is Lea's job: \"Keep the food systems stable\". Switch to Lea!",
+    "text": "That is Lea's job: \"Keep the food systems stable\". Switch to Lea!",
+    "normalized": "That is Lea's job: \"Keep the food systems stable\". Switch to Lea!",
+    "sentences": [
+      "That is Lea's job: \"Keep the food systems stable\".",
+      "Switch to Lea!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/e2746fcc0ae7af071785.mp3"
+  },
+  {
+    "key": "rocky|Lea needs to finish “Keep the food systems stable” first. Tap that task in the mission list to go there.",
+    "text": "Lea needs to finish “Keep the food systems stable” first. Tap that task in the mission list to go there.",
+    "normalized": "Lea needs to finish “Keep the food systems stable” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Lea needs to finish “Keep the food systems stable” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/b0aa1fbdaa91318237b5.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Keep the food systems stable\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Keep the food systems stable\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Keep the food systems stable\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Keep the food systems stable\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/12967247079d6160d362.mp3"
+  },
+  {
+    "key": "rocky|Max's next job: \"Send our discoveries to Earth\". Walk to the Command terminal and press Interact!",
+    "text": "Max's next job: \"Send our discoveries to Earth\". Walk to the Command terminal 🖥️ and press Interact!",
+    "normalized": "Max's next job: \"Send our discoveries to Earth\". Walk to the Command terminal and press Interact!",
+    "sentences": [
+      "Max's next job: \"Send our discoveries to Earth\".",
+      "Walk to the Command terminal and press Interact!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/5a48878ca58dab27ec97.mp3"
+  },
+  {
+    "key": "rocky|That is Max's job: \"Send our discoveries to Earth\". Switch to Max!",
+    "text": "That is Max's job: \"Send our discoveries to Earth\". Switch to Max!",
+    "normalized": "That is Max's job: \"Send our discoveries to Earth\". Switch to Max!",
+    "sentences": [
+      "That is Max's job: \"Send our discoveries to Earth\".",
+      "Switch to Max!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6a1a6d8a368c3e8925cb.mp3"
+  },
+  {
+    "key": "rocky|Max needs to finish “Send our discoveries to Earth” first. Tap that task in the mission list to go there.",
+    "text": "Max needs to finish “Send our discoveries to Earth” first. Tap that task in the mission list to go there.",
+    "normalized": "Max needs to finish “Send our discoveries to Earth” first. Tap that task in the mission list to go there.",
+    "sentences": [
+      "Max needs to finish “Send our discoveries to Earth” first.",
+      "Tap that task in the mission list to go there."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/eeee8fed9d764712fa3e.mp3"
+  },
+  {
+    "key": "rocky|We skipped \"Send our discoveries to Earth\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "text": "We skipped \"Send our discoveries to Earth\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "normalized": "We skipped \"Send our discoveries to Earth\". Every astronaut's job helps the base, so try to finish them all next sol!",
+    "sentences": [
+      "We skipped \"Send our discoveries to Earth\".",
+      "Every astronaut's job helps the base, so try to finish them all next sol!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/06fe0715430752c91126.mp3"
+  },
+  {
+    "key": "rocky|Oh no, Max woke up feeling sick ( minus 10 Crew Health). Doctor Elsa can help in the Medical Bay, but Max will need to rest.",
+    "text": "Oh no, Max woke up feeling sick (−10 Crew Health). Doctor Elsa can help in the Medical Bay, but Max will need to rest.",
+    "normalized": "Oh no, Max woke up feeling sick ( minus 10 Crew Health). Doctor Elsa can help in the Medical Bay, but Max will need to rest.",
+    "sentences": [
+      "Oh no, Max woke up feeling sick ( minus 10 Crew Health).",
+      "Doctor Elsa can help in the Medical Bay, but Max will need to rest."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/c89f3c6423fc2b108af9.mp3"
+  },
+  {
+    "key": "rocky|Oh no, Elsa woke up feeling sick ( minus 10 Crew Health). Doctor Elsa can help in the Medical Bay, but Elsa will need to rest.",
+    "text": "Oh no, Elsa woke up feeling sick (−10 Crew Health). Doctor Elsa can help in the Medical Bay, but Elsa will need to rest.",
+    "normalized": "Oh no, Elsa woke up feeling sick ( minus 10 Crew Health). Doctor Elsa can help in the Medical Bay, but Elsa will need to rest.",
+    "sentences": [
+      "Oh no, Elsa woke up feeling sick ( minus 10 Crew Health).",
+      "Doctor Elsa can help in the Medical Bay, but Elsa will need to rest."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/24d5e93edb7a70e5af19.mp3"
+  },
+  {
+    "key": "rocky|Oh no, Charles woke up feeling sick ( minus 10 Crew Health). Doctor Elsa can help in the Medical Bay, but Charles will need to rest.",
+    "text": "Oh no, Charles woke up feeling sick (−10 Crew Health). Doctor Elsa can help in the Medical Bay, but Charles will need to rest.",
+    "normalized": "Oh no, Charles woke up feeling sick ( minus 10 Crew Health). Doctor Elsa can help in the Medical Bay, but Charles will need to rest.",
+    "sentences": [
+      "Oh no, Charles woke up feeling sick ( minus 10 Crew Health).",
+      "Doctor Elsa can help in the Medical Bay, but Charles will need to rest."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6e881f2dc7ef89857128.mp3"
+  },
+  {
+    "key": "rocky|Oh no, Lea woke up feeling sick ( minus 10 Crew Health). Doctor Elsa can help in the Medical Bay, but Lea will need to rest.",
+    "text": "Oh no, Lea woke up feeling sick (−10 Crew Health). Doctor Elsa can help in the Medical Bay, but Lea will need to rest.",
+    "normalized": "Oh no, Lea woke up feeling sick ( minus 10 Crew Health). Doctor Elsa can help in the Medical Bay, but Lea will need to rest.",
+    "sentences": [
+      "Oh no, Lea woke up feeling sick ( minus 10 Crew Health).",
+      "Doctor Elsa can help in the Medical Bay, but Lea will need to rest."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/70ef2e82839f8edc8c74.mp3"
+  },
+  {
+    "key": "rocky|The solar panels are still dusty, so we make less power. Max can clean them through the Airlock.",
+    "text": "The solar panels are still dusty, so we make less power. Max can clean them through the Airlock.",
+    "normalized": "The solar panels are still dusty, so we make less power. Max can clean them through the Airlock.",
+    "sentences": [
+      "The solar panels are still dusty, so we make less power.",
+      "Max can clean them through the Airlock."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/b67d90c690e22f5db740.mp3"
+  },
+  {
+    "key": "rocky|Nothing to do here right now. Press \"Ask Rocky\" if you are lost. I love being asked!",
+    "text": "Nothing to do here right now. Press \"Ask Rocky\" if you are lost. I love being asked!",
+    "normalized": "Nothing to do here right now. Press \"Ask Rocky\" if you are lost. I love being asked!",
+    "sentences": [
+      "Nothing to do here right now.",
+      "Press \"Ask Rocky\" if you are lost.",
+      "I love being asked!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/489ad070a5b71cca378c.mp3"
+  },
+  {
+    "key": "rocky|First, send Max to the Command Center to decide today’s problem. Then your science plan is ready!",
+    "text": "First, send Max to the Command Center to decide today’s problem. Then your science plan is ready!",
+    "normalized": "First, send Max to the Command Center to decide today’s problem. Then your science plan is ready!",
+    "sentences": [
+      "First, send Max to the Command Center to decide today’s problem.",
+      "Then your science plan is ready!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/038a6573dde075e0ebf5.mp3"
+  },
+  {
+    "key": "rocky|Everything is done for today! Press \"End the sol\" so the crew can sleep. Even robots need a recharge. Zzzt.",
+    "text": "Everything is done for today! Press \"End the sol\" so the crew can sleep. Even robots need a recharge. Zzzt.",
+    "normalized": "Everything is done for today! Press \"End the sol\" so the crew can sleep. Even robots need a recharge. Zzzt.",
+    "sentences": [
+      "Everything is done for today!",
+      "Press \"End the sol\" so the crew can sleep.",
+      "Even robots need a recharge.",
+      "Zzzt."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/2c631c8c1f512d07acbd.mp3"
+  },
+  {
+    "key": "rocky|Power is getting low. Watch out for choices that cost power, and keep those solar panels clean!",
+    "text": "Power is getting low. Watch out for choices that cost power, and keep those solar panels clean!",
+    "normalized": "Power is getting low. Watch out for choices that cost power, and keep those solar panels clean!",
+    "sentences": [
+      "Power is getting low.",
+      "Watch out for choices that cost power, and keep those solar panels clean!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/d08e6bd25dc83a49e517.mp3"
+  },
+  {
+    "key": "rocky|Shielding is low, so the crew loses health at night. Extra shielding costs power, but it keeps everyone safe.",
+    "text": "Shielding is low, so the crew loses health at night. Extra shielding costs power, but it keeps everyone safe.",
+    "normalized": "Shielding is low, so the crew loses health at night. Extra shielding costs power, but it keeps everyone safe.",
+    "sentences": [
+      "Shielding is low, so the crew loses health at night.",
+      "Extra shielding costs power, but it keeps everyone safe."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/4b90bea2a6d93365a52a.mp3"
+  },
+  {
+    "key": "rocky|Food is running low. Lea's greenhouse tasks grow more food every sol.",
+    "text": "Food is running low. Lea's greenhouse tasks grow more food every sol.",
+    "normalized": "Food is running low. Lea's greenhouse tasks grow more food every sol.",
+    "sentences": [
+      "Food is running low.",
+      "Lea's greenhouse tasks grow more food every sol."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/58f656fbc9e9b7e6df0f.mp3"
+  },
+  {
+    "key": "rocky|The crew is tired. Elsa's checkups bring Crew Health back up.",
+    "text": "The crew is tired. Elsa's checkups bring Crew Health back up.",
+    "normalized": "The crew is tired. Elsa's checkups bring Crew Health back up.",
+    "sentences": [
+      "The crew is tired.",
+      "Elsa's checkups bring Crew Health back up."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/ab973083ed24c0e93c41.mp3"
+  },
+  {
+    "key": "rocky|Great balance, Commander! You are thinking like a real mission planner. Beep boop!",
+    "text": "Great balance, Commander! You are thinking like a real mission planner. Beep boop!",
+    "normalized": "Great balance, Commander! You are thinking like a real mission planner. Beep boop!",
+    "sentences": [
+      "Great balance, Commander!",
+      "You are thinking like a real mission planner.",
+      "Beep boop!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/e72aee88def17b2a8682.mp3"
+  },
+  {
+    "key": "rocky|Good morning! It is Sol 1: Welcome to Astro Base.",
+    "text": "☀️ Good morning! It is Sol 1: Welcome to Astro Base.",
+    "normalized": "Good morning! It is Sol 1: Welcome to Astro Base.",
+    "sentences": [
+      "Good morning!",
+      "It is Sol 1: Welcome to Astro Base."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/69c0b3d98e902025a270.mp3"
+  },
+  {
+    "key": "rocky|Beep boop! Welcome to Astro Base, Commander! I am Rocky, your very silly robot helper.",
+    "text": "Beep boop! Welcome to Astro Base, Commander! I am Rocky, your very silly robot helper.",
+    "normalized": "Beep boop! Welcome to Astro Base, Commander! I am Rocky, your very silly robot helper.",
+    "sentences": [
+      "Beep boop!",
+      "Welcome to Astro Base, Commander!",
+      "I am Rocky, your very silly robot helper."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/0f80c4cf04fde783cb9f.mp3"
+  },
+  {
+    "key": "rocky|Tap the yellow Next button to send Max to Mission Control. When he arrives, press Interact or E.",
+    "text": "Tap the yellow Next button to send Max to Mission Control. When he arrives, press Interact or E.",
+    "normalized": "Tap the yellow Next button to send Max to Mission Control. When he arrives, press Interact or E.",
+    "sentences": [
+      "Tap the yellow Next button to send Max to Mission Control.",
+      "When he arrives, press Interact or E."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/137f5431bb2a199a7aba.mp3"
+  },
+  {
+    "key": "rocky|Decide how to handle the power overload, then tap a crew task to head to its station. You can also walk with WASD, arrow keys, or a click on the floor.",
+    "text": "Decide how to handle the power overload, then tap a crew task to head to its station. You can also walk with WASD, arrow keys, or a click on the floor.",
+    "normalized": "Decide how to handle the power overload, then tap a crew task to head to its station. You can also walk with WASD, arrow keys, or a click on the floor.",
+    "sentences": [
+      "Decide how to handle the power overload, then tap a crew task to head to its station.",
+      "You can also walk with WASD, arrow keys, or a click on the floor."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/ee03d96b71e9d6addb4a.mp3"
+  },
+  {
+    "key": "control|Mars has the largest known volcano in our solar system: Olympus Mons. It is about 22 kilometers high, more than twice as tall as Mount Everest!",
+    "text": "Mars has the largest known volcano in our solar system: Olympus Mons. It is about 22 km high, more than twice as tall as Mount Everest!",
+    "normalized": "Mars has the largest known volcano in our solar system: Olympus Mons. It is about 22 kilometers high, more than twice as tall as Mount Everest!",
+    "sentences": [
+      "Mars has the largest known volcano in our solar system: Olympus Mons.",
+      "It is about 22 kilometers high, more than twice as tall as Mount Everest!"
+    ],
+    "speaker": "control",
+    "voice": "F2",
+    "file": "clips/7edc8cd1e5a533b87004.mp3"
+  },
+  {
+    "key": "rocky|Good morning! It is Sol 2: The Great Dust Storm.",
+    "text": "☀️ Good morning! It is Sol 2: The Great Dust Storm.",
+    "normalized": "Good morning! It is Sol 2: The Great Dust Storm.",
+    "sentences": [
+      "Good morning!",
+      "It is Sol 2: The Great Dust Storm."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/2651229ce3138b862842.mp3"
+  },
+  {
+    "key": "rocky|Bzzt! A big dust storm rolled in. The solar panels are covered in dust and make much less power.",
+    "text": "Bzzt! A big dust storm rolled in. The solar panels are covered in dust and make much less power.",
+    "normalized": "Bzzt! A big dust storm rolled in. The solar panels are covered in dust and make much less power.",
+    "sentences": [
+      "Bzzt!",
+      "A big dust storm rolled in.",
+      "The solar panels are covered in dust and make much less power."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/2f53b8a6568fc8ec9a7c.mp3"
+  },
+  {
+    "key": "rocky|Max can go outside to clean them, but outdoor work is risky. Decide at the Command Center.",
+    "text": "Max can go outside to clean them, but outdoor work is risky. Decide at the Command Center.",
+    "normalized": "Max can go outside to clean them, but outdoor work is risky. Decide at the Command Center.",
+    "sentences": [
+      "Max can go outside to clean them, but outdoor work is risky.",
+      "Decide at the Command Center."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/f6233a1e578e856827b5.mp3"
+  },
+  {
+    "key": "rocky|Charles: take the rover out through the Airlock and collect soil samples. Drive carefully in the dust!",
+    "text": "Charles: take the rover out through the Airlock and collect soil samples. Drive carefully in the dust!",
+    "normalized": "Charles: take the rover out through the Airlock and collect soil samples. Drive carefully in the dust!",
+    "sentences": [
+      "Charles: take the rover out through the Airlock and collect soil samples.",
+      "Drive carefully in the dust!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/ad8a0d338c207ef9aa0e.mp3"
+  },
+  {
+    "key": "control|Dust storms on Mars can grow until they cover the whole planet. In 2018 a global storm blocked so much sunlight that the solar-powered Opportunity rover could not recharge.",
+    "text": "Dust storms on Mars can grow until they cover the whole planet. In 2018 a global storm blocked so much sunlight that the solar-powered Opportunity rover could not recharge.",
+    "normalized": "Dust storms on Mars can grow until they cover the whole planet. In 2018 a global storm blocked so much sunlight that the solar-powered Opportunity rover could not recharge.",
+    "sentences": [
+      "Dust storms on Mars can grow until they cover the whole planet.",
+      "In 2018 a global storm blocked so much sunlight that the solar-powered Opportunity rover could not recharge."
+    ],
+    "speaker": "control",
+    "voice": "F2",
+    "file": "clips/d8d6208b2591abaddee4.mp3"
+  },
+  {
+    "key": "rocky|Good morning! It is Sol 3: Greenhouse Emergency.",
+    "text": "☀️ Good morning! It is Sol 3: Greenhouse Emergency.",
+    "normalized": "Good morning! It is Sol 3: Greenhouse Emergency.",
+    "sentences": [
+      "Good morning!",
+      "It is Sol 3: Greenhouse Emergency."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/5a9a1abfa71c00ee4222.mp3"
+  },
+  {
+    "key": "rocky|Brrr! It got very cold last night. The plants are not growing well.",
+    "text": "Brrr! It got very cold last night. The plants are not growing well.",
+    "normalized": "Brrr! It got very cold last night. The plants are not growing well.",
+    "sentences": [
+      "Brrr!",
+      "It got very cold last night.",
+      "The plants are not growing well."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/865d9f812516ad3c4d12.mp3"
+  },
+  {
+    "key": "rocky|Heating helps, but it costs power. Max decides at the Command Center. The water pipes froze too: Max can fix them in the Air & Water room.",
+    "text": "Heating helps, but it costs power. Max decides at the Command Center. The water pipes froze too: Max can fix them in the Air & Water room.",
+    "normalized": "Heating helps, but it costs power. Max decides at the Command Center. The water pipes froze too: Max can fix them in the Air & Water room.",
+    "sentences": [
+      "Heating helps, but it costs power.",
+      "Max decides at the Command Center.",
+      "The water pipes froze too: Max can fix them in the Air & Water room."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/8bcd88f4c6d59605707e.mp3"
+  },
+  {
+    "key": "rocky|Lea: one lettuce plant still looks unhappy. Compare it with a healthy plant after Max repairs the water supply. That is today's science mission!",
+    "text": "Lea: one lettuce plant still looks unhappy. Compare it with a healthy plant after Max repairs the water supply. That is today's science mission!",
+    "normalized": "Lea: one lettuce plant still looks unhappy. Compare it with a healthy plant after Max repairs the water supply. That is today's science mission!",
+    "sentences": [
+      "Lea: one lettuce plant still looks unhappy.",
+      "Compare it with a healthy plant after Max repairs the water supply.",
+      "That is today's science mission!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/19b96df5ffbfe6edc317.mp3"
+  },
+  {
+    "key": "control|Astronauts have grown and eaten lettuce on the International Space Station. Fresh food is good for the body and for the mood!",
+    "text": "Astronauts have grown and eaten lettuce on the International Space Station. Fresh food is good for the body and for the mood!",
+    "normalized": "Astronauts have grown and eaten lettuce on the International Space Station. Fresh food is good for the body and for the mood!",
+    "sentences": [
+      "Astronauts have grown and eaten lettuce on the International Space Station.",
+      "Fresh food is good for the body and for the mood!"
+    ],
+    "speaker": "control",
+    "voice": "F2",
+    "file": "clips/bf2722de17e61b9a7c25.mp3"
+  },
+  {
+    "key": "rocky|Good morning! It is Sol 4: Solar Radiation Alert.",
+    "text": "☀️ Good morning! It is Sol 4: Solar Radiation Alert.",
+    "normalized": "Good morning! It is Sol 4: Solar Radiation Alert.",
+    "sentences": [
+      "Good morning!",
+      "It is Sol 4: Solar Radiation Alert."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/613d2ef6219c9b4483a1.mp3"
+  },
+  {
+    "key": "rocky|ALERT! ALERT! The Sun burped out a big solar storm. My antenna is tingling!",
+    "text": "ALERT! ALERT! The Sun burped out a big solar storm. My antenna is tingling!",
+    "normalized": "ALERT! ALERT! The Sun burped out a big solar storm. My antenna is tingling!",
+    "sentences": [
+      "ALERT!",
+      "ALERT!",
+      "The Sun burped out a big solar storm.",
+      "My antenna is tingling!"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/0342cddaa5c532a211b3.mp3"
+  },
+  {
+    "key": "rocky|The storm already hit our shielding. Extra shielding keeps the crew safe, but it uses lots of power.",
+    "text": "The storm already hit our shielding. Extra shielding keeps the crew safe, but it uses lots of power.",
+    "normalized": "The storm already hit our shielding. Extra shielding keeps the crew safe, but it uses lots of power.",
+    "sentences": [
+      "The storm already hit our shielding.",
+      "Extra shielding keeps the crew safe, but it uses lots of power."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/f98c8ddb10890bcd78fc.mp3"
+  },
+  {
+    "key": "rocky|Charles: read the yeast biosensor in the Science Lab to find out how strong the radiation is.",
+    "text": "Charles: read the yeast biosensor in the Science Lab to find out how strong the radiation is.",
+    "normalized": "Charles: read the yeast biosensor in the Science Lab to find out how strong the radiation is.",
+    "sentences": [
+      "Charles: read the yeast biosensor in the Science Lab to find out how strong the radiation is."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a993fa1df209bfc5d665.mp3"
+  },
+  {
+    "key": "control|Earth's air and magnetic field protect us from most space radiation. On the International Space Station, instruments measure radiation every day, and astronauts there get much more than people on the ground. Mars has almost no such protection.",
+    "text": "Earth's air and magnetic field protect us from most space radiation. On the International Space Station, instruments measure radiation every day, and astronauts there get much more than people on the ground. Mars has almost no such protection.",
+    "normalized": "Earth's air and magnetic field protect us from most space radiation. On the International Space Station, instruments measure radiation every day, and astronauts there get much more than people on the ground. Mars has almost no such protection.",
+    "sentences": [
+      "Earth's air and magnetic field protect us from most space radiation.",
+      "On the International Space Station, instruments measure radiation every day, and astronauts there get much more than people on the ground.",
+      "Mars has almost no such protection."
+    ],
+    "speaker": "control",
+    "voice": "F2",
+    "file": "clips/057c093cd18dc8fd446f.mp3"
+  },
+  {
+    "key": "rocky|Good morning! It is Sol 5: Final Mars Expedition.",
+    "text": "☀️ Good morning! It is Sol 5: Final Mars Expedition.",
+    "normalized": "Good morning! It is Sol 5: Final Mars Expedition.",
+    "sentences": [
+      "Good morning!",
+      "It is Sol 5: Final Mars Expedition."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/b26c102a29d3807f02ec.mp3"
+  },
+  {
+    "key": "rocky|Last sol, Commander! Time for the big rover expedition. I packed snacks. Wait, I do not eat snacks.",
+    "text": "Last sol, Commander! Time for the big rover expedition. I packed snacks. Wait, I do not eat snacks.",
+    "normalized": "Last sol, Commander! Time for the big rover expedition. I packed snacks. Wait, I do not eat snacks.",
+    "sentences": [
+      "Last sol, Commander!",
+      "Time for the big rover expedition.",
+      "I packed snacks.",
+      "Wait, I do not eat snacks."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/e83b00a1a92ab200ab00.mp3"
+  },
+  {
+    "key": "rocky|The rover battery is limited. Max chooses the route at the Command Center before Charles leaves.",
+    "text": "The rover battery is limited. Max chooses the route at the Command Center before Charles leaves.",
+    "normalized": "The rover battery is limited. Max chooses the route at the Command Center before Charles leaves.",
+    "sentences": [
+      "The rover battery is limited.",
+      "Max chooses the route at the Command Center before Charles leaves."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/4a94677a508ece010c46.mp3"
+  },
+  {
+    "key": "rocky|Today's goals are new: build a weather station, take photos and hunt for a meteorite! Then Max sends our report to Earth.",
+    "text": "Today's goals are new: build a weather station, take photos and hunt for a meteorite! Then Max sends our report to Earth.",
+    "normalized": "Today's goals are new: build a weather station, take photos and hunt for a meteorite! Then Max sends our report to Earth.",
+    "sentences": [
+      "Today's goals are new: build a weather station, take photos and hunt for a meteorite!",
+      "Then Max sends our report to Earth."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/73467bdce6f97c1a4d2b.mp3"
+  },
+  {
+    "key": "control|On Mars the daytime sky is butterscotch-coloured, but sunsets look blue near the Sun! Fine dust scatters the light differently than Earth's air does.",
+    "text": "On Mars the daytime sky is butterscotch-coloured, but sunsets look blue near the Sun! Fine dust scatters the light differently than Earth's air does.",
+    "normalized": "On Mars the daytime sky is butterscotch-coloured, but sunsets look blue near the Sun! Fine dust scatters the light differently than Earth's air does.",
+    "sentences": [
+      "On Mars the daytime sky is butterscotch-coloured, but sunsets look blue near the Sun!",
+      "Fine dust scatters the light differently than Earth's air does."
+    ],
+    "speaker": "control",
+    "voice": "F2",
+    "file": "clips/4b568eb4a9a82ee206db.mp3"
+  },
+  {
+    "key": "control|Food on Mars must be grown or brought from Earth. A trip to Mars takes about 7 months, so there is no quick delivery!",
+    "text": "Food on Mars must be grown or brought from Earth. A trip to Mars takes about 7 months, so there is no quick delivery!",
+    "normalized": "Food on Mars must be grown or brought from Earth. A trip to Mars takes about 7 months, so there is no quick delivery!",
+    "sentences": [
+      "Food on Mars must be grown or brought from Earth.",
+      "A trip to Mars takes about 7 months, so there is no quick delivery!"
+    ],
+    "speaker": "control",
+    "voice": "F2",
+    "file": "clips/eef9600cdaa694734e9c.mp3"
+  },
+  {
+    "key": "control|This room recycles air and water. On the Space Station, most of the water is recycled, even sweat and pee. Yum? Beep!",
+    "text": "This room recycles air and water. On the Space Station, most of the water is recycled, even sweat and pee. Yum? Beep!",
+    "normalized": "This room recycles air and water. On the Space Station, most of the water is recycled, even sweat and pee. Yum? Beep!",
+    "sentences": [
+      "This room recycles air and water.",
+      "On the Space Station, most of the water is recycled, even sweat and pee.",
+      "Yum?",
+      "Beep!"
+    ],
+    "speaker": "control",
+    "voice": "F2",
+    "file": "clips/99a9829a0f41d3c5f8dd.mp3"
+  },
+  {
+    "key": "control|A day on Mars is called a sol. It lasts about 24 hours and 40 minutes, so astronauts get 40 extra minutes of sleep!",
+    "text": "A day on Mars is called a sol. It lasts about 24 hours and 40 minutes, so astronauts get 40 extra minutes of sleep!",
+    "normalized": "A day on Mars is called a sol. It lasts about 24 hours and 40 minutes, so astronauts get 40 extra minutes of sleep!",
+    "sentences": [
+      "A day on Mars is called a sol.",
+      "It lasts about 24 hours and 40 minutes, so astronauts get 40 extra minutes of sleep!"
+    ],
+    "speaker": "control",
+    "voice": "F2",
+    "file": "clips/b9d4a5739167047851b1.mp3"
+  },
+  {
+    "key": "rocky|Use the camera, magnet and microscope. Match all three clues to a rock in the guide.",
+    "text": "Use the camera, magnet and microscope. Match all three clues to a rock in the guide.",
+    "normalized": "Use the camera, magnet and microscope. Match all three clues to a rock in the guide.",
+    "sentences": [
+      "Use the camera, magnet and microscope.",
+      "Match all three clues to a rock in the guide."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/406b0121941013751f82.mp3"
+  },
+  {
+    "key": "control|Rocks preserve clues about the past. A camera shows shape and color. A magnet tests magnetic attraction, and a microscope reveals small structures. Compare all three observations before identifying a sample. Iron minerals are not all strongly magnetic. On Mars, some mineral deposits suggest that water once moved through the ground. These samples are simplified examples based on rover discoveries.",
+    "text": "Rocks preserve clues about the past. A camera shows shape and color. A magnet tests magnetic attraction, and a microscope reveals small structures. Compare all three observations before identifying a sample. Iron minerals are not all strongly magnetic. On Mars, some mineral deposits suggest that water once moved through the ground. These samples are simplified examples based on rover discoveries.",
+    "normalized": "Rocks preserve clues about the past. A camera shows shape and color. A magnet tests magnetic attraction, and a microscope reveals small structures. Compare all three observations before identifying a sample. Iron minerals are not all strongly magnetic. On Mars, some mineral deposits suggest that water once moved through the ground. These samples are simplified examples based on rover discoveries.",
+    "sentences": [
+      "Rocks preserve clues about the past.",
+      "A camera shows shape and color.",
+      "A magnet tests magnetic attraction, and a microscope reveals small structures.",
+      "Compare all three observations before identifying a sample.",
+      "Iron minerals are not all strongly magnetic.",
+      "On Mars, some mineral deposits suggest that water once moved through the ground.",
+      "These samples are simplified examples based on rover discoveries."
+    ],
+    "speaker": "control",
+    "voice": "F2",
+    "file": "clips/21d6c3609c68f2dc230a.mp3"
+  },
+  {
+    "key": "rocky|Look for tools you have not used on this sample.",
+    "text": "Look for tools you have not used on this sample.",
+    "normalized": "Look for tools you have not used on this sample.",
+    "sentences": [
+      "Look for tools you have not used on this sample."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/02a329db7d65213ae488.mp3"
+  },
+  {
+    "key": "rocky|Each tool gives a different clue. One clue alone can fit several rocks.",
+    "text": "Each tool gives a different clue. One clue alone can fit several rocks.",
+    "normalized": "Each tool gives a different clue. One clue alone can fit several rocks.",
+    "sentences": [
+      "Each tool gives a different clue.",
+      "One clue alone can fit several rocks."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/8aa446b28d730feccdc7.mp3"
+  },
+  {
+    "key": "rocky|Use Camera, Magnet and Microscope, then select Identify the rock.",
+    "text": "Use Camera, Magnet and Microscope, then select Identify the rock.",
+    "normalized": "Use Camera, Magnet and Microscope, then select Identify the rock.",
+    "sentences": [
+      "Use Camera, Magnet and Microscope, then select Identify the rock."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/98f491abcd27ea9dbd8c.mp3"
+  },
+  {
+    "key": "rocky|Compare your clues with the three lines on each guide card.",
+    "text": "Compare your clues with the three lines on each guide card.",
+    "normalized": "Compare your clues with the three lines on each guide card.",
+    "sentences": [
+      "Compare your clues with the three lines on each guide card."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/e01f1b611ddcf920b88f.mp3"
+  },
+  {
+    "key": "rocky|Rule out any card that disagrees with even one observation.",
+    "text": "Rule out any card that disagrees with even one observation.",
+    "normalized": "Rule out any card that disagrees with even one observation.",
+    "sentences": [
+      "Rule out any card that disagrees with even one observation."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/8d16be94d20b9edd8905.mp3"
+  },
+  {
+    "key": "rocky|Choose the card that matches the camera shape, magnetic pull and microscope structure.",
+    "text": "Choose the card that matches the camera shape, magnetic pull and microscope structure.",
+    "normalized": "Choose the card that matches the camera shape, magnetic pull and microscope structure.",
+    "sentences": [
+      "Choose the card that matches the camera shape, magnetic pull and microscope structure."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/398f5379c19c3360398b.mp3"
+  },
+  {
+    "key": "rocky|Visit each marked site and use its instrument to collect soil evidence. Then return to the garage.",
+    "text": "Visit each marked site and use its instrument to collect soil evidence. Then return to the garage.",
+    "normalized": "Visit each marked site and use its instrument to collect soil evidence. Then return to the garage.",
+    "sentences": [
+      "Visit each marked site and use its instrument to collect soil evidence.",
+      "Then return to the garage."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a592be5ac49496c61be3.mp3"
+  },
+  {
+    "key": "control|A rover carries tools that extend what scientists can observe. Different instruments reveal different properties of soil and rock. Measurements need context: where was the sample found, and what did the instrument test? Collect evidence from each site before drawing a conclusion. Our instruments and scores are simplified for play. Real Mars rovers send measurements and images back to teams on Earth for careful comparison.",
+    "text": "A rover carries tools that extend what scientists can observe. Different instruments reveal different properties of soil and rock. Measurements need context: where was the sample found, and what did the instrument test? Collect evidence from each site before drawing a conclusion. Our instruments and scores are simplified for play. Real Mars rovers send measurements and images back to teams on Earth for careful comparison.",
+    "normalized": "A rover carries tools that extend what scientists can observe. Different instruments reveal different properties of soil and rock. Measurements need context: where was the sample found, and what did the instrument test? Collect evidence from each site before drawing a conclusion. Our instruments and scores are simplified for play. Real Mars rovers send measurements and images back to teams on Earth for careful comparison.",
+    "sentences": [
+      "A rover carries tools that extend what scientists can observe.",
+      "Different instruments reveal different properties of soil and rock.",
+      "Measurements need context: where was the sample found, and what did the instrument test?",
+      "Collect evidence from each site before drawing a conclusion.",
+      "Our instruments and scores are simplified for play.",
+      "Real Mars rovers send measurements and images back to teams on Earth for careful comparison."
+    ],
+    "speaker": "control",
+    "voice": "F2",
+    "file": "clips/b88dbc1b9f464b9565bc.mp3"
+  },
+  {
+    "key": "rocky|Look for the next unfinished marker on your map.",
+    "text": "Look for the next unfinished marker on your map.",
+    "normalized": "Look for the next unfinished marker on your map.",
+    "sentences": [
+      "Look for the next unfinished marker on your map."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/9941fdb5ee8841dd2d97.mp3"
+  },
+  {
+    "key": "rocky|A site becomes available when you stop nearby.",
+    "text": "A site becomes available when you stop nearby.",
+    "normalized": "A site becomes available when you stop nearby.",
+    "sentences": [
+      "A site becomes available when you stop nearby."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/f5543aa162a9346b547d.mp3"
+  },
+  {
+    "key": "rocky|Drive to a numbered marker, brake, and press E. When all sites are complete, park on the green garage pad.",
+    "text": "Drive to a numbered marker, brake, and press E. When all sites are complete, park on the green garage pad.",
+    "normalized": "Drive to a numbered marker, brake, and press E. When all sites are complete, park on the green garage pad.",
+    "sentences": [
+      "Drive to a numbered marker, brake, and press E.",
+      "When all sites are complete, park on the green garage pad."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/d2f58aff304a3a73b65c.mp3"
+  },
+  {
+    "key": "rocky|Look at the instrument instructions and the clue you are measuring.",
+    "text": "Look at the instrument instructions and the clue you are measuring.",
+    "normalized": "Look at the instrument instructions and the clue you are measuring.",
+    "sentences": [
+      "Look at the instrument instructions and the clue you are measuring."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/72ac935c537616018a3b.mp3"
+  },
+  {
+    "key": "rocky|Adjust one control at a time and watch how the reading changes.",
+    "text": "Adjust one control at a time and watch how the reading changes.",
+    "normalized": "Adjust one control at a time and watch how the reading changes.",
+    "sentences": [
+      "Adjust one control at a time and watch how the reading changes."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/c676e785091b997dd183.mp3"
+  },
+  {
+    "key": "rocky|Follow the instrument target shown on this screen, then use its collect or confirm button.",
+    "text": "Follow the instrument target shown on this screen, then use its collect or confirm button.",
+    "normalized": "Follow the instrument target shown on this screen, then use its collect or confirm button.",
+    "sentences": [
+      "Follow the instrument target shown on this screen, then use its collect or confirm button."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/49b64f565d73f6a1f45e.mp3"
+  },
+  {
+    "key": "rocky|Watch the drill move across the surface and find the green mark.",
+    "text": "Watch the drill move across the surface and find the green mark.",
+    "normalized": "Watch the drill move across the surface and find the green mark.",
+    "sentences": [
+      "Watch the drill move across the surface and find the green mark."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/58395b0785e73ebaca9b.mp3"
+  },
+  {
+    "key": "rocky|The green mark identifies rock soft enough to drill.",
+    "text": "The green mark identifies rock soft enough to drill.",
+    "normalized": "The green mark identifies rock soft enough to drill.",
+    "sentences": [
+      "The green mark identifies rock soft enough to drill."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/bb161cfdf9e64d28656f.mp3"
+  },
+  {
+    "key": "rocky|Wait until the drill is above the green soft-rock zone, then press Drill.",
+    "text": "Wait until the drill is above the green soft-rock zone, then press Drill.",
+    "normalized": "Wait until the drill is above the green soft-rock zone, then press Drill.",
+    "sentences": [
+      "Wait until the drill is above the green soft-rock zone, then press Drill."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a981cd2a43c7b01ce7bc.mp3"
+  },
+  {
+    "key": "rocky|Compare the top, middle and bottom layers.",
+    "text": "Compare the top, middle and bottom layers.",
+    "normalized": "Compare the top, middle and bottom layers.",
+    "sentences": [
+      "Compare the top, middle and bottom layers."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a8d69e2e5cd325c6e0eb.mp3"
+  },
+  {
+    "key": "rocky|In this undisturbed stack, newer layers were deposited above older ones.",
+    "text": "In this undisturbed stack, newer layers were deposited above older ones.",
+    "normalized": "In this undisturbed stack, newer layers were deposited above older ones.",
+    "sentences": [
+      "In this undisturbed stack, newer layers were deposited above older ones."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a91bc7cb47a4a881af64.mp3"
+  },
+  {
+    "key": "rocky|Choose the bottom layer, labeled C, as the oldest.",
+    "text": "Choose the bottom layer, labeled C, as the oldest.",
+    "normalized": "Choose the bottom layer, labeled C, as the oldest.",
+    "sentences": [
+      "Choose the bottom layer, labeled C, as the oldest."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/1757c9d299ce766c37ca.mp3"
+  },
+  {
+    "key": "rocky|Compare the laser reading with each mineral pattern.",
+    "text": "Compare the laser reading with each mineral pattern.",
+    "normalized": "Compare the laser reading with each mineral pattern.",
+    "sentences": [
+      "Compare the laser reading with each mineral pattern."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/e6d745a379e8d32070ee.mp3"
+  },
+  {
+    "key": "rocky|Every colored bar must match in the same position.",
+    "text": "Every colored bar must match in the same position.",
+    "normalized": "Every colored bar must match in the same position.",
+    "sentences": [
+      "Every colored bar must match in the same position."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/18ce5a59a7eb973f95ee.mp3"
+  },
+  {
+    "key": "rocky|Compare from left to right and select the card with the identical five-bar pattern.",
+    "text": "Compare from left to right and select the card with the identical five-bar pattern.",
+    "normalized": "Compare from left to right and select the card with the identical five-bar pattern.",
+    "sentences": [
+      "Compare from left to right and select the card with the identical five-bar pattern."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/59bbae4d0ca16a33b904.mp3"
+  },
+  {
+    "key": "rocky|Compare the struggling plant with the reference plant. Inspect, repair, and verify the result.",
+    "text": "Compare the struggling plant with the reference plant. Inspect, repair, and verify the result.",
+    "normalized": "Compare the struggling plant with the reference plant. Inspect, repair, and verify the result.",
+    "sentences": [
+      "Compare the struggling plant with the reference plant.",
+      "Inspect, repair, and verify the result."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/037d6887493613d41992.mp3"
+  },
+  {
+    "key": "control|A reference plant helps us spot differences. Both plants receive the same light, but only one is struggling. Compare their leaves and water supply before choosing a repair. Change the part supported by your evidence, then check whether the plant recovers. Scientists test explanations this way. The readings and fast recovery here are a teaching model, inspired by plant growing experiments rather than real NASA measurements.",
+    "text": "A reference plant helps us spot differences. Both plants receive the same light, but only one is struggling. Compare their leaves and water supply before choosing a repair. Change the part supported by your evidence, then check whether the plant recovers. Scientists test explanations this way. The readings and fast recovery here are a teaching model, inspired by plant growing experiments rather than real NASA measurements.",
+    "normalized": "A reference plant helps us spot differences. Both plants receive the same light, but only one is struggling. Compare their leaves and water supply before choosing a repair. Change the part supported by your evidence, then check whether the plant recovers. Scientists test explanations this way. The readings and fast recovery here are a teaching model, inspired by plant growing experiments rather than real NASA measurements.",
+    "sentences": [
+      "A reference plant helps us spot differences.",
+      "Both plants receive the same light, but only one is struggling.",
+      "Compare their leaves and water supply before choosing a repair.",
+      "Change the part supported by your evidence, then check whether the plant recovers.",
+      "Scientists test explanations this way.",
+      "The readings and fast recovery here are a teaching model, inspired by plant growing experiments rather than real NASA measurements."
+    ],
+    "speaker": "control",
+    "voice": "F2",
+    "file": "clips/01e01b168ef61770bea0.mp3"
+  },
+  {
+    "key": "rocky|Look for the observation dock beside the test plant.",
+    "text": "Look for the observation dock beside the test plant.",
+    "normalized": "Look for the observation dock beside the test plant.",
+    "sentences": [
+      "Look for the observation dock beside the test plant."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/f076cf9b67e9bc5a4179.mp3"
+  },
+  {
+    "key": "rocky|The plant needs to be on the bench before you can inspect it.",
+    "text": "The plant needs to be on the bench before you can inspect it.",
+    "normalized": "The plant needs to be on the bench before you can inspect it.",
+    "sentences": [
+      "The plant needs to be on the bench before you can inspect it."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/9088d7965d2f852aacf8.mp3"
+  },
+  {
+    "key": "rocky|Select the test plant, then select the observation dock. You can also drag the plant onto the dock.",
+    "text": "Select the test plant, then select the observation dock. You can also drag the plant onto the dock.",
+    "normalized": "Select the test plant, then select the observation dock. You can also drag the plant onto the dock.",
+    "sentences": [
+      "Select the test plant, then select the observation dock.",
+      "You can also drag the plant onto the dock."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/496e99ca0d01669d9c6a.mp3"
+  },
+  {
+    "key": "rocky|Compare the leaves, water and light in both pods.",
+    "text": "Compare the leaves, water and light in both pods.",
+    "normalized": "Compare the leaves, water and light in both pods.",
+    "sentences": [
+      "Compare the leaves, water and light in both pods."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/dec989e7e3d2677935bf.mp3"
+  },
+  {
+    "key": "rocky|The same working light reaches both plants. What differs in the water supply?",
+    "text": "The same working light reaches both plants. What differs in the water supply?",
+    "normalized": "The same working light reaches both plants. What differs in the water supply?",
+    "sentences": [
+      "The same working light reaches both plants.",
+      "What differs in the water supply?"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a1a498e80903d0160d65.mp3"
+  },
+  {
+    "key": "rocky|Inspect all three evidence cards. Notice the dry test tray and loose connector.",
+    "text": "Inspect all three evidence cards. Notice the dry test tray and loose connector.",
+    "normalized": "Inspect all three evidence cards. Notice the dry test tray and loose connector.",
+    "sentences": [
+      "Inspect all three evidence cards.",
+      "Notice the dry test tray and loose connector."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/1d429d3ca5d5271cae42.mp3"
+  },
+  {
+    "key": "rocky|Compare the clues before selecting an explanation.",
+    "text": "Compare the clues before selecting an explanation.",
+    "normalized": "Compare the clues before selecting an explanation.",
+    "sentences": [
+      "Compare the clues before selecting an explanation."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/bc114e782da36a5a5fd7.mp3"
+  },
+  {
+    "key": "rocky|Both plants have light. Only the test tray has no water and a loose connection.",
+    "text": "Both plants have light. Only the test tray has no water and a loose connection.",
+    "normalized": "Both plants have light. Only the test tray has no water and a loose connection.",
+    "sentences": [
+      "Both plants have light.",
+      "Only the test tray has no water and a loose connection."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a15137f60e2e8d655439.mp3"
+  },
+  {
+    "key": "rocky|Choose the water-supply explanation, then test it with a flow connector.",
+    "text": "Choose the water-supply explanation, then test it with a flow connector.",
+    "normalized": "Choose the water-supply explanation, then test it with a flow connector.",
+    "sentences": [
+      "Choose the water-supply explanation, then test it with a flow connector."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6669138eed8ba9dc9b6e.mp3"
+  },
+  {
+    "key": "rocky|Which tool addresses the difference you observed?",
+    "text": "Which tool addresses the difference you observed?",
+    "normalized": "Which tool addresses the difference you observed?",
+    "sentences": [
+      "Which tool addresses the difference you observed?"
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/1eb9cf664f5f46588476.mp3"
+  },
+  {
+    "key": "rocky|The tank has water, but it is not reaching the test tray.",
+    "text": "The tank has water, but it is not reaching the test tray.",
+    "normalized": "The tank has water, but it is not reaching the test tray.",
+    "sentences": [
+      "The tank has water, but it is not reaching the test tray."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/24e2fe80fae62c2659c6.mp3"
+  },
+  {
+    "key": "rocky|Select the Flow connector and place it at the loose water connection.",
+    "text": "Select the Flow connector and place it at the loose water connection.",
+    "normalized": "Select the Flow connector and place it at the loose water connection.",
+    "sentences": [
+      "Select the Flow connector and place it at the loose water connection."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/78981cb21a18750c6a7f.mp3"
+  },
+  {
+    "key": "rocky|Compare the repaired plant with the unchanged reference.",
+    "text": "Compare the repaired plant with the unchanged reference.",
+    "normalized": "Compare the repaired plant with the unchanged reference.",
+    "sentences": [
+      "Compare the repaired plant with the unchanged reference."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/5f42f1554fd8a4189767.mp3"
+  },
+  {
+    "key": "rocky|A repair is evidence only if the expected change actually happens.",
+    "text": "A repair is evidence only if the expected change actually happens.",
+    "normalized": "A repair is evidence only if the expected change actually happens.",
+    "sentences": [
+      "A repair is evidence only if the expected change actually happens."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a6e012e82c9e57550bcd.mp3"
+  },
+  {
+    "key": "rocky|Check the water flow and recovering leaves, then choose the explanation supported by the comparison.",
+    "text": "Check the water flow and recovering leaves, then choose the explanation supported by the comparison.",
+    "normalized": "Check the water flow and recovering leaves, then choose the explanation supported by the comparison.",
+    "sentences": [
+      "Check the water flow and recovering leaves, then choose the explanation supported by the comparison."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/3775b7622b937b263435.mp3"
+  },
+  {
+    "key": "rocky|Match yeast growth to radiation exposure, compare sensitivity, then protect the crew.",
+    "text": "Match yeast growth to radiation exposure, compare sensitivity, then protect the crew.",
+    "normalized": "Match yeast growth to radiation exposure, compare sensitivity, then protect the crew.",
+    "sentences": [
+      "Match yeast growth to radiation exposure, compare sensitivity, then protect the crew."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/f671217dfe7492c71916.mp3"
+  },
+  {
+    "key": "control|Living sensors show how radiation affects cells. In this model, growing yeast changes blue dye to pink. More radiation damages the yeast, so there is less growth and the dye stays blue. Compare samples that received the same dose to test sensitivity fairly. Yeast that cannot repair its D N A is more sensitive. The colors and shelter decision are simplified game examples inspired by BioSentinel research.",
+    "text": "Living sensors show how radiation affects cells. In this model, growing yeast changes blue dye to pink. More radiation damages the yeast, so there is less growth and the dye stays blue. Compare samples that received the same dose to test sensitivity fairly. Yeast that cannot repair its DNA is more sensitive. The colors and shelter decision are simplified game examples inspired by BioSentinel research.",
+    "normalized": "Living sensors show how radiation affects cells. In this model, growing yeast changes blue dye to pink. More radiation damages the yeast, so there is less growth and the dye stays blue. Compare samples that received the same dose to test sensitivity fairly. Yeast that cannot repair its D N A is more sensitive. The colors and shelter decision are simplified game examples inspired by BioSentinel research.",
+    "sentences": [
+      "Living sensors show how radiation affects cells.",
+      "In this model, growing yeast changes blue dye to pink.",
+      "More radiation damages the yeast, so there is less growth and the dye stays blue.",
+      "Compare samples that received the same dose to test sensitivity fairly.",
+      "Yeast that cannot repair its D N A is more sensitive.",
+      "The colors and shelter decision are simplified game examples inspired by BioSentinel research."
+    ],
+    "speaker": "control",
+    "voice": "F2",
+    "file": "clips/7195939ec966e19d46dd.mp3"
+  },
+  {
+    "key": "rocky|Look at how pink or blue each well is.",
+    "text": "Look at how pink or blue each well is.",
+    "normalized": "Look at how pink or blue each well is.",
+    "sentences": [
+      "Look at how pink or blue each well is."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6026a95cb17203a04ebe.mp3"
+  },
+  {
+    "key": "rocky|Pink means more growth. Blue means less growth after radiation damage.",
+    "text": "Pink means more growth. Blue means less growth after radiation damage.",
+    "normalized": "Pink means more growth. Blue means less growth after radiation damage.",
+    "sentences": [
+      "Pink means more growth.",
+      "Blue means less growth after radiation damage."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/44966cfd8dfbb94f514f.mp3"
+  },
+  {
+    "key": "rocky|Match pink to no radiation, purple to medium dose, and blue to high dose.",
+    "text": "Match pink to no radiation, purple to medium dose, and blue to high dose.",
+    "normalized": "Match pink to no radiation, purple to medium dose, and blue to high dose.",
+    "sentences": [
+      "Match pink to no radiation, purple to medium dose, and blue to high dose."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/4e2db0770f1cc3e8a730.mp3"
+  },
+  {
+    "key": "rocky|Both samples received the same radiation dose.",
+    "text": "Both samples received the same radiation dose.",
+    "normalized": "Both samples received the same radiation dose.",
+    "sentences": [
+      "Both samples received the same radiation dose."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/5e424781b8ab6321ffb8.mp3"
+  },
+  {
+    "key": "rocky|The more sensitive yeast stops growing sooner.",
+    "text": "The more sensitive yeast stops growing sooner.",
+    "normalized": "The more sensitive yeast stops growing sooner.",
+    "sentences": [
+      "The more sensitive yeast stops growing sooner."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/055c59d613fda6029811.mp3"
+  },
+  {
+    "key": "rocky|Choose the yeast that cannot repair its D N A.",
+    "text": "Choose the yeast that cannot repair its DNA.",
+    "normalized": "Choose the yeast that cannot repair its D N A.",
+    "sentences": [
+      "Choose the yeast that cannot repair its D N A."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/581a6f62708e67a99fff.mp3"
+  },
+  {
+    "key": "rocky|The blue sensor indicates very little growth.",
+    "text": "The blue sensor indicates very little growth.",
+    "normalized": "The blue sensor indicates very little growth.",
+    "sentences": [
+      "The blue sensor indicates very little growth."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/009181b8eeb9ff4e4724.mp3"
+  },
+  {
+    "key": "rocky|Radiation damage is a reason to seek protection.",
+    "text": "Radiation damage is a reason to seek protection.",
+    "normalized": "Radiation damage is a reason to seek protection.",
+    "sentences": [
+      "Radiation damage is a reason to seek protection."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/3b6dbc1e25b19213ce23.mp3"
+  },
+  {
+    "key": "rocky|Move everyone to the shielded shelter.",
+    "text": "Move everyone to the shielded shelter.",
+    "normalized": "Move everyone to the shielded shelter.",
+    "sentences": [
+      "Move everyone to the shielded shelter."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/c4ee43d5387d79f73add.mp3"
+  },
+  {
+    "key": "rocky|Follow your chosen route: build a weather station, photograph the landscape, and search for a meteorite if your route includes it.",
+    "text": "Follow your chosen route: build a weather station, photograph the landscape, and search for a meteorite if your route includes it.",
+    "normalized": "Follow your chosen route: build a weather station, photograph the landscape, and search for a meteorite if your route includes it.",
+    "sentences": [
+      "Follow your chosen route: build a weather station, photograph the landscape, and search for a meteorite if your route includes it."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/724196b1431f63f8c3a4.mp3"
+  },
+  {
+    "key": "control|An expedition combines different kinds of evidence. A weather station measures conditions, photographs record the landscape, and a meteorite search examines possible visitors from space. Each instrument answers a different question. Mission planners balance those discoveries against limited power and time. A short route can still be useful science. Our route costs and instrument puzzles are invented for play, inspired by real rover exploration.",
+    "text": "An expedition combines different kinds of evidence. A weather station measures conditions, photographs record the landscape, and a meteorite search examines possible visitors from space. Each instrument answers a different question. Mission planners balance those discoveries against limited power and time. A short route can still be useful science. Our route costs and instrument puzzles are invented for play, inspired by real rover exploration.",
+    "normalized": "An expedition combines different kinds of evidence. A weather station measures conditions, photographs record the landscape, and a meteorite search examines possible visitors from space. Each instrument answers a different question. Mission planners balance those discoveries against limited power and time. A short route can still be useful science. Our route costs and instrument puzzles are invented for play, inspired by real rover exploration.",
+    "sentences": [
+      "An expedition combines different kinds of evidence.",
+      "A weather station measures conditions, photographs record the landscape, and a meteorite search examines possible visitors from space.",
+      "Each instrument answers a different question.",
+      "Mission planners balance those discoveries against limited power and time.",
+      "A short route can still be useful science.",
+      "Our route costs and instrument puzzles are invented for play, inspired by real rover exploration."
+    ],
+    "speaker": "control",
+    "voice": "F2",
+    "file": "clips/dfc872a370172af4cdda.mp3"
+  },
+  {
+    "key": "rocky|Check which stops are included in your route.",
+    "text": "Check which stops are included in your route.",
+    "normalized": "Check which stops are included in your route.",
+    "sentences": [
+      "Check which stops are included in your route."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/5a0a5a457d0c50be42cc.mp3"
+  },
+  {
+    "key": "rocky|Complete each marked stop before returning to base.",
+    "text": "Complete each marked stop before returning to base.",
+    "normalized": "Complete each marked stop before returning to base.",
+    "sentences": [
+      "Complete each marked stop before returning to base."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/b2421ddf33dd270825c3.mp3"
+  },
+  {
+    "key": "rocky|Stop beside an unfinished marker and press E. After the last stop, return to the green garage pad.",
+    "text": "Stop beside an unfinished marker and press E. After the last stop, return to the green garage pad.",
+    "normalized": "Stop beside an unfinished marker and press E. After the last stop, return to the green garage pad.",
+    "sentences": [
+      "Stop beside an unfinished marker and press E.",
+      "After the last stop, return to the green garage pad."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/95eed61c6930cb6ab9d1.mp3"
+  },
+  {
+    "key": "rocky|Look at the blueprint from the ground upward.",
+    "text": "Look at the blueprint from the ground upward.",
+    "normalized": "Look at the blueprint from the ground upward.",
+    "sentences": [
+      "Look at the blueprint from the ground upward."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/dba1371e7dae0d31cbb4.mp3"
+  },
+  {
+    "key": "rocky|Each part needs support before it can be installed.",
+    "text": "Each part needs support before it can be installed.",
+    "normalized": "Each part needs support before it can be installed.",
+    "sentences": [
+      "Each part needs support before it can be installed."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/fabc49a17d6505a7dd13.mp3"
+  },
+  {
+    "key": "rocky|Start with the base, then add the mast and supported parts. Connect power after the required parts are in place.",
+    "text": "Start with the base, then add the mast and supported parts. Connect power after the required parts are in place.",
+    "normalized": "Start with the base, then add the mast and supported parts. Connect power after the required parts are in place.",
+    "sentences": [
+      "Start with the base, then add the mast and supported parts.",
+      "Connect power after the required parts are in place."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6bf0bdf085555b7cffc3.mp3"
+  },
+  {
+    "key": "rocky|Look for the landscape targets listed above the camera.",
+    "text": "Look for the landscape targets listed above the camera.",
+    "normalized": "Look for the landscape targets listed above the camera.",
+    "sentences": [
+      "Look for the landscape targets listed above the camera."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/9c522ccaa61e28d2578b.mp3"
+  },
+  {
+    "key": "rocky|Move the view until a target lines up with the camera.",
+    "text": "Move the view until a target lines up with the camera.",
+    "normalized": "Move the view until a target lines up with the camera.",
+    "sentences": [
+      "Move the view until a target lines up with the camera."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/a34515bdcc48e4f1035a.mp3"
+  },
+  {
+    "key": "rocky|Use the arrows or drag to center each target, then take its photograph.",
+    "text": "Use the arrows or drag to center each target, then take its photograph.",
+    "normalized": "Use the arrows or drag to center each target, then take its photograph.",
+    "sentences": [
+      "Use the arrows or drag to center each target, then take its photograph."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/6b57f8bbe03210a848be.mp3"
+  },
+  {
+    "key": "rocky|Scan a square and look at its signal bars.",
+    "text": "Scan a square and look at its signal bars.",
+    "normalized": "Scan a square and look at its signal bars.",
+    "sentences": [
+      "Scan a square and look at its signal bars."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/994c821d6afd5eee6791.mp3"
+  },
+  {
+    "key": "rocky|More bars mean the meteorite is closer. Compare neighboring squares.",
+    "text": "More bars mean the meteorite is closer. Compare neighboring squares.",
+    "normalized": "More bars mean the meteorite is closer. Compare neighboring squares.",
+    "sentences": [
+      "More bars mean the meteorite is closer.",
+      "Compare neighboring squares."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/1b53ac1878ee30e05a58.mp3"
+  },
+  {
+    "key": "rocky|Scan untested squares near the strongest signal. The meteorite is collected when you scan its square.",
+    "text": "Scan untested squares near the strongest signal. The meteorite is collected when you scan its square.",
+    "normalized": "Scan untested squares near the strongest signal. The meteorite is collected when you scan its square.",
+    "sentences": [
+      "Scan untested squares near the strongest signal.",
+      "The meteorite is collected when you scan its square."
+    ],
+    "speaker": "rocky",
+    "voice": "M2",
+    "file": "clips/c5ff75a0b5f7b0c08d1f.mp3"
+  }
+]

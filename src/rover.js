@@ -6,6 +6,9 @@ import { $, h, sfx, shuffle, G, onAbort } from './ui.js';
 import { music, engine, wind } from './audio.js';
 import { SITE_TASKS } from './minigames/sites.js';
 import { EXPEDITION_TASKS, EXPEDITION_STOPS } from './minigames/expedition.js';
+import { createGameClock } from './game-clock.js';
+import { createCoach } from './voice-ui.js';
+import { narration } from './narration.js';
 
 // Two missions, two different worlds: where the stops are, and which terrain is generated.
 const ROUTES = {
@@ -14,7 +17,8 @@ const ROUTES = {
 };
 const BATTERY_RANGE = 620;      // metres the expedition rover drives on one charge
 const PAD = [0, 17];            // parking pad in front of the rover garage
-const DOOR_Z = -2;              // garage door (the garage goes back to z = -11)
+const SUSPENSION = 0.32;        // how far a wheel can move up or down from the chassis
+const DOOR_Z = -2;             // garage door (the garage goes back to z = -11)
 const TAU = Math.PI * 2;
 const mat = (color, extra = {}) => new THREE.MeshLambertMaterial({ color, flatShading: true, ...extra });
 const lit = (color, extra = {}) => new THREE.MeshBasicMaterial({ color, ...extra });
@@ -66,7 +70,8 @@ function makeGround(scene, rand, SITE_POS) {
   geo.setAttribute('color', new THREE.BufferAttribute(col, 3)); geo.computeVertexNormals();
   const mesh = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ vertexColors: true, flatShading: true }));
   mesh.receiveShadow = true; scene.add(mesh);
-  const far = new THREE.Mesh(new THREE.PlaneGeometry(3000, 3000), mat(0xc4532e)); far.rotation.x = -Math.PI / 2; far.position.set(0, -0.5, CZ); scene.add(far);
+  // The plain beyond the terrain is a ring, not a full sheet: a sheet under the map would cover the crater floors.
+  const far = new THREE.Mesh(new THREE.RingGeometry(366, 2200, 64), mat(0xc4532e)); far.rotation.x = -Math.PI / 2; far.position.set(0, -0.05, CZ); scene.add(far);
   // Height of the actual mesh (so wheels, rocks and tracks sit exactly on it).
   const at = (x, z) => {
     const fx = Math.max(0, Math.min(SEG - 0.001, (x + HALF) / CELL)), fz = Math.max(0, Math.min(SEG - 0.001, (z - CZ + HALF) / CELL));
@@ -340,7 +345,7 @@ function buildRover() {
     const holder = new THREE.Group(), spin = new THREE.Group(); holder.position.set(lx, 0.78, lz); holder.add(spin); root.add(holder);
     add(tire, dark, 0, 0, 0, spin); add(hub, white, 0, 0, 0, spin).castShadow = false; add(nut, orange, 0, 0.2, 0, spin).castShadow = false;
     for (let i = 0; i < 9; i++) { const a = i * TAU / 9, c = add(cleat, navy, 0, Math.cos(a) * 0.78, Math.sin(a) * 0.78, spin); c.rotation.x = a; c.castShadow = false; }
-    wheels.push({ holder, spin, lx, lz });
+    wheels.push({ holder, spin, lx, lz, sus: 0 });
   }
   return { root, body, wheels, cam, flag };
 }
@@ -380,14 +385,66 @@ function buildSite(scene, x, z, n, y, tint = 0x7fe4ff, glow = 0x2fb8ff) {
   return { x, z, y, n, group: g, crystal, ring, beam, label, flag, done: false, doneAt: 0 };
 }
 
+/** Same field instruments and learning goals, without a WebGL driving scene. */
+export function runInstrumentMission({ sites = 3, mode = 'samples' } = {}) {
+  return new Promise((resolve) => {
+    const root = $('#rover');
+    root.replaceChildren(); root.classList.remove('hidden'); document.body.classList.add('in-rover');
+    let active = true, mistakes = 0;
+    const finish = (done, cancelled = false) => {
+      if (!active) return;
+      active = false; unAbort();
+      root.dispatchEvent(new Event('rover-stop'));
+      root.replaceChildren(); root.classList.add('hidden'); document.body.classList.remove('in-rover');
+      resolve({ done, mistakes, cancelled });
+    };
+    const unAbort = onAbort(() => finish(false, true));
+    const tasks = (mode === 'expedition' ? EXPEDITION_TASKS : shuffle(SITE_TASKS)).slice(0, Math.max(1, Math.min(3, sites)));
+    const status = h('div', { id: 'rv-mission', class: 'rv-box', role: 'status' });
+    root.append(status, h('button', { id: 'rv-leave', class: 'btn small warn', onclick: () => finish(false) }, 'Back to base (leave unfinished)'));
+    music.play('rover');
+    (async () => {
+      for (let i = 0; i < tasks.length; i++) {
+        status.textContent = `Instrument mission · Stop ${i + 1} of ${tasks.length} · ${mode === 'expedition' ? EXPEDITION_STOPS[i] : 'Collect soil evidence'}`;
+        const result = await tasks[i](root);
+        if (!active) return;
+        if (result == null) { finish(false); return; }
+        mistakes += result;
+      }
+      finish(true);
+    })().catch(error => { console.warn('Instrument mission stopped', error); finish(false); });
+  });
+}
+
 export function runRover({ sites: nSites = 3, dust: storm = false, mode: missionMode = 'samples' } = {}) {
   return new Promise((resolve) => {
     const root = $('#rover');
     root.replaceChildren(); root.classList.remove('hidden'); document.body.classList.add('in-rover');
     const canvas = h('canvas', { class: 'three' }); root.append(canvas);
-    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    const lowGraphics = !!G.lowGraphics;
+    const reducedMotion = () => G.reducedMotion ?? window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let renderer;
+    try { renderer = new THREE.WebGLRenderer({ canvas, antialias: !lowGraphics }); }
+    catch (error) {
+      console.warn('Rover graphics unavailable', error);
+      let active = true;
+      const leave = (cancelled = false) => {
+        if (!active) return false;
+        active = false; unAbortError(); root.replaceChildren(); root.classList.add('hidden'); document.body.classList.remove('in-rover');
+        if (cancelled) resolve({ done: false, cancelled: true, mistakes: 0 });
+        return true;
+      };
+      const unAbortError = onAbort(() => leave(true));
+      root.replaceChildren(h('div', { class: 'rv-task' }, h('div', { class: 'term' },
+        h('div', { class: 'term-body' }, h('h2', {}, 'The rover graphics could not start'),
+          h('p', {}, 'Your mission progress is safe. You can complete the same field experiments in instrument mode, without 3D driving.'),
+          h('button', { class: 'px-btn ok', onclick: () => { if (leave()) resolve(runInstrumentMission({ sites: nSites, mode: missionMode })); } }, 'Instrument mission (no 3D)'),
+          h('button', { class: 'px-btn', onclick: () => { if (leave()) resolve({ done: false, mistakes: 0 }); } }, 'Back to base'),
+          h('button', { class: 'px-btn ok', onclick: () => { if (leave()) resolve(runRover({ sites: nSites, dust: storm, mode: missionMode })); } }, 'Try again')))));
+      return;
+    }
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, lowGraphics ? 1 : 2));
+    renderer.shadowMap.enabled = !lowGraphics; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(60, 1, 0.3, 1400);
     const expedition = missionMode === 'expedition', route = ROUTES[expedition ? 'expedition' : 'samples'], SITE_POS = route.pos;
@@ -417,6 +474,8 @@ export function runRover({ sites: nSites = 3, dust: storm = false, mode: mission
     const battFill = h('i'), batt = h('div', { id: 'rv-batt', class: 'rv-box' + (expedition ? '' : ' hidden') }, '🔋', h('div', { class: 'gauge' }, battFill));
     const map = h('canvas', { width: 150, height: 150 });
     const keys = new Set();
+    const coach = createCoach({ mission: missionMode === 'expedition' ? 'expedition' : 'samples', owner: 'rover-help', host: root, pause: () => keys.clear() });
+    coach.setStage('drive');
     const hold = (code, label, cls = '') => { const b = h('button', { class: cls }, label); const on = (e) => { e.preventDefault(); keys.add(code); if (code === 'KeyE') act(); }, off = () => keys.delete(code); b.addEventListener('pointerdown', on); b.addEventListener('pointerup', off); b.addEventListener('pointerleave', off); b.addEventListener('pointercancel', off); return b; };
     const up = hold('KeyW', '▲'); up.style.gridColumn = '2';
     root.append(mission, prompt, nav, batt, h('div', { id: 'rv-map', class: 'rv-box' }, map),
@@ -425,39 +484,57 @@ export function runRover({ sites: nSites = 3, dust: storm = false, mode: mission
       h('div', { id: 'rv-touch' }, up, hold('KeyE', 'E', 'e'), hold('KeyA', '◀'), hold('KeyS', '▼'), hold('KeyD', '▶')), fade);
 
     // mode: 'intro' (rolls out of the garage) -> 'drive' <-> 'task' -> 'dock' (auto-parks in the garage)
-    let x = 0, z = -6, heading = 0, speed = 0, mistakes = 0, mode = 'intro', ended = false, raf = 0, last = performance.now();
+    let x = 0, z = -6, heading = 0, speed = 0, mistakes = 0, mode = 'intro', ended = false, raf = 0, last = performance.now(), elapsed = 0;
+    const clock = createGameClock();
     let battery = 1, bumpAt = 0, near = null, shake = 0, trackDist = 0, dustAcc = 0, lastGas = 0, steerNow = 0, mapTick = 0, fov = 60, endAt = 0;
     const allDone = () => sites.every((s) => s.done);
-    const renderMission = () => mission.replaceChildren(h('b', {}, expedition ? '🚀 Mission: final expedition' : '🌪️ Mission: soil samples'),
-      ...sites.map((s) => h('div', { class: s.done ? 'done' : '' }, `${s.done ? '✅' : '⬜'} ${stopName(s)}`)), h('div', { class: allDone() ? 'go' : '' }, `${allDone() ? '🟢' : '⬜'} Park in the rover garage`));
+    const renderMission = () => mission.replaceChildren(h('b', {}, expedition ? 'Final expedition' : 'Soil survey'),
+      h('span', { class: 'rv-progress' }, `${sites.filter(s => s.done).length} / ${sites.length} stops`),
+      ...(allDone() ? [h('small', { class: 'go' }, 'Return to the green garage pad')] : []));
     renderMission();
 
     const walkAstro = (from, to, ms) => new Promise((done) => {
       astro.group.visible = true; astro.walk = { from, to, t: 0, ms, done };
-      for (let s = 0; s < ms - 150; s += 260) setTimeout(() => { if (!ended) sfx('step'); }, s);
+      for (let s = 0; s < ms - 150; s += 260) clock.schedule(() => { if (!ended) sfx('step'); }, s);
     });
     async function act() {
-      if (mode !== 'drive' || !near || Math.abs(speed) >= 3) return;
+      if (ended || G.paused || G.helpOpen || document.hidden || mode !== 'drive' || !near || Math.abs(speed) >= 3) return;
       const site = near;
       mode = 'task'; speed = 0; keys.clear(); prompt.classList.add('hidden'); sfx('ok');
+      coach.setVisible(false);
       const side = new THREE.Vector3(x + Math.cos(heading) * 2.8, 0, z - Math.sin(heading) * 2.8);
       const d = Math.hypot(x - site.x, z - site.z) || 1, spot = new THREE.Vector3(site.x + (x - site.x) / d * 2.6, 0, site.z + (z - site.z) / d * 2.6);
       await walkAstro(side, spot, 900);
-      astro.working = true;
-      mistakes += await tasks[(site.n - 1) % tasks.length](root);
       if (ended) return;
-      astro.working = false; site.done = true; site.doneAt = performance.now();
-      site.group.remove(site.crystal, site.beam, site.label); site.flag.visible = true; site.ring.material.color.setHex(0x35c46a);
+      astro.working = true;
+      const result = await tasks[(site.n - 1) % tasks.length](root);
+      if (ended) return;
+      if (result == null) { finish(false); return; }
+      mistakes += result;
+      astro.working = false; site.done = true; site.doneAt = elapsed;
+      for (const marker of [site.crystal, site.beam, site.label]) marker.visible = false;
+      site.flag.visible = true; site.ring.material.color.setHex(0x35c46a);
       for (let i = 0; i < 24; i++) dust.emit(site.x, site.y + 1.5, site.z, (Math.random() - 0.5) * 6, 2 + Math.random() * 4, (Math.random() - 0.5) * 6, 0.6, 2.4, 1.2, 0.5);
       renderMission();
       await walkAstro(spot, side, 700);
+      if (ended) return;
       astro.group.visible = false; near = null; mode = 'drive';
+      coach.setVisible(true); coach.setStage('drive', sites.filter(s => s.done).length);
       if (allDone()) sfx('win');
     }
     const code = (e) => e.code.replace('ArrowUp', 'KeyW').replace('ArrowDown', 'KeyS').replace('ArrowLeft', 'KeyA').replace('ArrowRight', 'KeyD');
-    const kd = (e) => { if (G.paused) return; const c = code(e); if (c.startsWith('Key') || c === 'Space') e.preventDefault(); keys.add(c); if ((c === 'KeyE' || c === 'Space') && !e.repeat) act(); };
+    const kd = (e) => {
+      if (G.paused || G.helpOpen || mode !== 'drive' || e.target.closest?.('button,a,input,select,textarea,[role="button"],summary')) return;
+      const c = code(e);
+      if (!['KeyW','KeyA','KeyS','KeyD','KeyE','ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Space'].includes(c)) return;
+      e.preventDefault(); keys.add(c);
+      if ((c === 'KeyE' || c === 'Space') && !e.repeat) act();
+    };
     const ku = (e) => keys.delete(code(e));
     window.addEventListener('keydown', kd); window.addEventListener('keyup', ku);
+    const clearKeys = () => keys.clear();
+    window.addEventListener('blur', clearKeys);
+    document.addEventListener('visibilitychange', clearKeys);
 
     function drawMap() {
       const g = map.getContext('2d'); const mx = (wx) => 75 - wx * 0.55, my = (wz) => 134 - wz * 0.6;
@@ -474,10 +551,13 @@ export function runRover({ sites: nSites = 3, dust: storm = false, mode: mission
     const camPos = new THREE.Vector3(11, 6.5, 30), camLook = new THREE.Vector3(0, 2, 0), wantPos = new THREE.Vector3(), wantLook = new THREE.Vector3(), m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), up3 = new THREE.Vector3(0, 1, 0), v3 = new THREE.Vector3(), one = new THREE.Vector3(1, 1, 1);
     camera.position.copy(camPos);
 
-    function frame(now) {
+    function frame(time) {
       raf = requestAnimationFrame(frame);
-      const dt = Math.min(0.05, (now - last) / 1000); last = now;
-      if (G.paused) { keys.clear(); if (!quiet) { quiet = true; engine.set(-1); wind.pause(true); } return; }
+      const dt = Math.min(0.05, (time - last) / 1000); last = time;
+      if (G.paused || G.helpOpen || document.hidden) { keys.clear(); if (!quiet) { quiet = true; engine.set(-1); wind.pause(true); } return; }
+      elapsed += dt * 1000;
+      const now = elapsed;
+      clock.tick(dt * 1000);
       if (quiet) { quiet = false; wind.pause(false); }
       const w = root.clientWidth, hgt = root.clientHeight;
       if (canvas.width !== Math.floor(w * renderer.getPixelRatio()) || canvas.height !== Math.floor(hgt * renderer.getPixelRatio())) { renderer.setSize(w, hgt, false); camera.aspect = w / hgt; camera.updateProjectionMatrix(); }
@@ -533,11 +613,22 @@ export function runRover({ sites: nSites = 3, dust: storm = false, mode: mission
       const sinH = Math.sin(heading), cosH = Math.cos(heading), spd = Math.abs(speed);
       engine.set(Math.min(1, spd / 17), Math.abs(gas));
       const gy = ground.at(x, z);
-      const pitch = Math.atan2(ground.at(x - sinH * 1.7, z - cosH * 1.7) - ground.at(x + sinH * 1.7, z + cosH * 1.7), 3.4);
-      const roll = Math.atan2(ground.at(x + cosH * 1.6, z - sinH * 1.6) - ground.at(x - cosH * 1.6, z + sinH * 1.6), 3.2);
-      const k = Math.min(1, dt * 10);
-      rover.root.position.set(x, rover.root.position.y + (gy - rover.root.position.y) * Math.min(1, dt * 14), z);
+      // The ground under each of the six wheels decides the lean and the height, so the rover
+      // never sinks into a crater rim: it rides on its wheels, not on one point under its middle.
+      const hw = rover.wheels.map((wh) => ground.at(x + cosH * wh.lx + sinH * wh.lz, z - sinH * wh.lx + cosH * wh.lz));
+      const pitch = Math.atan2((hw[0] + hw[3]) / 2 - (hw[2] + hw[5]) / 2, 3.2);
+      const roll = Math.atan2((hw[3] + hw[4] + hw[5]) / 3 - (hw[0] + hw[1] + hw[2]) / 3, 3.2);
+      const k = Math.min(1, dt * 14);
       rover.root.rotation.y = heading; rover.root.rotation.x += (pitch - rover.root.rotation.x) * k; rover.root.rotation.z += (roll - rover.root.rotation.z) * k;
+      // How far each wheel hangs above or below the tilted chassis plane, and the lowest height that
+      // keeps every wheel within its suspension travel and the belly and bumpers clear of the ground.
+      const tiltX = Math.sin(rover.root.rotation.x), tiltZ = Math.sin(rover.root.rotation.z);
+      let fit = 0, top = -Infinity;
+      rover.wheels.forEach((wh, i) => { hw[i] -= wh.lx * tiltZ - wh.lz * tiltX; fit += hw[i] / 6; top = Math.max(top, hw[i]); });
+      const want = Math.max(fit, top - SUSPENSION, gy - 0.45,
+        ground.at(x + sinH * 2.5, z + cosH * 2.5) + 2.5 * tiltX - 0.7, ground.at(x - sinH * 2.5, z - cosH * 2.5) - 2.5 * tiltX - 0.7);
+      const ry = rover.root.position.y + (want - rover.root.position.y) * Math.min(1, dt * (want > rover.root.position.y ? 30 : 12));
+      rover.root.position.set(x, ry, z);
       const accel = gas && mode === 'drive' ? gas : 0; lastGas += (accel - lastGas) * Math.min(1, dt * 5);
       rover.body.rotation.z += (steerNow * spd / 17 * 0.09 - rover.body.rotation.z) * k;
       rover.body.rotation.x = -lastGas * 0.03 * (1 - spd / 20);
@@ -546,7 +637,8 @@ export function runRover({ sites: nSites = 3, dust: storm = false, mode: mission
       rover.wheels.forEach((wh, i) => {
         wh.spin.rotation.x += speed * dt / 0.78;
         wh.holder.rotation.y = wh.lz > 0 ? steerNow * 0.42 : wh.lz < 0 ? -steerNow * 0.22 : 0;
-        wh.holder.position.y = 0.78 + Math.sin(now / 60 + i * 1.7) * 0.025 * spd / 17;
+        wh.sus += (Math.max(-SUSPENSION, Math.min(SUSPENSION, hw[i] - ry)) - wh.sus) * Math.min(1, dt * 22);   // each wheel follows its own bump
+        wh.holder.position.y = 0.78 + wh.sus + Math.sin(now / 60 + i * 1.7) * 0.025 * spd / 17;
       });
 
       // --- Dust from the wheels + tyre tracks ---
@@ -600,11 +692,17 @@ export function runRover({ sites: nSites = 3, dust: storm = false, mode: mission
       else { wantPos.set(x - sinH * 12, gy + 6.5, Math.max(1.5, z - cosH * 12)); wantLook.set(x + sinH * 5, gy + 1.5, z + cosH * 5); }
       const ck = 1 - Math.pow(0.004, dt);
       camPos.lerp(wantPos, ck); camLook.lerp(wantLook, 1 - Math.pow(0.0005, dt));
-      camPos.y = Math.max(camPos.y, ground.at(camPos.x, camPos.z) + 1.6);
+      // Keep the camera above the ground, and lift it when a rim would hide the rover.
+      camPos.y = Math.max(camPos.y, ground.at(camPos.x, camPos.z) + 2.2);
+      for (const f of [0.2, 0.4, 0.6, 0.8]) {
+        const need = (ground.at(camPos.x + (x - camPos.x) * f, camPos.z + (z - camPos.z) * f) + 0.9 - (gy + 1.5) * f) / (1 - f);
+        if (need > camPos.y) camPos.y += (need - camPos.y) * Math.min(1, dt * 8);
+      }
       shake = Math.max(0, shake - dt * 1.6);
-      camera.position.set(camPos.x + (Math.random() - 0.5) * shake, camPos.y + (Math.random() - 0.5) * shake, camPos.z);
+      const cameraShake = reducedMotion() ? 0 : shake;
+      camera.position.set(camPos.x + (Math.random() - 0.5) * cameraShake, camPos.y + (Math.random() - 0.5) * cameraShake, camPos.z);
       camera.lookAt(camLook);
-      const wantFov = 58 + spd * 0.75; if (Math.abs(wantFov - fov) > 0.05) { fov += (wantFov - fov) * Math.min(1, dt * 3); camera.fov = fov; camera.updateProjectionMatrix(); }
+      const wantFov = reducedMotion() ? 60 : 58 + spd * 0.75; if (Math.abs(wantFov - fov) > 0.05) { fov += (wantFov - fov) * Math.min(1, dt * 3); camera.fov = fov; camera.updateProjectionMatrix(); }
       sky.position.copy(camera.position);
       const sx = Math.round(x / 4) * 4, sz = Math.round(z / 4) * 4;
       sun.position.set(sx - 60, 38, sz + 80); sun.target.position.set(sx, 0, sz);
@@ -620,7 +718,8 @@ export function runRover({ sites: nSites = 3, dust: storm = false, mode: mission
       if (++mapTick % 3 === 0) drawMap();
     }
     let trackI = 0;
-    if (new URLSearchParams(location.search).has('debug')) window.__rover = { warp: (wx, wz, wh = heading) => { x = wx; z = wz; heading = wh; speed = 0; }, collect: () => sites.forEach((s) => { s.done = true; s.doneAt = performance.now(); s.group.remove(s.crystal, s.beam, s.label); s.flag.visible = true; }) || renderMission() };
+    const debug = { warp: (wx, wz, wh = heading) => { x = wx; z = wz; heading = wh; speed = 0; }, collect: () => sites.forEach((s) => { s.done = true; s.doneAt = elapsed; for (const marker of [s.crystal, s.beam, s.label]) marker.visible = false; s.flag.visible = true; }) || renderMission() };
+    if (new URLSearchParams(location.search).has('debug')) window.__rover = debug;
     let quiet = false;
     music.play('rover'); engine.start(); wind.start(storm ? 1 : 0.35); sfx('door');
     raf = requestAnimationFrame(frame);
@@ -628,11 +727,26 @@ export function runRover({ sites: nSites = 3, dust: storm = false, mode: mission
     const unAbort = onAbort(() => finish(false, true));
     function finish(done, silent = false) {
       if (ended) return; ended = true; unAbort();
+      coach.dispose(); narration.stop();
+      clock.clear(); root.dispatchEvent(new Event('rover-stop'));
+      if (astro.walk) { const walk = astro.walk; astro.walk = null; walk.done(); }
       cancelAnimationFrame(raf); engine.stop(); wind.stop();
       window.removeEventListener('keydown', kd); window.removeEventListener('keyup', ku);
-      scene.traverse((o) => { o.geometry?.dispose(); for (const m of [].concat(o.material || [])) { m.map?.dispose(); m.dispose(); } });
-      renderer.dispose(); root.replaceChildren(); root.classList.add('hidden'); document.body.classList.remove('in-rover');
-      if (!silent) resolve({ done, mistakes });
+      window.removeEventListener('blur', clearKeys); document.removeEventListener('visibilitychange', clearKeys);
+      const geometries = new Set(), materials = new Set(), textures = new Set();
+      scene.traverse((o) => {
+        if (o.geometry) geometries.add(o.geometry);
+        for (const material of [].concat(o.material || [])) {
+          materials.add(material);
+          for (const value of Object.values(material)) if (value?.isTexture) textures.add(value);
+          for (const uniform of Object.values(material.uniforms || {})) if (uniform.value?.isTexture) textures.add(uniform.value);
+        }
+        o.shadow?.dispose();
+      });
+      for (const resource of [...textures, ...materials, ...geometries]) resource.dispose();
+      renderer.dispose(); renderer.forceContextLoss(); root.replaceChildren(); root.classList.add('hidden'); document.body.classList.remove('in-rover');
+      if (window.__rover === debug) delete window.__rover;
+      resolve({ done, mistakes, cancelled: silent });
     }
   });
 }

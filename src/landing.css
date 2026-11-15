@@ -1,6 +1,14 @@
 /* Landing page: Rocky's briefing + title lockup */
 #landing { position: fixed; inset: 0; z-index: 35; overflow: hidden; background: #04061a; }
 #landing .ld-sky { position: absolute; inset: 0; width: 100%; height: 100%; display: block; cursor: pointer; }
+.ld-character { position: absolute; border: 2px solid transparent; border-radius: 24px; background: transparent; cursor: pointer; touch-action: manipulation; }
+.ld-character:hover, .ld-character:focus-visible { outline: 3px solid var(--yellow); outline-offset: 3px; background: #ffd23f12; }
+.ld-greeting { position: absolute; left: 0; top: 0; width: max-content; max-width: min(280px, calc(100vw - 24px)); color: #fff; pointer-events: none; z-index: 5; }
+.ld-greeting-card { padding: 11px 15px; border: 1px solid #a6e5ffb3; border-radius: 15px; background: #101d35f5; box-shadow: 0 8px 22px #02081966, inset 0 1px #ffffff1a; font-size: 16px; line-height: 1.3; }
+.ld-greeting-card b, .ld-greeting-card span { display: block; }
+.ld-greeting-card b { color: #9fe6ff; margin-bottom: 4px; font-size: 13px; }
+.ld-greeting::after { content: ''; position: absolute; left: var(--tail-x, 50%); bottom: -7px; width: 12px; height: 12px; border-right: 1px solid #a6e5ffb3; border-bottom: 1px solid #a6e5ffb3; background: #101d35; transform: translateX(-50%) rotate(45deg); }
+.ld-continue { font-size: clamp(20px, 2.5vw, 26px); padding: 12px 24px; }
 
 .ld-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .9s ease, transform 1.3s cubic-bezier(.4,0,.2,1); transform-origin: 70% 62%; cursor: pointer; }
 .ld-video.on { opacity: 1; }
@@ -105,3 +113,15 @@
 #pause .vol output { font-variant-numeric: tabular-nums; text-align: right; opacity: .85; }
 #pause .vol-box.muted .vol { opacity: .4; }
 #pause .vol-box .btn { justify-self: center; }
+
+@media (prefers-reduced-motion: reduce) {
+  #landing *, #landing *::before, #landing *::after, #pause .panel { animation: none !important; transition: none !important; }
+}
+.reduce-motion #landing *, .reduce-motion #landing *::before, .reduce-motion #landing *::after, .reduce-motion #pause .panel { animation: none !important; transition: none !important; }
+@media (max-height: 560px) {
+  .ld-title { inset: 16px 12px 12px; overflow-y: auto; justify-content: flex-start; padding-top: 16px; }
+  .ld-patch { flex-shrink: 0; padding: 14px; }
+  .ld-logo, .ld-sub, .ld-patch p, .ld-foot { display: none; }
+  .ld-big { font-size: 32px; } .ld-jr { font-size: 18px; }
+  .ld-actions { margin-top: auto; padding-bottom: 8px; }
+}

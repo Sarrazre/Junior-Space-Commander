@@ -100,7 +100,7 @@ export async function medical(body, { kase = 'dust', patient } = {}, api) {
     let left = c.readings.length;
     const row = h('div', { class: 'row' }, shuffle(c.readings).map(([name, value, bad]) => {
       const out = h('div', { style: 'color:#ffd23f;min-height:52px' }, '???');
-      const card = h('div', { class: 'card', onclick: () => { if (card.dataset.done) return; card.dataset.done = 1; card.classList.add('flip', 'sel'); setTimeout(() => { out.textContent = value; }, 220); state.lines.push([name, value, bad]); api.ok(); if (--left === 0) next.classList.remove('hidden'); } }, h('span', { class: 'big' }, name.split(' ')[0]), name.slice(name.indexOf(' ') + 1), out);
+      const card = h('div', { class: 'card', onclick: () => { if (card.dataset.done) return; card.dataset.done = 1; card.classList.add('flip', 'sel'); api.later(() => { out.textContent = value; }, 220); state.lines.push([name, value, bad]); api.ok(); if (--left === 0) next.classList.remove('hidden'); } }, h('span', { class: 'big' }, name.split(' ')[0]), name.slice(name.indexOf(' ') + 1), out);
       return card;
     }));
     const next = h('button', { class: 'px-btn ok hidden', onclick: resolve }, 'READ THE RESULTS ▶');
@@ -108,8 +108,8 @@ export async function medical(body, { kase = 'dust', patient } = {}, api) {
   });
   await ask(body, api, 'Step 2: which reading is NOT normal?', shuffle(c.readings).map(([name, value, bad]) => ({ label: `${name}: ${value}`, correct: !!bad, why: bad ? 'Yes, that reading explains the symptoms.' : 'That one is normal. Look for the unusual reading.' })), { before: [story, view] });
   const cure = ask(body, api, 'Step 3: choose the safest treatment.', shuffle(c.cures).map(([label2, ok, why]) => ({ label: label2, correct: !!ok, why: ok ? why : 'That would not be safe. Try again!' })), { before: [story, view] });
-  const watch = setInterval(() => { if (body.querySelector('.px-btn.ok')) { state.healed = true; clearInterval(watch); } }, 150);
-  api.onCleanup(() => clearInterval(watch));
+  const watch = api.every(() => { if (body.querySelector('.px-btn.ok')) { state.healed = true; api.cancelTimer(watch); } }, 150);
+  api.onCleanup(() => api.cancelTimer(watch));
   await cure;
   api.finish(`${who} is in good hands. The flight doctor keeps the whole crew healthy so the mission can go on.`, 'Symptoms and treatments here are simplified for the game, not medical advice.');
 }

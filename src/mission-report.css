@@ -1,0 +1,13 @@
+#modal .panel.mission-report { width: min(640px, 100%); padding: 24px; text-align: left; background: #102538f5; border-color: #86d5c55e; }
+.report-eyebrow { color: #8ee1c2; font-size: 11px; letter-spacing: .13em; }
+#modal .mission-report h2 { font-size: clamp(23px, 4vw, 32px); margin: 8px 0 14px; color: #fff0c8; text-align: left; }
+.mission-report canvas { width: 100%; max-height: 120px; object-fit: cover; border-radius: 12px; }
+.mission-report h3 { margin: 16px 0 8px; font-size: 20px; }
+.mission-report p { line-height: 1.5; font-size: 16px; }
+.report-source { display: block; font-size: 12px; color: #a9cfe6; }
+.mission-report-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 20px 0 10px; }
+.mission-report-actions .btn { min-height: 44px; font-size: 14px; box-shadow: none; }
+.mission-report-status { display: block; color: #9eb8c9; font-size: 12px; }
+.mission-report-progress { height: 3px; background: #a7d6e41c; margin-top: 12px; border-radius: 6px; overflow: hidden; }
+.mission-report-progress i { display: block; height: 100%; background: #8ee1c2; transform: scaleX(0); transform-origin: left; }
+@media (max-width: 480px) { #modal .panel.mission-report { padding: 20px 16px; } .mission-report-actions .btn.go { flex: 1; } }

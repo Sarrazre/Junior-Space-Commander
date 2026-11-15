@@ -1,0 +1,89 @@
+/* Two compact difficulty choices; the launch action always stays in view. */
+#modal:has(.mission-picker) { padding: 12px; }
+#modal .panel.mission-picker { width: min(800px, 100%); max-height: calc(100dvh - 24px); padding: 24px; display: flex; flex-direction: column; gap: 0; overflow: hidden; background: radial-gradient(ellipse at 0 0, #294b5b, transparent 65%), #101d30; }
+.mission-heading { flex-shrink: 0; margin: 0 0 18px; text-align: left; }
+#modal .mission-heading h2 { margin: 0 0 4px; font-size: 30px; line-height: 1.15; }
+.mission-heading p { margin: 0; color: #b9d0df; font-size: 14px; }
+.mission-picker-body { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 4px; }
+.mission-options { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.mission-option { position: relative; display: flex; flex-direction: column; padding: 0; overflow: hidden; border: 2px solid #708ca35c; border-radius: 17px; background: #0d1b2c; color: #e6f3fa; font: inherit; cursor: pointer; text-align: left; transition: border-color 160ms ease; }
+.mission-option[aria-pressed=true] { border-color: #a5e5b8; box-shadow: 0 0 0 2px #a5e5b820; }
+.mission-option.commander[aria-pressed=true] { border-color: #ffcd89; box-shadow: 0 0 0 2px #ffcd8920; }
+.mission-illustration { display: block; width: 100% !important; height: 116px !important; object-fit: cover; object-position: center 55%; border: 0; border-radius: 0; }
+.mission-option-body { flex: 1; min-width: 0; padding: 14px; display: flex; flex-direction: column; gap: 7px; }
+.mission-mode-top { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.mission-mode-name { font-size: 26px; line-height: 1.1; color: #fff2d5; }
+.mission-check { display: grid; place-items: center; flex: 0 0 22px; height: 22px; border: 1px solid #7894aa66; border-radius: 50%; font-size: 13px; color: transparent; }
+[aria-pressed=true] .mission-check { background: #92d9af; border-color: #92d9af; color: #153b30; }
+.commander[aria-pressed=true] .mission-check { background: #f4ca8d; border-color: #f4ca8d; color: #473420; }
+.mission-difficulty { display: flex; align-items: center; gap: 8px; color: #f5d187; font-size: 16px; line-height: 1.1; letter-spacing: .1em; }
+.mission-difficulty small { color: #a6bfd1; font-size: 11px; letter-spacing: 0; }
+.mission-feature { display: block; font-size: 14px; line-height: 1.35; color: #d6e5ee; }
+.mission-shared { margin: 12px 0; font-size: 12px; line-height: 1.35; color: #b7cfdd; text-align: left; }
+.mission-tour-choice { display: flex; align-items: center; gap: 10px; min-height: 44px; padding: 8px 10px; background: #ffffff08; border: 1px solid #86bdd336; border-radius: 11px; cursor: pointer; font-size: 14px; }
+.mission-tour-choice input { width: 21px; height: 21px; accent-color: #8bdeb0; flex-shrink: 0; margin: 0; }
+.mission-save-note { margin: 10px 0 0; color: #abc3d4; font-size: 11px; line-height: 1.3; text-align: left; }
+#modal .mission-actions { flex-shrink: 0; position: static; display: flex; flex-wrap: nowrap; justify-content: space-between; gap: 10px; margin: 16px 0 0; padding: 14px 4px 0; border-top: 1px solid #ffffff20; background: transparent; }
+#modal .mission-actions .btn { min-height: 48px; padding: 8px 14px; font-size: 16px; box-shadow: none; }
+.mission-launch { flex: 1; min-width: 0; }
+.mission-option:focus-visible { outline: 3px solid #9ee3ff; outline-offset: 2px; }
+@media (hover: hover) and (pointer: fine) { .mission-option:hover { border-color: #d7ebfa; } }
+@media (max-width: 620px) {
+  #modal .panel.mission-picker { padding: 16px 12px; }
+  .mission-heading { margin-bottom: 10px; padding-inline: 4px; }
+  #modal .mission-heading h2 { font-size: 24px; }
+  .mission-heading p { font-size: 12px; }
+  .mission-options { grid-template-columns: 1fr; gap: 10px; }
+  .mission-option { flex-direction: row; align-items: stretch; }
+  .mission-illustration { width: 66px !important; height: auto !important; min-height: 108px; flex: 0 0 66px; object-position: 26% center; }
+  .mission-option-body { padding: 10px; gap: 5px; }
+  .mission-mode-name { font-size: 22px; }
+  .mission-feature { font-size: 13px; line-height: 1.3; }
+  .mission-difficulty { font-size: 14px; }
+  .mission-shared { margin: 9px 0; font-size: 11px; }
+  .mission-tour-choice { font-size: 13px; }
+  #modal .mission-actions { margin-top: 12px; padding-top: 12px; }
+  #modal .mission-actions .btn { font-size: 15px; padding-inline: 12px; }
+  .tour-card { padding: 16px; }
+}
+@media (max-width: 360px) and (max-height: 620px) {
+  #modal .panel.mission-picker { padding: 12px 10px; }
+  .mission-illustration { width: 50px !important; flex-basis: 50px; min-height: 104px; }
+  .mission-option-body { padding: 9px; gap: 4px; }
+  .mission-mode-name { font-size: 21px; }
+  .mission-feature { font-size: 12px; }
+  .mission-save-note { margin-top: 7px; font-size: 10px; }
+}
+
+#tasks-body button.task.priority-task { border-color: #edc576; border-left-width: 4px; background: linear-gradient(120deg, #53462be6, #282a30); }
+#tasks-body button.task[data-priority=URGENT] { border-color: #ff9f7b; background: linear-gradient(120deg, #643c30, #30232a); }
+.priority-badge { display: block; width: fit-content; color: #17213b; background: #f4d28a; border-radius: 4px; padding: 2px 6px; font-size: 10px; letter-spacing: .06em; margin-bottom: 5px; }
+[data-priority=URGENT] .priority-badge { background: #ffb18e; }
+#tasks-body .task .priority-reason { color: #f4dfb6; font-size: 11px; margin-bottom: 6px; }
+.objective-label { display: block; font-size: 10px; letter-spacing: .09em; margin-bottom: 3px; color: #ffe6ad; }
+#tasks > button, #end-reason, #save-status { flex-shrink: 0; }
+#tasks-body { min-height: 80px; }
+#objective[data-priority=URGENT] { border-color: #ffae8e; background: #51342d; }
+.priority-enter .priority-badge { animation: priority-arrive 650ms ease-out 2; }
+@keyframes priority-arrive { 50% { opacity: .45; } }
+.walkthrough { position: fixed; inset: 0; z-index: 50; overflow: hidden; }
+.walkthrough.tour-suspended { visibility: hidden; }
+.tour-spot { position: absolute; background: transparent; border: 3px solid #ffe299; border-radius: 16px; box-shadow: 0 0 0 200vmax #030a19b8, 0 0 24px #ffd07055; padding: 0; }
+.tour-spot:disabled { opacity: 1; }
+.tour-spot:not(:disabled) { cursor: pointer; }
+.tour-travelling .tour-spot { box-shadow: 0 0 0 200vmax #030a1944; }
+.tour-arrow { position: absolute; inset: 0; pointer-events: none; }
+.tour-card { position: absolute; width: min(360px, calc(100vw - 24px)); max-height: calc(100dvh - 24px); overflow-y: auto; padding: 20px; border: 1px solid #bbdffb99; border-radius: 21px; background: linear-gradient(140deg, #294158, #122138); box-shadow: 0 18px 60px #02061580; color: #edf6ff; }
+.tour-heading-row { display: flex; gap: 13px; align-items: center; }
+.tour-rocky { flex: 0 0 48px; }
+.tour-rocky svg { width: 48px; height: 56px; }
+.tour-counter { font-size: 10px; letter-spacing: .1em; color: #a6d5e4; }
+.tour-card h2 { font-size: 21px; line-height: 1.15; margin: 5px 0 0; color: #ffe7ae; }
+.tour-card p { font-size: 15px; line-height: 1.5; margin: 15px 0; }
+.tour-actions { display: flex; gap: 8px; justify-content: space-between; align-items: center; margin-top: 14px; }
+.tour-actions .btn { font-size: 13px; padding: 10px 12px; }
+.tour-card .voice-controls { margin-top: 5px; }
+.tour-card .voice-controls button { font-size: 12px; }
+@media (max-height: 540px) { .tour-card { width: min(330px, calc(100vw - 24px)); padding: 12px; } .tour-card p { margin: 8px 0; font-size: 13px; } .tour-rocky { display: none; } }
+@media (prefers-reduced-motion: reduce) { .priority-enter .priority-badge { animation: none; } }
+.reduce-motion .priority-enter .priority-badge { animation: none; }

@@ -1,0 +1,96 @@
+#objective .task-portrait, #objective .objective-go, #objective .objective-owner { display: none; }
+#modal:has(.task-sheet) { place-items: end center; padding: 0; background: #030d1da8; }
+#modal .task-sheet { width: min(100%, 560px); max-height: min(82dvh, 760px); padding: 20px 16px max(16px, env(safe-area-inset-bottom)); margin: 0; display: flex; flex-direction: column; gap: 14px; overflow: hidden; border: 1px solid #b4dcf550; border-radius: 26px 26px 0 0; background: #112437f7; backdrop-filter: blur(18px); box-shadow: 0 -12px 50px #02091270; animation: task-sheet-in 200ms cubic-bezier(.2,.8,.2,1); }
+.task-sheet-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.task-sheet-heading h2 { margin: 2px 0 0; font-size: 23px; text-align: left; }
+.task-sheet-heading small { color: #9dc0d8; font-size: 11px; letter-spacing: .1em; }
+.task-sheet-heading .btn { min-width: 44px; min-height: 44px; box-shadow: none; }
+.task-sheet-progress { display: flex; align-items: center; gap: 12px; font-size: 13px; color: #cce1ed; }
+.task-sheet-progress progress { flex: 1; width: 0; height: 7px; accent-color: #85ddc0; }
+.task-sheet-scroll { min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: grid; gap: 10px; padding: 4px; }
+.task-sheet-row { display: flex; align-items: center; gap: 10px; width: 100%; padding: 12px 10px; border: 1px solid #a9cce52c; border-radius: 15px; background: #1c3549; color: #f1f6fa; font: inherit; text-align: left; cursor: pointer; }
+.task-portrait { width: 40px; height: 48px; flex: 0 0 40px; object-fit: contain; }
+.task-sheet-copy { display: grid; gap: 3px; min-width: 0; flex: 1; }
+.task-sheet-copy b { font-size: 16px; line-height: 1.3; }
+.task-sheet-copy small { font-size: 12px; color: #bcd1e0; }
+.task-sheet-status { font-size: 12px; color: #c6eddb; line-height: 1.3; }
+.task-sheet-row.recommended { border-color: #e5c574; background: #373b38; }
+.task-sheet-copy .task-sheet-badge { color: #ffe5a0; font-weight: 700; font-size: 10px; letter-spacing: .08em; }
+.task-sheet-row[data-priority=URGENT] { border-color: #ffad8b; background: #4b3332; }
+.task-sheet-arrow { font-size: 22px; }
+.tasks-completed { border-top: 1px solid #b4dcf526; padding: 8px 2px; }
+.tasks-completed summary { min-height: 44px; display: list-item; padding-top: 12px; color: #bcd1e0; cursor: pointer; }
+.tasks-completed p { font-size: 14px; margin: 10px; }
+.tasks-completed small { display: block; color: #9db6c8; }
+.task-sheet-rest { border-top: 1px solid #b4dcf526; padding-top: 14px; }
+.task-sheet-rest .btn { width: 100%; min-height: 48px; font-size: 16px; }
+.task-sheet-rest p { color: #bcd1e0; font-size: 12px; text-align: center; margin: 8px 0 0; }
+.task-sheet-links { display: flex; gap: 10px; }
+.task-sheet-links .btn { flex: 1; min-height: 44px; font-size: 13px; box-shadow: none; }
+@keyframes task-sheet-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+@media (max-width: 760px) {
+  #hud { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px; padding: 4px 8px; }
+  #hud .brand { grid-column: 1 / -1; min-width: 0; min-height: 40px; margin-right: 44px; padding: 3px 8px; border-width: 1px; box-shadow: none; }
+  #hud .brand small { display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 11px; }
+  #hud .brand .planet { display: none; }
+  #hud .brand > div { min-width: 0; }
+  #hud .res { min-width: 0; min-height: 42px; padding: 2px 3px; flex-direction: row; justify-content: center; gap: 5px; border-width: 1px; }
+  #hud .res b { font-size: 13px; flex: 0; min-width: 0; }
+  #hud .res > span { font-size: 16px; }
+  #hud .res.sci { gap: 3px; }
+  #hud .res.sci b { font-size: 11px; white-space: nowrap; }
+  #planet-clock { top: 98px; }
+
+}
+@media (prefers-reduced-motion: reduce) { #modal .task-sheet { animation: none; } }
+.reduce-motion #modal .task-sheet { animation: none; }
+
+@media (max-width: 360px) { #hud .res { flex-direction: column; gap: 0; } #planet-clock { gap: 4px; padding-inline: 6px; } #planet-clock > span { gap: 2px; } #planet-clock b { font-size: 12px; } #planet-clock span small, #planet-clock > small { font-size: 8px; } }
+#tasks { top: var(--tasks-top, 115px); left: 12px; right: 12px; width: auto; max-height: none; overflow: visible; gap: 0; border: 1px solid #c9e5ef4d; border-radius: 16px; background: #11273bef; box-shadow: 0 5px 18px #04112140; backdrop-filter: blur(12px); }
+#tasks > :not(#objective):not(#tasks-toggle) { display: none !important; }
+#tasks #objective { display: flex; align-items: center; gap: 9px; width: 100%; margin: 0; min-height: 72px; padding: 8px 12px; border: 0; background: transparent; box-shadow: none; border-radius: 15px 15px 0 0; }
+#objective .task-portrait { display: block; width: 36px; height: 43px; flex-basis: 36px; }
+#objective .objective-copy { min-width: 0; flex: 1; display: grid; gap: 2px; }
+#objective .objective-title { font-size: 14px; line-height: 1.2; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+#objective .objective-label { font-size: 9px; color: #ffe1a0; margin: 0; }
+#objective .objective-owner { display: block; font-size: 11px; color: #bed7e4; }
+#objective .objective-go { display: grid; place-items: center; flex-shrink: 0; min-width: 42px; min-height: 42px; border-radius: 10px; background: #324b5d; color: #f8df9b; font-size: 13px; }
+#tasks #tasks-toggle { min-height: 36px; padding: 4px 12px; font-size: 12px; text-align: left; border: 0; border-top: 1px solid #c9e5ef22; border-radius: 0 0 15px 15px; box-shadow: none; background: #ffffff06; color: #c8dce9; }
+#tasks #tasks-toggle::after { content: 'View all ↑'; float: right; }
+#objective[data-priority=URGENT] { background: #59342cbf !important; }
+@media (min-width: 761px) {
+  #tasks { left: 16px; right: auto; width: 310px; top: var(--tasks-top, 90px); }
+  #tasks #objective { min-height: 96px; padding: 14px; gap: 12px; }
+  #objective .task-portrait { width: 44px; height: 54px; flex-basis: 44px; }
+  #objective .objective-title { font-size: 17px; line-height: 1.3; }
+  #objective .objective-label { font-size: 10px; }
+  #objective .objective-owner { font-size: 12px; }
+  #tasks #tasks-toggle { min-height: 44px; font-size: 13px; }
+  #modal:has(.task-sheet) { place-items: center end; padding: 16px; background: #030d1d60; }
+  #modal .task-sheet { width: 430px; max-height: calc(100dvh - 32px); border-radius: 24px; padding: 24px 20px; box-shadow: -12px 0 60px #02091280; }
+  .task-sheet-row { padding: 14px 12px; }
+  .task-sheet-heading h2 { font-size: 26px; }
+}
+@media (hover: hover) {
+  .task-sheet-row:hover { border-color: #b4def4; background: #2a455b; }
+  .task-sheet-row.recommended:hover { border-color: #ffe5a0; background: #484a3c; }
+  #tasks #objective:hover { background: #ffffff0b; }
+}
+.task-sheet-row:focus-visible { outline: 3px solid #a8e5ff; outline-offset: 2px; }
+
+#pause .pause-page { max-height: calc(100dvh - 32px); }
+#pause .pause-home { width: min(420px, 100%); padding: 28px; }
+.pause-eyebrow { color: #b1ccdf; font-size: 10px; letter-spacing: .12em; }
+#pause .pause-home h2 { margin: 10px 0; }
+#pause .pause-secondary { margin-top: 20px; padding-top: 16px; border-top: 1px solid #ffffff20; }
+#pause .pause-secondary .btn { flex: 1; font-size: 13px; min-height: 44px; box-shadow: none; }
+#pause .pause-settings, #pause .pause-help { display: flex; flex-direction: column; gap: 12px; overflow: hidden; padding: 24px; }
+.pause-page-header { display: flex; align-items: center; gap: 18px; }
+#pause .pause-page-header h2 { margin: 0; font-size: 25px; }
+.pause-page-header .btn { min-height: 44px; box-shadow: none; }
+.pause-page-scroll { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 2px; text-align: left; }
+.pause-page-scroll h3 { font-size: 16px; color: #d0e5f1; margin: 14px 0 8px; }
+#pause .pause-settings .vol-box { max-width: none; margin: 0 0 18px; }
+#pause .pause-settings .note { margin: 0; font-size: 13px; text-align: left; }
+#pause .pause-settings .accessibility-controls { display: grid; gap: 12px; padding: 14px; background: #08182b9e; border-radius: 16px; }
+@media (max-width: 480px) { #pause .pause-home, #pause .pause-settings, #pause .pause-help { padding: 20px 16px; } #pause .pause-home .pz-main .btn { font-size: 18px; } }
