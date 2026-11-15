@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>Junior Space Commander</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/src/style.css">
+  <link rel="stylesheet" href="/src/fx.css">
+  <link rel="stylesheet" href="/src/dashboard.css">
+</head>
+<body>
+  <div id="game"></div>
+  <div id="rover" class="hidden"></div>
+
+  <div id="ui" class="hidden">
+    <header id="hud">
+      <div class="brand"><span class="planet">🪐</span><div><b>Junior Space Commander</b><small id="sol-label">Sol 1</small></div></div>
+      <div class="res" data-res="power"><span>⚡</span><div><small>Power</small><div class="bar"><i></i></div></div><b>100</b></div>
+      <div class="res" data-res="shield"><span>🛡️</span><div><small>Shielding</small><div class="bar"><i></i></div></div><b>100</b></div>
+      <div class="res" data-res="food"><span>🥬</span><div><small>Food</small><div class="bar"><i></i></div></div><b>100</b></div>
+      <div class="res" data-res="health"><span>❤️</span><div><small>Crew Health</small><div class="bar"><i></i></div></div><b>100</b></div>
+      <div class="res sci"><span>🔬</span><div><small>Science</small></div><b id="sci">0 / 50</b></div>
+      <button id="btn-menu" class="btn icon" aria-label="Pause">⏸</button>
+    </header>
+
+    <aside id="tasks">
+      <button id="tasks-toggle" class="btn small">📋 Tasks</button>
+      <div id="tasks-body"></div>
+      <button id="btn-endsol" class="btn go" disabled>🌙 End the sol</button>
+    </aside>
+
+    <nav id="crew"></nav>
+    <button id="btn-hint" class="btn rocky-btn">🤖 Ask Rocky</button>
+    <button id="btn-interact" class="btn go hidden">✋ Interact <kbd>E</kbd></button>
+  </div>
+
+  <div id="rocky" class="hidden">
+    <div class="rocky-face">
+      <svg viewBox="0 0 84 96" aria-label="Rocky the robot">
+        <g stroke="#1d2547" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+          <line x1="42" y1="16" x2="42" y2="6"/><circle class="ant" cx="42" cy="6" r="4.5" fill="#ffd23f"/>
+          <g class="arm"><rect x="4" y="58" width="12" height="22" rx="6" fill="#b8c2d6"/></g>
+          <rect x="68" y="58" width="12" height="22" rx="6" fill="#b8c2d6"/>
+          <rect x="18" y="54" width="48" height="34" rx="12" fill="#eef2f9"/>
+          <rect x="30" y="64" width="24" height="14" rx="5" fill="#1b2a5c"/>
+          <rect x="10" y="16" width="64" height="42" rx="16" fill="#eef2f9"/>
+          <rect x="18" y="24" width="48" height="26" rx="11" fill="#1b2a5c"/>
+        </g>
+        <ellipse class="eye" cx="32" cy="36" rx="5" ry="6.5" fill="#5fd4ff"/><ellipse class="eye" cx="52" cy="36" rx="5" ry="6.5" fill="#5fd4ff"/>
+        <path d="M36 45 q6 5 12 0" fill="none" stroke="#5fd4ff" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="36" cy="71" r="2.5" fill="#58d66b"/><circle cx="42" cy="71" r="2.5" fill="#ffd23f"/><circle cx="48" cy="71" r="2.5" fill="#ff5a5a"/>
+      </svg>
+    </div>
+    <div class="rocky-bubble"><b>Rocky</b><p id="rocky-text"></p><button id="rocky-next" class="btn small go">OK ▶</button></div>
+  </div>
+
+  <div id="overlay" class="hidden"></div>
+  <div id="modal" class="hidden"></div>
+  <div id="toast"></div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
