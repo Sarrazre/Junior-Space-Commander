@@ -1,0 +1,37 @@
+<template>
+  <style>
+    @font-face { font-family: "Baloo 2"; font-weight: 800; src: url("assets/fonts/Baloo2-800.woff2") format("woff2"); }
+    #root { position: absolute; inset: 0; overflow: hidden; font-family: "Baloo 2", sans-serif; font-weight: 800; color: #fff; background: #c7532f; }
+    #ec-bg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; object-fit: cover; }
+    #ec-logo { position: absolute; left: 660px; top: 40px; width: 600px; height: 400px; object-fit: contain; }
+    .ec-line { position: absolute; left: 96px; right: 96px; text-align: center; line-height: 0.95; }
+    .ec-ink { display: inline-block; white-space: nowrap; -webkit-text-stroke: 20px #1d2547; paint-order: stroke fill; text-shadow: 0 10px 0 #1d2547; }
+    #ec-junior { top: 410px; font-size: 84px; letter-spacing: 0.34em; color: #ffd23f; }
+    #ec-junior .ec-ink { -webkit-text-stroke-width: 10px; text-shadow: 0 7px 0 #1d2547; }
+    #ec-name { top: 478px; font-size: 196px; letter-spacing: -0.01em; }
+    #ec-ask { top: 700px; font-size: 76px; }
+    #ec-ask .ec-ink { -webkit-text-stroke-width: 14px; text-shadow: 0 7px 0 #1d2547; }
+    #ec-ask b { color: #ffd23f; font-weight: 800; }
+    #ec-apps { position: absolute; left: 0; right: 0; bottom: 70px; display: flex; justify-content: center; }
+    #ec-pill { display: flex; align-items: center; gap: 28px; padding: 18px 44px 18px 30px; border-radius: 28px; background: #101a3c; border: 5px solid #1d2547; box-shadow: 0 9px 0 #1d2547; font-size: 44px; white-space: nowrap; }
+    #ec-pill img { height: 84px; width: auto; }
+  </style>
+  <div id="root" data-composition-id="endcard" data-width="1920" data-height="1080">
+    <img id="ec-bg" class="clip" src="assets/img/landing-bg.webp" data-start="0" data-duration="4.783" alt="" />
+    <img id="ec-logo" class="clip" src="assets/img/mission-logo.webp" data-start="0.1" data-duration="4.683" alt="" />
+    <div id="ec-junior" class="clip ec-line" data-start="0.45" data-duration="4.333"><span class="ec-ink">JUNIOR</span></div>
+    <div id="ec-name" class="clip ec-line" data-start="0.6" data-duration="4.183"><span class="ec-ink">Space Commander</span></div>
+    <div id="ec-ask" class="clip ec-line" data-start="1.25" data-duration="3.533"><span class="ec-ink">Ready for launch, <b>Commander?</b></span></div>
+    <div id="ec-apps" class="clip" data-start="1.75" data-duration="3.033"><div id="ec-pill"><img src="assets/img/space-apps-logo.png" alt="" /><span>Made for the NASA Space Apps Challenge 2026</span></div></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#ec-bg", { scale: 1.12 }, { scale: 1.02, duration: 4.783, ease: "power1.out" }, 0);
+    tl.fromTo("#ec-logo", { scale: 0.2, opacity: 0, rotation: -25 }, { scale: 1, opacity: 1, rotation: 0, duration: 0.55, ease: "back.out(2.2)" }, 0.1);
+    tl.fromTo("#ec-junior .ec-ink", { y: 40, opacity: 0 }, { y: 0, opacity: 1, duration: 0.25, ease: "power3.out" }, 0.45);
+    tl.fromTo("#ec-name .ec-ink", { scale: 1.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.2, ease: "power4.out" }, 0.6);
+    tl.fromTo("#ec-ask .ec-ink", { scale: 0.7, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.35, ease: "back.out(2)" }, 1.25);
+    tl.fromTo("#ec-pill", { y: 60, opacity: 0 }, { y: 0, opacity: 1, duration: 0.35, ease: "power3.out" }, 1.75);
+    window.__timelines["endcard"] = tl;
+  </script>
+</template>

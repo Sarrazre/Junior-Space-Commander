@@ -1,0 +1,60 @@
+<template>
+  <style>
+    @font-face { font-family: "Baloo 2"; font-weight: 800; src: url("assets/fonts/Baloo2-800.woff2") format("woff2"); }
+    #root { position: absolute; inset: 0; font-family: "Baloo 2", sans-serif; font-weight: 800; color: #fff; }
+    .t-line { position: absolute; left: 96px; right: 96px; text-align: center; line-height: 0.95; letter-spacing: -0.01em; text-transform: uppercase; }
+    .t-ink { display: inline-block; -webkit-text-stroke: 20px #1d2547; paint-order: stroke fill; text-shadow: 0 10px 0 #1d2547; white-space: nowrap; }
+    .t-ink b { color: #ffd23f; font-weight: 800; }
+    .t-xl { font-size: 200px; }
+    .t-l { font-size: 150px; }
+    .t-m { font-size: 104px; }
+    .t-m .t-ink { -webkit-text-stroke-width: 16px; text-shadow: 0 8px 0 #1d2547; }
+    .t-verb { font-size: 230px; bottom: 70px; }
+    .t-verb .t-ink { -webkit-text-stroke-width: 24px; text-shadow: 0 12px 0 #1d2547; }
+    .t-s { font-size: 60px; text-transform: none; letter-spacing: 0; }
+    .t-s .t-ink { -webkit-text-stroke-width: 12px; text-shadow: 0 6px 0 #1d2547; }
+  </style>
+  <div id="root" data-composition-id="titles" data-width="1920" data-height="1080">
+    <!-- 1 · lander -->
+    <div id="tt-landed-a" class="clip t-line t-l" style="bottom: 270px" data-start="0.25" data-duration="3.1"><span class="t-ink">You just landed</span></div>
+    <div id="tt-landed-b" class="clip t-line t-xl" style="bottom: 80px" data-start="0.7" data-duration="2.65"><span class="t-ink">on <b>Mars</b></span></div>
+    <!-- 2 · the base -->
+    <div id="tt-crew" class="clip t-line t-l" style="bottom: 90px" data-start="3.6" data-duration="1.55"><span class="t-ink">4 astronauts. 1 base.</span></div>
+    <div id="tt-commander" class="clip t-line t-l" style="bottom: 90px" data-start="5.2" data-duration="1.65"><span class="t-ink">You're the <b>Commander</b></span></div>
+    <!-- 3 · the decision -->
+    <div id="tt-call" class="clip t-line t-m" style="bottom: 40px" data-start="7.5" data-duration="2.85"><span class="t-ink">Every call is <b>yours</b></span></div>
+    <!-- 4 · eight jobs, one verb each -->
+    <div id="tt-v1" class="clip t-line t-verb" data-start="10.435" data-duration="0.869"><span class="t-ink">Wire it</span></div>
+    <div id="tt-v2" class="clip t-line t-verb" data-start="11.304" data-duration="0.87"><span class="t-ink">Clean it</span></div>
+    <div id="tt-v3" class="clip t-line t-verb" data-start="12.174" data-duration="0.869"><span class="t-ink">Scan it</span></div>
+    <div id="tt-v4" class="clip t-line t-verb" data-start="13.043" data-duration="0.87"><span class="t-ink">Repair it</span></div>
+    <div id="tt-v5" class="clip t-line t-verb" data-start="13.913" data-duration="0.87"><span class="t-ink">Plumb it</span></div>
+    <div id="tt-v6" class="clip t-line t-verb" data-start="14.783" data-duration="0.869"><span class="t-ink">Test it</span></div>
+    <div id="tt-v7" class="clip t-line t-verb" data-start="15.652" data-duration="0.87"><span class="t-ink">Drill it</span></div>
+    <div id="tt-v8" class="clip t-line t-verb" data-start="16.522" data-duration="0.869"><span class="t-ink"><b>Grow it</b></span></div>
+    <!-- 5 · the rover -->
+    <div id="tt-drive" class="clip t-line t-xl" style="bottom: 90px" data-start="17.45" data-duration="2.0"><span class="t-ink">Then <b>drive</b> it</span></div>
+    <div id="tt-claim-a" class="clip t-line t-l" style="bottom: 190px" data-start="19.6" data-duration="2.9"><span class="t-ink"><b>20+</b> missions of</span></div>
+    <div id="tt-claim-b" class="clip t-line t-l" style="bottom: 50px" data-start="19.9" data-duration="2.6"><span class="t-ink">real Mars science</span></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const slam = (id, at, dur, rot = 0, from = 1.5) => {
+      const el = `#${id} .t-ink`;
+      tl.fromTo(el, { scale: from, opacity: 0, rotation: rot * 2.5 }, { scale: 1, opacity: 1, rotation: rot, duration: 0.17, ease: "power4.out" }, at);
+      tl.to(el, { scale: 0.86, opacity: 0, duration: 0.13, ease: "power2.in" }, at + dur - 0.15);
+    };
+    slam("tt-landed-a", 0.25, 3.1, -2);
+    slam("tt-landed-b", 0.7, 2.65, -2, 1.9);
+    slam("tt-crew", 3.6, 1.55, 1.5);
+    slam("tt-commander", 5.2, 1.65, -1.5);
+    slam("tt-call", 7.5, 2.85, 0, 1.3);
+    [["tt-v1", 10.435, -4], ["tt-v2", 11.304, 3], ["tt-v3", 12.174, -3], ["tt-v4", 13.043, 4], ["tt-v5", 13.913, -4], ["tt-v6", 14.783, 3], ["tt-v7", 15.652, -3], ["tt-v8", 16.522, 4]].forEach(([id, at, rot]) => {
+      tl.fromTo(`#${id} .t-ink`, { scale: 1.7, opacity: 0, rotation: rot * 2 }, { scale: 1, opacity: 1, rotation: rot, duration: 0.14, ease: "power4.out" }, at);
+    });
+    slam("tt-drive", 17.45, 2.0, -2, 1.8);
+    slam("tt-claim-a", 19.6, 2.9, 0);
+    slam("tt-claim-b", 19.9, 2.6, 0);
+    window.__timelines["titles"] = tl;
+  </script>
+</template>
