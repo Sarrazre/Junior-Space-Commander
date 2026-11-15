@@ -11,7 +11,7 @@ export function siteShell(root, title, build) {
     build(body, {
       miss: () => { mistakes++; sfx('bad'); },
       found: (text, doneTitle = '✔ SAMPLE COLLECTED') => {
-        sfx('win');
+        sfx('collect');
         const { c } = cv(150, 120);
         loop(c, (g, t) => { g.clearRect(0, 0, 150, 120); g.fillStyle = rg(g, 75, 60, 4, 70, ['#5fd4ff66', '#5fd4ff00']); g.fillRect(0, 0, 150, 120); for (let i = 0; i < 6; i++) { const a = t * 1.5 + i * TAU / 6; star(g, 75 + Math.cos(a) * 52, 52 + Math.sin(a) * 34, 5 + Math.sin(t * 4 + i) * 2, t, 4, 0.35); g.fillStyle = '#ffd23f'; g.fill(); } drawAstro(g, 75, 112, 0.95, '#4aa8ff', { t, mood: 'happy' }); });
         body.replaceChildren(h('div', { class: 'row' }, c), h('p', { class: 'done-title' }, doneTitle), h('p', {}, text), h('div', { class: 'row' }, h('button', { class: 'px-btn ok', onclick: () => { box.remove(); resolve(mistakes); } }, 'BACK TO THE ROVER ▶')));
@@ -68,7 +68,7 @@ export const SITE_TASKS = [
     });
     body.replaceChildren(h('p', {}, 'Stop the drill above the SOFT ROCK (green mark), where the rock is soft enough to drill.'), h('div', { class: 'row' }, c), h('div', { class: 'row' }, h('button', { class: 'px-btn ok', onclick: () => {
       if (state !== 'aim') return;
-      if (pos >= zone && pos <= zone + 18) { state = 'drill'; sfx('ok'); msg.textContent = 'Drilling…'; }
+      if (pos >= zone && pos <= zone + 18) { state = 'drill'; sfx('drill'); msg.textContent = 'Drilling…'; }
       else { api.miss(); spark = 1; msg.textContent = 'Clang! Too hard there. Try again and watch the drill.'; }
     } }, '⛏️ DRILL!')), msg);
   }),

@@ -51,7 +51,8 @@ export function startSol() {
     S.tasks.push({ id: 'panels-late', who: 'max', station: 'airlock', title: 'Clean the dusty solar panels', game: 'panels', fx: BAL.cleanPanels, flagsAfter: { panelsDirty: false }, done: false });
   }
   // One random astronaut (never the doctor) gets sick once per game.
-  if (S.sick && S.sick.sol === S.sol) {
+  if (S.sick && S.sick.sol === S.sol && !S.sick.applied) {
+    S.sick.applied = true;                                   // each astronaut is sick at most once per game
     change(BAL.sickness);
     S.tasks.push({ id: 'treat', who: 'elsa', station: 'medbay', title: `Treat ${S.sick.name} (feeling sick)`, game: 'medical', params: { kase: 'sick', patient: S.sick.name }, optional: true, treat: true, done: false });
   }
@@ -93,5 +94,5 @@ export function successPercent() {
 export function resetGame() {
   Object.assign(S, { sol: 1, res: { ...BAL.start }, science: 0, current: 'max', flags: {}, solFlags: {}, crisisDone: false, tasks: [], log: [], totals: { done: 0, total: 0 } });
   const who = ['max', 'charles', 'lea'][Math.floor(Math.random() * 3)];
-  S.sick = { who, name: who[0].toUpperCase() + who.slice(1), sol: 2 + Math.floor(Math.random() * 4), treated: false };
+  S.sick = { who, name: who[0].toUpperCase() + who.slice(1), sol: 2 + Math.floor(Math.random() * 3), treated: false, applied: false };
 }

@@ -53,7 +53,7 @@ export const SOLS = [
     },
     tasks: [
       { id: 'panels', who: 'max', station: 'airlock', title: 'Clean the solar panels', game: 'panels', fx: BAL.cleanPanels, flagsAfter: { panelsDirty: false }, when: (f) => f.cleanPanels },
-      { id: 'exposure', who: 'elsa', station: 'medbay', title: 'Outdoor exposure checkup', game: 'medical', params: { kase: 'dust' }, fx: BAL.smallCheckup },
+      { id: 'exposure', who: 'elsa', station: 'medbay', title: 'Routine crew checkup', game: 'vitals', fx: BAL.smallCheckup },
       { id: 'rover', who: 'charles', station: 'airlock', title: 'Rover: collect soil samples', game: 'rover', params: { sites: 3, dust: true }, science: true, fx: BAL.roverTrip },
       { id: 'harvest', who: 'lea', station: 'greenhouse', title: 'Test the lettuce harvest', game: 'harvest', tend: true },
     ],
@@ -77,7 +77,7 @@ export const SOLS = [
     },
     tasks: [
       { id: 'heater', who: 'max', station: 'air', title: 'Fix the frozen water pipes', game: 'pipes', params: { label: 'Water pipes' }, fx: BAL.smallRepair },
-      { id: 'nutrition', who: 'elsa', station: 'medbay', title: 'Nutrition and health check', game: 'medical', params: { kase: 'nutrition' }, fx: BAL.smallCheckup },
+      { id: 'nutrition', who: 'elsa', station: 'medbay', title: 'Analyse a blood sample', game: 'cells', fx: BAL.smallCheckup },
       { id: 'gravity', who: 'charles', station: 'lab', title: 'Gravity Garden experiment', game: 'gravity' },
       { id: 'greenhouse', who: 'lea', station: 'greenhouse', title: 'Save the Mars greenhouse', game: 'greenhouse', science: true, tend: true },
     ],
@@ -100,7 +100,7 @@ export const SOLS = [
     },
     tasks: [
       { id: 'shieldgen', who: 'max', station: 'generator', title: 'Start up the shield generator', game: 'sequence', params: { label: 'Shield generator' }, fx: BAL.smallShieldCheck },
-      { id: 'radcheck', who: 'elsa', station: 'medbay', title: 'Radiation exposure check', game: 'medical', params: { kase: 'radiation' }, fx: BAL.smallCheckup },
+      { id: 'radcheck', who: 'elsa', station: 'medbay', title: 'Read the radiation badges', game: 'dose', fx: BAL.smallCheckup },
       { id: 'biosensor', who: 'charles', station: 'lab', title: 'Radiation biosensor terminal', game: 'biosensor', science: true },
       { id: 'dna', who: 'lea', station: 'greenhouse', title: 'Plant DNA Repair Lab', game: 'dna', tend: true },
     ],
@@ -122,7 +122,7 @@ export const SOLS = [
     },
     tasks: [
       { id: 'roverprep', who: 'max', station: 'generator', title: 'Charge the rover fuel cells', game: 'charge', params: { label: 'Rover charger' }, fx: BAL.smallRepair },
-      { id: 'clearance', who: 'elsa', station: 'medbay', title: 'Clear the crew for exploration', game: 'medical', params: { kase: 'clearance' }, fx: BAL.smallCheckup },
+      { id: 'clearance', who: 'elsa', station: 'medbay', title: 'Mars gravity fitness test', game: 'fitness', fx: BAL.smallCheckup },
       { id: 'expedition', who: 'charles', station: 'airlock', title: 'Rover expedition', game: 'rover', params: { mode: 'expedition' }, science: true, needsCrisis: true },
       { id: 'foodcheck', who: 'lea', station: 'greenhouse', title: 'Keep the food systems stable', game: 'plants', tend: true },
       { id: 'report', who: 'max', station: 'command', title: 'Send the report to Earth', game: 'report' },

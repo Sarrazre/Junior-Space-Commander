@@ -1,31 +1,37 @@
 // Mini-game shell: opens the lab terminal, runs one game, returns { done, mistakes }.
 // Every game is a function (body, params, api) that builds its own screen inside `body`.
-import { $, h, sfx } from '../ui.js';
+import { $, h, sfx, onAbort } from '../ui.js';
 import { cv, loop, star, rg, drawAstro, confetti, TAU } from '../art.js';
 import { CREW } from '../data/sols.js';
 import { wires, panels, report } from './engineering.js';
 import { pipes, sequence, charge } from './repairs.js';
+import { vitals, cells, dose, fitness } from './medlab.js';
 import { bones, medical } from './medical.js';
 import { rocks, gravity, biosensor } from './science.js';
 import { plants, harvest, greenhouse, dna } from './botany.js';
 import { runRover } from '../rover.js';
+import { music } from '../audio.js';
 
-const GAMES = { wires, panels, report, pipes, sequence, charge, bones, medical, rocks, gravity, biosensor, plants, harvest, greenhouse, dna };
+const GAMES = { wires, panels, report, pipes, sequence, charge, vitals, cells, dose, fitness, bones, medical, rocks, gravity, biosensor, plants, harvest, greenhouse, dna };
 
 export function runGame(id, params = {}, meta = {}) {
-  if (id === 'rover') return runRover(params);
+  const prev = music.current;
+  if (id === 'rover') return runRover(params).then((r) => { music.play(prev); return r; });
   return new Promise((resolve) => {
     const ov = $('#overlay');
     let mistakes = 0;
     const cleanups = [];
     const colour = Object.values(CREW).find((c) => c.name === meta.who)?.css || '#4aa8ff';
     const body = h('div', { class: 'term-body' });
-    const close = (done) => { cleanups.forEach((f) => f()); ov.classList.add('hidden'); ov.replaceChildren(); resolve({ done, mistakes }); };
+    const teardown = () => { cleanups.forEach((f) => f()); ov.classList.add('hidden'); ov.replaceChildren(); };
+    const unAbort = onAbort(teardown);
+    const close = (done) => { unAbort(); teardown(); sfx('close'); music.play(prev); resolve({ done, mistakes }); };
     const term = h('div', { class: 'term' },
       h('div', { class: 'term-bar' }, h('span', { class: 'leds' }, h('i'), h('i'), h('i')), h('span', { class: 'who', style: `background:${colour}` }, meta.who || ''), h('span', { class: 'title' }, meta.title || ''), h('button', { class: 'x', onclick: () => close(false) }, '✕ LEAVE')),
       body);
     ov.replaceChildren(term);
     ov.classList.remove('hidden');
+    sfx('open'); music.play('game');
     const api = {
       miss() { mistakes++; sfx('bad'); term.classList.remove('oops'); void term.offsetWidth; term.classList.add('oops'); },
       ok() { sfx('ok'); },

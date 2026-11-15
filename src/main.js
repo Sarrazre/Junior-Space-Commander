@@ -2,12 +2,15 @@ import { S, on, emit, change, startSol, solDef, visibleTasks, scienceCap, endOfS
 import { BAL } from './data/balance.js';
 import { CREW, CREW_IDS, SOLS, STATION_FACTS, DATA_SOURCES } from './data/sols.js';
 import { STATIONS } from './data/map.js';
-import { $, h, toast, modal, modalOpen, sfx, sound } from './ui.js';
+import { $, h, toast, modal, modalOpen, sfx, G, abortAll, audioControls } from './ui.js';
+import { music, rockyTalk, settings, setMuted } from './audio.js';
 import { createBase } from './base.js';
 import { runGame } from './minigames/index.js';
 import { getFlare } from './nasa.js';
 import { scene } from './art.js';
 import { openDashboard } from './dashboard.js';
+import { openCrewDashboard, solSummary, finalGauges } from './panels.js';
+import { createLanding } from './landing.js';
 
 let nearStation = null, busy = false, started = false;
 const overlayOpen = () => !$('#overlay').classList.contains('hidden') || !$('#rover').classList.contains('hidden');
@@ -18,12 +21,27 @@ function say(lines) {
   lines = [].concat(lines);
   return new Promise((resolve) => {
     let i = 0;
-    const show = () => { $('#rocky-text').textContent = lines[i]; sfx('rocky'); };
+    const many = lines.length > 1;
+    // ◀ / ▶ (or the arrow keys) step through the lines, ✕ (or Esc) closes Rocky.
+    const show = () => {
+      $('#rocky-text').textContent = lines[i];
+      $('#rocky-dots').replaceChildren(...(many ? lines.map((_, k) => h('i', { class: k === i ? 'on' : '' })) : []));
+      $('#rocky-prev').classList.toggle('hidden', !many);
+      $('#rocky-prev').disabled = i === 0;
+      $('#rocky-next').textContent = i < lines.length - 1 ? '▶' : 'OK ✓';
+      rockyTalk(lines[i]);
+    };
     $('#rocky').classList.remove('hidden');
-    $('#rocky-next').onclick = () => { if (++i < lines.length) show(); else { $('#rocky').classList.add('hidden'); resolve(); } };
+    const end = () => { $('#rocky').classList.add('hidden'); resolve(); };
+    $('#rocky-next').onclick = () => { if (++i < lines.length) show(); else end(); };
+    $('#rocky-prev').onclick = () => { if (i > 0) { i--; show(); } };
+    $('#rocky-close').onclick = end;
     show();
   });
 }
+
+/** Sols 2 (dust storm) and 4 (solar storm) get the more urgent theme. */
+const baseTrack = () => (S.sol === 2 || S.sol === 4 ? 'storm' : 'base');
 
 const pending = (who) => visibleTasks().filter((t) => !t.done && (!who || t.who === who));
 const scienceTask = () => S.tasks.find((t) => t.science);
@@ -94,8 +112,8 @@ on(renderAll);
 
 // ---------- Base scene bridge ----------
 const base = createBase({
-  paused: () => !started || busy || overlayOpen() || modalOpen() || rockyOpen(),
-  near: (id) => { nearStation = id; updateInteract(); },
+  paused: () => !started || G.paused || busy || overlayOpen() || modalOpen() || rockyOpen(),
+  near: (id) => { if (id && started) sfx('near'); nearStation = id; updateInteract(); },
   select: (id) => select(id),
   ready: () => base.refresh(),
   stationState: (id) => {
@@ -108,7 +126,7 @@ const base = createBase({
 
 function select(id) {
   if (busy || overlayOpen() || modalOpen()) return;
-  S.current = id; sfx('tap');
+  S.current = id; sfx('select');
   base.select(id);
   emit('all');
 }
@@ -127,6 +145,7 @@ async function interact() {
   busy = true; updateInteract();
   try {
     if (st === 'command') return await commandCenter();
+    if (st === 'medbay') return await medicalBay();
     const here = pending().filter((t) => t.station === st);
     const mine = here.find((t) => t.who === S.current);
     if (mine) return await runTask(mine);
@@ -134,6 +153,19 @@ async function interact() {
     if (STATIONS[st].info) return await say(STATION_FACTS[st]);
     return await say('Nothing to do here right now. Press "Ask Rocky" if you are lost. I love being asked!');
   } finally { busy = false; emit('all'); }
+}
+
+// The Medical Bay station opens the crew health monitor. Elsa starts her medical jobs from it.
+async function medicalBay() {
+  for (;;) {
+    const here = pending().filter((t) => t.station === 'medbay');
+    const mine = here.filter((t) => t.who === S.current);
+    const note = !mine.length && here.length ? `The medical jobs here are Doctor ${CREW[here[0].who].name}'s. Switch to ${CREW[here[0].who].name} to do them!` : null;
+    const pick = await openCrewDashboard({ tasks: mine, note });
+    if (!pick) return;
+    await runTask(pick); emit('all');
+    if (!pick.done) return;
+  }
 }
 
 // The Command Center terminal opens the Mission Control dashboard. From there the commander
@@ -154,7 +186,7 @@ async function commandCenter() {
 
 function doCrisis() {
   const c = solDef().crisis;
-  sfx('alert');
+  sfx(S.sol === 4 ? 'storm' : S.sol === 2 ? 'dust' : 'alert');
   return new Promise((resolve) => {
     const m = modal(
       scene(c.art, 640, 170), h('h2', {}, '⚠️ ' + c.title), h('p', {}, c.text), h('p', { class: 'note' }, 'Every choice helps one thing and costs another. Choose wisely, Commander!'),
@@ -174,7 +206,7 @@ async function runTask(t) {
   if (t.game === 'rover') params.sites = S.solFlags.roverSites || params.sites || 3;
   const result = await runGame(t.game, params, { who: CREW[t.who].name, title: t.title });
   if (!result.done) { toast('Task not finished yet. Come back any time!'); return; }
-  t.done = true; sfx('win');
+  t.done = true; sfx('sparkle');
   let fx = t.fx;
   if (t.id === 'expedition') fx = params.sites === 2 ? BAL.roverShortTrip : BAL.roverTrip;
   change(fx);
@@ -212,6 +244,11 @@ async function factCard(pts, cappedAt) {
 // ---------- End of sol ----------
 async function endSol() {
   if (busy) return;
+  busy = true;
+  try { await endSolFlow(); } finally { busy = false; emit('all'); }
+}
+
+async function endSolFlow() {
   const left = pending().filter((t) => !t.optional);
   if (left.length) {
     const go = await new Promise((resolve) => {
@@ -223,23 +260,20 @@ async function endSol() {
   }
   const before = { ...S.res };
   const sum = endOfSol();
-  sfx('win');
+  sfx('fanfare');
   const delta = (k) => { const d = Math.round(S.res[k] - S.startRes[k]); return `${Math.round(S.res[k])} (${d >= 0 ? '+' : ''}${d} today)`; };
   await new Promise((resolve) => {
     const m = modal(
-      h('h2', {}, `🤖 Rocky's report – Sol ${S.sol}`),
-      h('p', {}, `Tasks completed: ${sum.done} of ${sum.total}. Science today: +${sum.scienceGain} points.`),
-      h('h3', {}, 'Tonight at Astro Base'), h('ul', {}, sum.lines.map((l) => h('li', {}, l))),
-      h('h3', {}, 'Resources'),
-      h('div', { class: 'stat' }, '⚡ Power', h('b', {}, delta('power')), '🛡️ Shielding', h('b', {}, delta('shield')), '🥬 Food', h('b', {}, delta('food')), '❤️ Crew Health', h('b', {}, delta('health')), '🔬 Science', h('b', {}, `${S.science} / 50`)),
-      h('h3', {}, 'Rocky\'s tip'), h('p', {}, tipFor(sum)),
+      solSummary(sum, tipFor(sum)),
       h('div', { class: 'actions' }, h('button', { class: 'btn go', onclick: () => { m.close(); resolve(); } }, S.sol === 5 ? 'See final results ▶' : `Start Sol ${S.sol + 1} ▶`)));
+    m.el.classList.add('mc', 'mc-sum');
   });
   if (S.sol === 5) return finalReport();
   S.sol++;
   base.resetPositions();
   startSol();
-  if (solDef().onStart?.toast) { toast(solDef().onStart.toast); sfx('alert'); }
+  music.play(baseTrack());
+  if (solDef().onStart?.toast) { toast(solDef().onStart.toast); sfx('storm'); }
   await briefing();
 }
 
@@ -273,13 +307,14 @@ function finalReport() {
   }
   const title = pct >= 85 ? 'Legendary Space Commander!' : pct >= 65 ? 'Great mission, Commander!' : 'Mission complete: good try, Commander!';
   const m = modal(
-    scene(pct >= 65 ? 'sunset' : 'title', 640, 150), h('h2', {}, '🏁 ' + title), h('div', { class: 'big-score' }, pct + '%'), h('p', { style: 'text-align:center' }, 'Mission success'),
+    scene(pct >= 65 ? 'sunset' : 'title', 640, 150), h('h2', {}, '🏁 ' + title), finalGauges(pct),
     h('p', { class: 'note' }, 'How it is counted: 50% science points, 30% tasks completed, 20% average of the four resources.'),
     h('h3', {}, '🌟 What went well'), h('ul', {}, (good.length ? good : ['You finished five sols on Mars. That is not easy!']).map((x) => h('li', {}, x))),
     tips.length ? [h('h3', {}, '🚀 Rocky\'s tips for next time'), h('ul', {}, tips.map((x) => h('li', {}, x)))] : null,
     h('h3', {}, '🧠 What you learned'), h('ul', {}, h('li', {}, 'Every choice on a space mission is a trade-off.'), h('li', {}, 'Real experiments help us learn to live on Mars.'), h('li', {}, 'Mars is cold and dusty, with thin air and lots of radiation.')),
-    h('div', { class: 'actions' }, h('button', { class: 'btn', onclick: () => showSources(() => finalReport()) }, 'Data sources'), h('button', { class: 'btn go', onclick: () => { m.close(); newGame(); } }, 'Play again 🔁')));
-  sfx('win');
+    h('div', { class: 'actions' }, h('button', { class: 'btn', onclick: () => showSources(() => finalReport()) }, 'Data sources'), h('button', { class: 'btn', onclick: () => { m.close(); quitToTitle(); } }, '🏠 Title screen'), h('button', { class: 'btn go', onclick: () => { m.close(); newGame(); } }, 'Play again 🔁')));
+  m.el.classList.add('mc', 'mc-sum');
+  sfx('finale');
 }
 
 // ---------- Menus ----------
@@ -290,32 +325,70 @@ function showSources(back) {
     h('div', { class: 'actions' }, h('button', { class: 'btn go', onclick: () => { m.close(); back?.(); } }, 'Back')));
 }
 
+// ---------- Pause menu: resume, restart or quit from anywhere ----------
+const pauseEl = $('#pause');
+const pauseOpen = () => !pauseEl.classList.contains('hidden');
+
 function showMenu() {
-  const m = modal(h('h2', {}, '⏸ Paused'),
-    h('h3', {}, 'Controls'),
-    h('ul', {}, h('li', {}, 'Walk: arrow keys or WASD, or tap/click where you want to go.'), h('li', {}, 'Interact: E or Space, or the green button.'), h('li', {}, 'Mission Control dashboard: interact with the Command terminal.'), h('li', {}, 'Switch astronaut: the buttons at the bottom, or keys 1 2 3 4.'), h('li', {}, 'Rover: W/S drive, A/D steer, E collect.')),
-    h('div', { class: 'actions' },
-      h('button', { class: 'btn', onclick: (e) => { sound.on = !sound.on; e.target.textContent = sound.on ? '🔊 Sound: on' : '🔇 Sound: off'; sfx('ok'); } }, sound.on ? '🔊 Sound: on' : '🔇 Sound: off'),
-      h('button', { class: 'btn', onclick: () => showSources(showMenu) }, 'Data sources'),
-      h('button', { class: 'btn go', onclick: () => m.close() }, 'Resume ▶')));
+  if (!started) return;
+  G.paused = true; sfx('tap'); music.muffle(true);
+  pauseEl.replaceChildren(h('div', { class: 'panel' },
+    h('h2', {}, '⏸ Mission paused'),
+    h('p', { class: 'note' }, `Sol ${S.sol} of 5 · Science ${S.science} / 50`),
+    h('div', { class: 'pz-main' },
+      h('button', { class: 'btn go', onclick: resume }, '▶ Resume mission'),
+      h('button', { class: 'btn', onclick: () => confirmPause('restart') }, '🔁 Restart mission'),
+      h('button', { class: 'btn warn', onclick: () => confirmPause('quit') }, '🏠 Quit to title')),
+    audioControls(),
+    h('div', { class: 'pz-row' },
+      !modalOpen() && !overlayOpen() && h('button', { class: 'btn', onclick: () => { resume(); showSources(showMenu); } }, '🛰️ Data sources')),
+    h('details', {}, h('summary', {}, 'Controls'),
+      h('ul', {}, h('li', {}, 'Walk: arrow keys or WASD, or tap/click where you want to go.'), h('li', {}, 'Interact: E or Space, or the green button.'), h('li', {}, 'Mission Control dashboard: interact with the Command terminal.'), h('li', {}, 'Switch astronaut: the buttons at the bottom, or keys 1 2 3 4.'), h('li', {}, 'Rover: W/S drive, A/D steer, E collect.'), h('li', {}, 'Pause: Esc or the ⏸ button, any time.')))));
+  pauseEl.classList.remove('hidden');
 }
 
-function titleScreen() {
-  const m = modal(h('div', { class: 'title-screen' },
-    scene('title', 640, 200), h('h1', {}, 'Junior Space Commander'), h('h2', {}, 'Five sols at Astro Base, Mars'),
-    h('p', {}, 'Lead four astronauts, solve problems, make smart trade-offs and collect 50 science points!'),
-    h('div', { class: 'actions', style: 'justify-content:center' },
-      h('button', { class: 'btn', onclick: () => showSources(titleScreen) }, 'Data sources'),
-      h('button', { class: 'btn go', style: 'font-size:24px', onclick: () => { m.close(); newGame(); } }, '🚀 Start mission'))));
+function resume() { pauseEl.classList.add('hidden'); pauseEl.replaceChildren(); G.paused = false; music.muffle(false); }
+
+function confirmPause(what) {
+  const restart = what === 'restart';
+  sfx('alert');
+  pauseEl.replaceChildren(h('div', { class: 'panel' },
+    h('h2', {}, restart ? '🔁 Restart the mission?' : '🏠 Quit to the title screen?'),
+    h('p', {}, restart ? 'You will go back to Sol 1 with a fresh crew and full resources.' : 'You can start a brand-new mission from the title screen.'),
+    h('p', { class: 'note' }, 'Your progress in this mission will be lost.'),
+    h('div', { class: 'pz-row' },
+      h('button', { class: 'btn', onclick: showMenu }, '◀ No, go back'),
+      h('button', { class: 'btn warn', onclick: () => (restart ? restartMission() : quitToTitle()) }, restart ? 'Yes, restart' : 'Yes, quit'))));
 }
+
+/** Close every open screen and stop the current mission. */
+function stopMission() {
+  resume();
+  abortAll();
+  busy = false; nearStation = null; started = false;
+  emit('all');
+}
+
+function restartMission() { stopMission(); toast('🔁 New mission: back to Sol 1!'); newGame(); }
+
+function quitToTitle() {
+  stopMission();
+  $('#ui').classList.add('hidden'); $('#btn-menu').classList.add('hidden');
+  resetGame(); base.resetPositions();
+  titleScreen({ intro: false });
+}
+
+const landing = createLanding({ onStart: () => newGame(), onSources: () => showSources() });
+function titleScreen(opts) { landing.show(opts); }
 
 async function newGame() {
   resetGame();
   base.resetPositions();
   startSol();
   base.select(S.current);
-  $('#ui').classList.remove('hidden');
+  $('#ui').classList.remove('hidden'); $('#btn-menu').classList.remove('hidden');
   started = true;
+  music.play(baseTrack());
   emit('all');
   await briefing();
 }
@@ -329,7 +402,12 @@ $('#tasks-toggle').onclick = () => $('#tasks').classList.toggle('closed');
 if (window.innerWidth < 900) $('#tasks').classList.add('closed');
 window.addEventListener('keydown', (e) => {
   if (e.repeat) return;
-  if (rockyOpen() && (e.code === 'Enter' || e.code === 'Space')) { e.preventDefault(); $('#rocky-next').click(); return; }
+  if (e.code === 'KeyM' && !(e.target instanceof HTMLInputElement)) { setMuted(!settings.muted); toast(settings.muted ? '🔇 Sound off' : '🔊 Sound on'); if (pauseOpen()) showMenu(); return; }
+  if (pauseOpen()) { if (e.code === 'Escape') { e.preventDefault(); resume(); } return; }
+  if (started && e.code === 'Escape' && !modalOpen() && !rockyOpen()) { e.preventDefault(); showMenu(); return; }
+  if (rockyOpen() && e.code === 'Escape') { $('#rocky-close').click(); return; }
+  if (rockyOpen() && e.code === 'ArrowLeft') { e.preventDefault(); $('#rocky-prev').click(); return; }
+  if (rockyOpen() && (e.code === 'Enter' || e.code === 'Space' || e.code === 'ArrowRight')) { e.preventDefault(); $('#rocky-next').click(); return; }
   if (overlayOpen() || modalOpen()) return;
   if (e.code === 'KeyE' || e.code === 'Space') { e.preventDefault(); interact(); }
   const n = ['Digit1', 'Digit2', 'Digit3', 'Digit4'].indexOf(e.code);

@@ -1,18 +1,19 @@
 // Mission Control: the station monitoring dashboard opened at the Command Center.
 // It only DISPLAYS readings from telemetry.js (which reads the real game state).
-import { h, modal, sfx } from './ui.js';
+import { h, modal, sfx, onAbort } from './ui.js';
 import { cv, loop, lg, rg, rr, TAU } from './art.js';
 import { readTelemetry } from './telemetry.js';
 import { S, solDef } from './state.js';
 
-const COL = { ok: '#58d66b', warn: '#ffd23f', crit: '#ff5a5a', info: '#5fd4ff' };
-const WORD = { ok: 'NOMINAL', warn: 'CAUTION', crit: 'CRITICAL', info: 'INFO' };
-const shown = {};   // last value each dial showed, so needles and bars sweep to the new reading
+export const COL = { ok: '#58d66b', warn: '#ffd23f', crit: '#ff5a5a', info: '#5fd4ff' };
+export const WORD = { ok: 'NOMINAL', warn: 'CAUTION', crit: 'CRITICAL', info: 'INFO' };
+export const shown = {};   // last value each dial showed, so needles and bars sweep to the new reading
 
-function gauge(m) {
+export function gauge(m, size) {
   const W = 168, H = 152, cx = W / 2, cy = 80, R = 62, A0 = Math.PI * 0.75, SWEEP = Math.PI * 1.5;
   const f = (v) => Math.max(0, Math.min(1, (v - m.min) / (m.max - m.min)));
   const { c } = cv(W, H, 'art plain');
+  if (size) c.style.width = size + 'px';
   let cur = shown[m.key] ?? m.min;
   loop(c, (g, t, dt) => {
     cur += (m.value - cur) * Math.min(1, dt * 2.4); shown[m.key] = cur;
@@ -38,7 +39,7 @@ function gauge(m) {
   return h('div', { class: 'mc-gauge ' + m.status }, c, h('b', {}, m.label), h('small', {}, WORD[m.status]));
 }
 
-function bar(m) {
+export function bar(m) {
   const from = shown[m.key] ?? 0; shown[m.key] = m.value;
   const fill = h('i', { style: `width:${from}%` });
   requestAnimationFrame(() => requestAnimationFrame(() => { fill.style.width = Math.max(0, Math.min(100, m.value)) + '%'; }));
@@ -91,7 +92,8 @@ export function openDashboard({ canDecide = false, taskTitle = null, note = null
     const clock = h('span', { class: 'mc-clock' });
     const t0 = Date.now(), tick = () => { const s = Math.floor((Date.now() - t0) / 1000) + S.sol * 3600 + 7 * 60; clock.textContent = `MET ${String(Math.floor(s / 3600)).padStart(2, '0')}:${String(Math.floor(s / 60) % 60).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`; };
     tick(); const timer = setInterval(tick, 1000);
-    const done = (what) => { clearInterval(timer); window.removeEventListener('keydown', esc); m.close(); resolve(what); };
+    const unAbort = onAbort(() => { clearInterval(timer); window.removeEventListener('keydown', esc); });
+    const done = (what) => { unAbort(); clearInterval(timer); window.removeEventListener('keydown', esc); m.close(); resolve(what); };
     const esc = (e) => { if (e.code === 'Escape') done('close'); };
     window.addEventListener('keydown', esc);
     const count = (lvl) => tm.alerts.filter((a) => a.level === lvl).length;
@@ -102,7 +104,7 @@ export function openDashboard({ canDecide = false, taskTitle = null, note = null
       h('div', { class: 'mc-key' }, h('span', { class: 'ok' }, '● Nominal: working normally'), h('span', { class: 'warn' }, '● Caution: needs attention'), h('span', { class: 'crit' }, '● Critical: act now')),
       h('div', { class: 'mc-grid' },
         h('section', {},
-          h('h4', {}, 'CRITICAL SYSTEMS'), h('div', { class: 'mc-gauges' }, tm.gauges.map(gauge)),
+          h('h4', {}, 'CRITICAL SYSTEMS'), h('div', { class: 'mc-gauges' }, tm.gauges.map((m) => gauge(m))),
           h('h4', {}, 'RESERVES'), h('div', {}, tm.bars.map(bar)),
           h('h4', {}, 'LIVE TELEMETRY'), traces(tm)),
         h('section', {},

@@ -101,3 +101,52 @@ export function readTelemetry() {
   const history = [BAL.start, ...S.log.map((l) => l.res), S.res];
   return { gauges, bars, lamps, alerts, forecast, history, overall: worst([...gauges, ...bars, ...alerts].map((x) => x.status || x.level)) };
 }
+
+// ---------- Crew health (Medical Bay dashboard) ----------
+// The game has ONE real "Crew Health" number. The per-astronaut readings below are worked out
+// from it plus things that really happened today: tasks done, outdoor work, sickness, shielding,
+// food and power. Display only: tune freely.
+const clamp = (v) => Math.max(0, Math.min(100, Math.round(v)));
+export function readCrew() {
+  const { power, shield, food, health } = S.res;
+  const oxygen = 21 * (0.8 + 0.12 * power / 100 + 0.08 * food / 100);
+  const crew = Object.keys(CREW).map((id, i) => {
+    const mine = S.tasks.filter((t) => t.who === id), jobs = mine.filter((t) => t.done).length;
+    const outside = mine.some((t) => t.done && (t.game === 'rover' || t.game === 'panels'));
+    const ill = !!(S.sick && S.sick.who === id && S.sick.sol === S.sol), sick = ill && !S.sick.treated;
+    const overall = clamp(health - (sick ? 20 : ill ? 8 : 0));
+    const hydration = clamp(58 + food * 0.42 - jobs * 6 - (outside ? 10 : 0));
+    const fatigue = clamp((100 - health) * 0.6 + jobs * 14 + (outside ? 10 : 0) + (sick ? 20 : 0));
+    const radiation = clamp(100 - shield + (outside ? 10 : 0));
+    const heart = Math.round(64 + i * 2 + fatigue * 0.28 + (sick ? 10 : 0));
+    const spo2 = Math.round(92 + ((oxygen - 16.8) / 4.2) * 7);
+    const temp = sick ? 38.2 : 36.6 + i * 0.1;
+    const s = {
+      overall: level(overall, 21, 51), hydration: level(hydration, 40, 60), fatigue: level(100 - fatigue, 30, 50), radiation: level(100 - radiation, 40, 60),
+      heart: heart > 110 ? 'crit' : heart > 95 ? 'warn' : 'ok', spo2: level(spo2, 93, 95), temp: temp > 37.5 ? 'warn' : 'ok',
+    };
+    const risks = [];
+    if (sick) risks.push(['warn', '🤒', `${CREW[id].name} is sick (${temp} °C)`, 'Treat them in the Medical Bay so they recover.']);
+    if (s.fatigue !== 'ok') risks.push([s.fatigue, '😴', `${CREW[id].name} is very tired`, 'Tired astronauts make mistakes. Raise Crew Health with checkups, food and shielding.']);
+    if (s.hydration !== 'ok') risks.push([s.hydration, '💧', `${CREW[id].name} needs more water and food`, 'Food stores are low. Lea\'s greenhouse jobs help everyone.']);
+    if (s.radiation !== 'ok') risks.push([s.radiation, '☢️', `${CREW[id].name}: radiation exposure is high`, 'Shielding is weak. Keep outdoor work short and raise the shielding.']);
+    if (s.spo2 !== 'ok') risks.push([s.spo2, '🫁', `${CREW[id].name}: blood oxygen is low`, 'The air recycler needs more power.']);
+    return {
+      id, name: CREW[id].name, role: CREW[id].role, css: CREW[id].css, sick, status: worst(Object.values(s)), risks,
+      gauges: [
+        { key: 'hr-' + id, label: 'Heart rate', value: heart, min: 40, max: 140, unit: 'bpm', status: s.heart, zones: [[40, 95, 'ok'], [95, 110, 'warn'], [110, 140, 'crit']] },
+        { key: 'o2-' + id, label: 'Blood oxygen', value: spo2, min: 88, max: 100, unit: '%', status: s.spo2, zones: [[88, 93, 'crit'], [93, 95, 'warn'], [95, 100, 'ok']] },
+      ],
+      temp, tempStatus: s.temp,
+      bars: [
+        { key: 'ov-' + id, icon: '❤️', label: 'Overall health', value: overall, status: s.overall, text: overall + '%', marks: [20, 50] },
+        { key: 'hy-' + id, icon: '💧', label: 'Hydration', value: hydration, status: s.hydration, text: hydration + '%', marks: [40, 60] },
+        { key: 'fa-' + id, icon: '😴', label: 'Fatigue', value: fatigue, status: s.fatigue, text: fatigue + '%', marks: [50, 70] },
+        { key: 'ra-' + id, icon: '☢️', label: 'Radiation', value: radiation, status: s.radiation, text: radiation + '%', marks: [40, 60] },
+      ],
+    };
+  });
+  const alerts = crew.flatMap((c) => c.risks).map(([lvl, icon, title, text]) => ({ level: lvl, icon, title, text })).sort((a, b) => RANK[b.level] - RANK[a.level]);
+  if (!alerts.length) alerts.push({ level: 'ok', icon: '✅', title: 'No health risks found', text: 'The whole crew is in good shape. Keep checking every sol!' });
+  return { crew, alerts, overall: worst(crew.map((c) => c.status)) };
+}

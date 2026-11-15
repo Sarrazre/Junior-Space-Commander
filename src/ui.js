@@ -32,36 +32,39 @@ export function modal(...content) {
 }
 export const modalOpen = () => !$('#modal').classList.contains('hidden');
 
-// --- Sound: tiny synth beeps, no audio files needed ---
-let ctx = null;
-export const sound = { on: true };
-const TUNES = {
-  ok: [[660, 0.08], [880, 0.12]], bad: [[200, 0.18]], tap: [[520, 0.04]],
-  win: [[523, 0.1], [659, 0.1], [784, 0.1], [1047, 0.22]], alert: [[440, 0.12], [330, 0.12], [440, 0.12]],
-  rocky: [[900, 0.05], [1200, 0.05], [1000, 0.07]],
-};
-/** One short beep at a given pitch (used by the memory and puzzle games). */
-export function tone(freq, dur = 0.15) {
-  if (!sound.on) return;
-  try {
-    ctx ||= new (window.AudioContext || window.webkitAudioContext)();
-    const o = ctx.createOscillator(), g = ctx.createGain(), t = ctx.currentTime;
-    o.type = 'triangle'; o.frequency.value = freq;
-    g.gain.setValueAtTime(0.09, t); g.gain.exponentialRampToValueAtTime(0.001, t + dur);
-    o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + dur);
-  } catch { /* sound is optional */ }
+// --- Sound: all music and effects are synthesized in src/audio.js ---
+import { sfx, tone, sound, settings, setVolume, setMuted } from './audio.js';
+export { sfx, tone, sound };
+
+/** Music + Effects volume sliders and a mute button (pause menu). */
+export function audioControls() {
+  const slider = (icon, label, key) => {
+    const out = h('output', {}, Math.round(settings[key] * 100) + '%');
+    const input = h('input', { type: 'range', min: 0, max: 100, step: 5, value: Math.round(settings[key] * 100), 'aria-label': label + ' volume',
+      oninput: (e) => { setVolume(key, e.target.value / 100); out.textContent = e.target.value + '%'; },
+      onchange: () => { if (key === 'sfx') sfx('ok'); } });
+    return h('label', { class: 'vol' }, h('span', {}, icon + ' ' + label), input, out);
+  };
+  const box = h('div', { class: 'vol-box' + (settings.muted ? ' muted' : '') });
+  const mute = h('button', { class: 'btn small', onclick: () => {
+    setMuted(!settings.muted); box.classList.toggle('muted', settings.muted);
+    mute.textContent = settings.muted ? '🔇 Unmute (M)' : '🔊 Mute all (M)'; sfx('ok');
+  } }, settings.muted ? '🔇 Unmute (M)' : '🔊 Mute all (M)');
+  box.append(slider('🎵', 'Music', 'music'), slider('🔔', 'Effects', 'sfx'), mute);
+  return box;
 }
-export function sfx(name) {
-  if (!sound.on) return;
-  try {
-    ctx ||= new (window.AudioContext || window.webkitAudioContext)();
-    let t = ctx.currentTime;
-    for (const [freq, dur] of TUNES[name] || TUNES.tap) {
-      const o = ctx.createOscillator(), g = ctx.createGain();
-      o.type = name === 'bad' ? 'sawtooth' : 'square'; o.frequency.value = freq;
-      g.gain.setValueAtTime(0.06, t); g.gain.exponentialRampToValueAtTime(0.001, t + dur);
-      o.connect(g).connect(ctx.destination); o.start(t); o.stop(t + dur);
-      t += dur;
-    }
-  } catch { /* sound is optional */ }
+
+// --- Pause + abort: lets the player restart or quit from anywhere ---
+/** Shared game state flags read by the base scene and the rover. */
+export const G = { paused: false };
+const aborters = new Set();
+/** Register a silent teardown for something that is open right now. Returns an unregister function. */
+export function onAbort(fn) { aborters.add(fn); return () => aborters.delete(fn); }
+/** Tear down every open game screen without resolving it (used by Restart / Quit). */
+export function abortAll() {
+  for (const fn of [...aborters]) { try { fn(); } catch (e) { console.warn(e); } }
+  aborters.clear();
+  for (const id of ['#overlay', '#modal']) { const el = $(id); el.classList.add('hidden'); el.replaceChildren(); }
+  $('#rocky').classList.add('hidden');
+  $('#toast').replaceChildren();
 }

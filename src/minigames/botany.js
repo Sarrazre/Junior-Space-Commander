@@ -1,6 +1,6 @@
 // Lea's tasks: plant care sliders, Contaminated Harvest (OSD-412),
 // Save the Mars Greenhouse (OSD-581), DNA Repair Lab (OSD-658).
-import { h, shuffle } from '../ui.js';
+import { h, shuffle, sfx } from '../ui.js';
 import { ask, SRC } from './index.js';
 import { cv, loop, rnd, rr, ink, lg, rg, label, star, TAU } from '../art.js';
 
@@ -233,7 +233,7 @@ export async function dna(body, params, api) {
     };
     const btns = 'ATCG'.split('').map((b) => h('button', { class: 'px-btn dna-btn', style: `--c:${BCOL[b]}`, onclick: () => {
       if (g >= gaps.length) return;
-      if (PAIR[top[gaps[g]]] === b) { g++; api.ok(); draw(); if (g === gaps.length) { msg.textContent = '✨ DNA repaired!'; setTimeout(resolve, 1200); } }
+      if (PAIR[top[gaps[g]]] === b) { g++; sfx('zip'); draw(); if (g === gaps.length) { sfx('sparkle'); msg.textContent = '✨ DNA repaired!'; setTimeout(resolve, 1200); } }
       else { api.miss(); msg.textContent = `Not ${b}. Look at the letter above the white box: A↔T, C↔G.`; }
     } }, b));
     draw();

@@ -8,33 +8,63 @@ import { siteShell } from './sites.js';
 export const EXPEDITION_STOPS = ['Weather station spot', 'Panorama point', 'Meteorite field'];
 
 export const EXPEDITION_TASKS = [
-  // 1) Put the weather station together in an order that works.
+  // 1) Put the weather station together, using the blueprint as a guide.
   (root) => siteShell(root, 'Build the weather station', (body, api) => {
-    const PARTS = { legs: ['🦵 Tripod legs', []], mast: ['📏 Mast', ['legs']], panel: ['🔆 Solar panel', ['mast']], sensors: ['🌬️ Wind + temperature sensors', ['mast']], power: ['🔛 Switch it on', ['panel', 'sensors']] };
-    const built = new Set(), W = 520, H = 210, { c } = cv(W, H), msg = h('p', { class: 'msg' }, 'Which part must go first?'), pop = {};
+    const PARTS = { base: ['🔺 Tripod base', []], mast: ['📏 Mast', ['base']], panel: ['🔆 Solar panel', ['mast']], sensors: ['🌬️ Wind + temperature sensors', ['mast']], power: ['🔛 Power switch', ['panel', 'sensors']] };
+    const LABELS = { base: ['Tripod base', 150, 16], mast: ['Mast', 96, -70], panel: ['Solar panel', 84, 62], sensors: ['Sensors', 26, -62], power: ['Power switch', 60, 52] };
+    const built = new Set(), W = 560, H = 230, BX = 122, SX = 430, GROUND = 190, { c } = cv(W, H), msg = h('p', { class: 'msg' }, 'Look at the blueprint. Which part has to go on the ground first?'), pop = {};
+    let wrong = null, wrongT = 0;
+    // One drawing routine for the three looks: 'plan' (white lines on blue), 'ghost' (dashed outline), 'real' (the built part).
+    const part = (g, key, x, mode, s, t) => {
+      const real = mode === 'real', line = mode === 'plan' ? '#ffffff' : '#ffffffaa';
+      const paint = (fill) => { if (real) { g.fillStyle = fill; g.fill(); ink(g, 2.5); } else { g.lineWidth = 2; g.strokeStyle = line; g.stroke(); } };
+      g.save(); g.translate(x, GROUND); g.setLineDash(mode === 'ghost' ? [5, 5] : []);
+      if (key === 'base') { g.lineWidth = real ? 6 : 2; g.strokeStyle = real ? '#1d2547' : line; g.beginPath(); for (const dx of [-38, 0, 38]) { g.moveTo(0, -40 * s); g.lineTo(dx * s, 0); } g.stroke(); }
+      if (key === 'mast') { rr(g, -4, -40 - 78 * s, 8, 78 * s, 3); paint('#dfe6f2'); }
+      if (key === 'panel') { g.translate(8, -94); g.rotate(-0.35); g.scale(s, s); rr(g, 0, -14, 56, 28, 4); paint('#2a64d8'); if (real) { g.strokeStyle = '#7fb4ff'; g.lineWidth = 1.5; for (let i = 1; i < 4; i++) { g.beginPath(); g.moveTo(i * 14, -14); g.lineTo(i * 14, 14); g.stroke(); } } }
+      if (key === 'sensors') {
+        g.translate(0, -124); g.scale(s, s); const spin = real && built.has('power') ? t * 7 : 0.4;
+        for (let i = 0; i < 3; i++) { const a = spin + i * TAU / 3; g.strokeStyle = real ? '#1d2547' : line; g.lineWidth = real ? 3 : 2; g.beginPath(); g.moveTo(0, 0); g.lineTo(Math.cos(a) * 24, Math.sin(a) * 7); g.stroke(); g.beginPath(); g.arc(Math.cos(a) * 24, Math.sin(a) * 7, 6, 0, TAU); paint('#ff8a3c'); }
+        rr(g, -34, 4, 12, 26, 5); paint('#ffffff'); if (real) { g.fillStyle = '#ff5a5a'; g.fillRect(-30, 16, 4, 12); }
+      }
+      if (key === 'power') { g.translate(0, -62); g.scale(s, s); rr(g, -9, -9, 18, 18, 5); paint('#3a4563'); g.beginPath(); g.arc(0, 0, 4.5, 0, TAU); paint(Math.sin(t * 8) > 0 ? '#58d66b' : '#1f6b33'); }
+      g.restore();
+    };
     loop(c, (g, t, dt) => {
       for (const k of built) pop[k] = Math.min(1, (pop[k] || 0) + dt * 3);
-      g.fillStyle = lg(g, 0, 0, 0, 150, ['#f7c896', '#ec9f66']); g.fillRect(0, 0, W, H); g.fillStyle = lg(g, 0, 150, 0, H, ['#c7532f', '#9c3a22']); g.fillRect(0, 150, W, 60);
-      const x = 260, s = (k) => { const p = pop[k] || 0; return 1 - (1 - p) ** 3; };
-      if (built.has('legs')) { g.strokeStyle = '#1d2547'; g.lineWidth = 6; g.beginPath(); for (const dx of [-40, 0, 40]) { g.moveTo(x, 150 - 40 * s('legs')); g.lineTo(x + dx * s('legs'), 172); } g.stroke(); }
-      if (built.has('mast')) { g.strokeStyle = '#dfe6f2'; g.lineWidth = 8; g.beginPath(); g.moveTo(x, 112); g.lineTo(x, 112 - 76 * s('mast')); g.stroke(); ink(g, 2); }
-      if (built.has('panel')) { g.save(); g.translate(x + 8, 96); g.rotate(-0.35); g.scale(s('panel'), s('panel')); rr(g, 0, -14, 56, 28, 4); g.fillStyle = '#2a64d8'; g.fill(); ink(g, 3); g.strokeStyle = '#7fb4ff'; g.lineWidth = 1.5; for (let i = 1; i < 4; i++) { g.beginPath(); g.moveTo(i * 14, -14); g.lineTo(i * 14, 14); g.stroke(); } g.restore(); }
-      if (built.has('sensors')) {
-        g.save(); g.translate(x, 36); g.scale(s('sensors'), s('sensors')); const spin = built.has('power') ? t * 7 : 0;
-        for (let i = 0; i < 3; i++) { const a = spin + i * TAU / 3; g.strokeStyle = '#1d2547'; g.lineWidth = 3; g.beginPath(); g.moveTo(0, 0); g.lineTo(Math.cos(a) * 24, Math.sin(a) * 7); g.stroke(); g.beginPath(); g.arc(Math.cos(a) * 24, Math.sin(a) * 7, 6, 0, TAU); g.fillStyle = '#ff8a3c'; g.fill(); ink(g, 2); }
-        rr(g, -34, 4, 12, 26, 5); g.fillStyle = '#fff'; g.fill(); ink(g, 2); g.fillStyle = '#ff5a5a'; g.fillRect(-30, 16, 4, 12); g.restore();
+      wrongT = Math.max(0, wrongT - dt);
+      // --- left: the blueprint ---
+      g.fillStyle = '#1b4a9c'; g.fillRect(0, 0, 250, H); g.strokeStyle = '#ffffff22'; g.lineWidth = 1;
+      for (let x = 0; x < 250; x += 15) { g.beginPath(); g.moveTo(x, 0); g.lineTo(x, H); g.stroke(); } for (let y = 0; y < H; y += 15) { g.beginPath(); g.moveTo(0, y); g.lineTo(250, y); g.stroke(); }
+      label(g, 'BLUEPRINT', 125, 14, { size: 14, stroke: null });
+      g.strokeStyle = '#fff'; g.lineWidth = 2; g.beginPath(); g.moveTo(50, GROUND); g.lineTo(200, GROUND); g.stroke();
+      for (const key of Object.keys(PARTS)) {
+        part(g, key, BX, 'plan', 1, t);
+        const [name, ly, side] = LABELS[key], done = built.has(key), bad = wrong === key && wrongT > 0, lx = BX + side;
+        g.strokeStyle = done ? '#9cffb3' : bad ? '#ff8a8a' : '#ffffffaa'; g.lineWidth = 1.2; g.beginPath(); g.moveTo(BX + Math.sign(side) * 10, ly + 14); g.lineTo(lx, ly + 14); g.stroke();
+        label(g, (done ? '✔ ' : '') + name, lx + (side > 0 ? 2 : -2), ly + 4, { size: 11, col: done ? '#9cffb3' : bad ? '#ff8a8a' : '#fff', align: side > 0 ? 'left' : 'right', stroke: '#1b4a9c' });
       }
-      if (built.has('power')) { g.beginPath(); g.arc(x, 62, 6, 0, TAU); g.fillStyle = Math.sin(t * 8) > 0 ? '#58d66b' : '#1f6b33'; g.fill(); ink(g, 2); for (let i = 0; i < 3; i++) { const q = (t * 0.8 + i / 3) % 1; g.strokeStyle = `rgba(95,212,255,${1 - q})`; g.lineWidth = 3; g.beginPath(); g.arc(x, 30, 16 + q * 40, -2.4, -0.7); g.stroke(); } }
-      drawAstro(g, 120, 190, 0.85, '#4aa8ff', { t, mood: built.has('power') ? 'happy' : 'ok' });
-      for (let i = 0; i < 8; i++) { const wx = (i * 83 + t * 70) % 560 - 20; g.strokeStyle = '#fff5'; g.lineWidth = 2; g.beginPath(); g.moveTo(wx, 30 + (i * 29) % 100); g.lineTo(wx + 16, 30 + (i * 29) % 100); g.stroke(); }
+      // --- right: the building site, with dashed outlines where parts will go ---
+      g.fillStyle = lg(g, 0, 0, 0, 170, ['#f7c896', '#ec9f66']); g.fillRect(250, 0, W - 250, H); g.fillStyle = lg(g, 0, GROUND - 14, 0, H, ['#c7532f', '#9c3a22']); g.fillRect(250, GROUND - 14, W - 250, H);
+      for (let i = 0; i < 6; i++) { const wx = 250 + (i * 83 + t * 70) % 310; g.strokeStyle = '#fff5'; g.lineWidth = 2; g.beginPath(); g.moveTo(wx, 26 + (i * 29) % 90); g.lineTo(wx + 16, 26 + (i * 29) % 90); g.stroke(); }
+      for (const key of Object.keys(PARTS)) {
+        if (!built.has(key)) { g.globalAlpha = wrong === key && wrongT > 0 ? 0.35 + Math.abs(Math.sin(t * 25)) * 0.6 : 0.75; part(g, key, SX, 'ghost', 1, t); g.globalAlpha = 1; continue; }
+        const p = pop[key], s = 1 - (1 - p) ** 3;
+        part(g, key, SX, 'real', s, t);
+        if (p < 1) for (let i = 0; i < 6; i++) { const a = i * TAU / 6 + t * 3; star(g, SX + Math.cos(a) * 60 * p, GROUND - 80 + Math.sin(a) * 60 * p, 7 * (1 - p), a, 4, 0.3); g.fillStyle = '#fff6c8'; g.fill(); }
+      }
+      if (built.has('power')) for (let i = 0; i < 3; i++) { const q = (t * 0.8 + i / 3) % 1; g.strokeStyle = `rgba(95,212,255,${1 - q})`; g.lineWidth = 3; g.beginPath(); g.arc(SX, GROUND - 130, 16 + q * 40, -2.4, -0.7); g.stroke(); }
+      drawAstro(g, 320, GROUND + 26, 0.8, '#4aa8ff', { t, mood: built.has('power') ? 'happy' : 'ok' });
+      label(g, `${built.size} of 5 parts`, W - 60, 16, { size: 13 });
     });
     const btns = Object.entries(PARTS).sort(() => Math.random() - 0.5).map(([key, [name, needs]]) => h('button', { class: 'px-btn', onclick: (e) => {
       const missing = needs.filter((n) => !built.has(n));
-      if (missing.length) { api.miss(); msg.textContent = `Not yet! That needs the ${PARTS[missing[0]][0].replace(/^\S+ /, '').toLowerCase()} first.`; return; }
-      built.add(key); e.target.disabled = true; e.target.classList.add('ok'); tone(400 + built.size * 70, 0.12); msg.textContent = 'Good! What comes next?';
-      if (built.size === 5) { msg.textContent = '🌬️ It is measuring the wind!'; setTimeout(() => api.found('The weather station is sending data! The Perseverance rover carries a weather station too. It measures wind, temperature and dust on Mars every day.', '✔ STATION BUILT'), 1600); }
+      if (missing.length) { api.miss(); wrong = key; wrongT = 0.9; msg.textContent = `Not yet! The ${name.replace(/^\S+ /, '').toLowerCase()} would have nothing to hold it. Check the blueprint: what is underneath it?`; return; }
+      built.add(key); e.target.disabled = true; e.target.classList.add('ok'); tone(400 + built.size * 70, 0.12);
+      msg.textContent = `✔ ${name.replace(/^\S+ /, '')} in place! What can be added now?`;
+      if (built.size === 5) { msg.textContent = '🌬️ It is measuring the wind!'; setTimeout(() => api.found('The weather station is sending data! The Perseverance rover carries a weather station too. It measures wind, temperature and dust on Mars every day.', '✔ STATION BUILT'), 1800); }
     } }, name));
-    body.replaceChildren(h('p', {}, 'Build a weather station for the base. Tap the parts in an order that works: nothing can float in the air!'), h('div', { class: 'row' }, c), h('div', { class: 'row' }, btns), msg);
+    body.replaceChildren(h('p', {}, 'Build the weather station shown on the BLUEPRINT. The dashed shapes show where each part goes. Choose the parts in an order that works: nothing can float in the air!'), h('div', { class: 'row' }, c), h('div', { class: 'row' }, btns), msg);
   }),
 
   // 2) Pan the camera and photograph three things.

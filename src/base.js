@@ -2,6 +2,7 @@
 // All sprites are drawn in code (canvas textures), so nothing here depends on extra image files.
 import Phaser from 'phaser';
 import { S } from './state.js';
+import { sfx } from './audio.js';
 import { CREW, CREW_IDS } from './data/sols.js';
 import { ROOMS, LINKS, STATIONS, STARTS, REACH, walkable, findPath } from './data/map.js';
 
@@ -216,6 +217,7 @@ export function createBase(bridge) {
       o.walk += ((moving ? 1 : 0) - o.walk) * Math.min(1, dt / 110);
       if (moving) {
         o.ph += dt * 0.0125; o.idle = 0; o.wave = 0;
+        const stepN = Math.floor(o.ph / Math.PI); if (stepN !== o.stepN) { o.stepN = stepN; if (selected) sfx('stepIn'); }
         o.face = Math.abs(vx) > Math.abs(vy) * 0.8 ? (vx < 0 ? 'left' : 'right') : (vy < 0 ? 'up' : 'down');
       } else if ((o.idle += dt) > 900) o.face = 'down';
       const back = o.face === 'up';
