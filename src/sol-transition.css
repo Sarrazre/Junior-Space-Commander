@@ -14,8 +14,8 @@
 /* Sol change and finale: a 3D scene (see sol-transition.js) with sticker-style words on top. */
 #modal:has(.sol-transition) { padding: 0; background: #0b0a26; transition: background .3s; }
 #modal:has(.sol-leaving) { background: transparent; }
-#modal .panel.sol-transition { --ink: #1d2547; --pop: cubic-bezier(.3, 1.5, .5, 1); position: relative; isolation: isolate; width: 100%; max-width: none; height: 100dvh; min-height: 100dvh; max-height: 100dvh; margin: 0; border: 0; border-radius: 0; padding: 0; overflow: hidden; color: #fff; box-shadow: none; backdrop-filter: none; text-align: center; background: linear-gradient(#070b24, #2a1d55 55%, #7a3a4a 72%, #8f3d28 72.2%, #5c2a22); animation: sol-iris .6s cubic-bezier(.3, 0, .2, 1) both; }
-#modal .panel.sol-transition.sol-flat { background: linear-gradient(#2f2c78, #ff8f5e 60%, #f4bf86 71%, #b04a2c 71.2%, #7d3524); }
+#modal .panel.sol-transition { --ink: #1d2547; --pop: cubic-bezier(.3, 1.5, .5, 1); position: relative; isolation: isolate; width: 100%; max-width: none; height: 100dvh; min-height: 100dvh; max-height: 100dvh; margin: 0; border: 0; border-radius: 0; padding: 0; overflow: hidden; color: #fff; box-shadow: none; backdrop-filter: none; text-align: center; background: linear-gradient(#04051a, #0d0e38 45%, #1b164e 66%, #3a1a2a 66.2%, #2a1220); animation: sol-iris .6s cubic-bezier(.3, 0, .2, 1) both; }
+#modal .panel.sol-transition.sol-flat { background: linear-gradient(#2b2580, #b65aa2 42%, #ffa46a 66%, #e2602c 66.2%, #b8452a); }
 .sol-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; z-index: -2; transition: opacity .45s; }
 .sol-loading .sol-canvas { opacity: 0; }
 .sol-flat .sol-canvas { display: none; }
@@ -33,13 +33,13 @@
 .sol-big-final { font-size: clamp(42px, min(11.5vw, 16vh), 150px); line-height: .95; }
 .sol-tag { margin: clamp(10px, 2.4vh, 22px) 0 0; max-width: 92vw; padding: 2px 22px; border-radius: 12px; background: var(--yellow); color: #2a1c00; box-shadow: 0 5px 0 #7a4a00; font-weight: 700; font-size: clamp(18px, 2.6vw, 30px); transform: rotate(-1.5deg); }
 
-.sol-stars { display: flex; align-items: flex-end; gap: clamp(6px, 1.4vw, 16px); margin-top: clamp(4px, 1.6vh, 16px); }
-.sol-star { display: block; width: clamp(44px, 9vh, 82px); filter: drop-shadow(0 5px 0 var(--ink)); }
-.sol-star:nth-child(2) { width: clamp(56px, 11.5vh, 104px); margin-bottom: 8px; }
+.sol-stars { display: flex; align-items: flex-end; gap: clamp(6px, 1.4vw, 16px); margin-top: auto; }
+.sol-star { display: block; width: clamp(40px, 7.5vh, 68px); filter: drop-shadow(0 5px 0 var(--ink)); }
+.sol-star:nth-child(2) { width: clamp(50px, 9.5vh, 86px); margin-bottom: 6px; }
 .sol-star svg { display: block; width: 100%; height: auto; overflow: visible; }
 .sol-star path { fill: #1b2a5ccc; stroke: var(--ink); stroke-width: 5; }
 .sol-star.earned path { fill: var(--yellow); }
-.sol-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 14px; margin-top: clamp(8px, 2vh, 20px); }
+.sol-stats { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px 14px; margin-top: 8px; padding-bottom: 14px; }
 .sol-stats > span { display: grid; min-width: clamp(104px, 15vw, 160px); padding: 6px 18px 8px; border: 3px solid var(--cyan); border-radius: 18px; background: radial-gradient(120% 90% at 50% 0%, #24397aee, #0d1535f2); box-shadow: 0 6px 0 #0009; }
 .sol-stats b { font-size: clamp(24px, 4vw, 40px); line-height: 1.1; color: var(--yellow); font-variant-numeric: tabular-nums; }
 .sol-stats small { font-size: clamp(12px, 1.4vw, 14px); color: #cfd8ff; }
@@ -67,16 +67,16 @@
 .sol-b1 .sol-track { opacity: 1; animation: sol-rise .45s ease-out both; }
 .sol-dawn.sol-b1 .sol-night { opacity: 1; animation: sol-rise .5s .15s ease-out both; }
 .sol-dawn.sol-b2 .sol-night { animation: sol-out .16s ease-in both; }
-.sol-dawn.sol-b2 .sol-title, .sol-finale.sol-b3 .sol-title { opacity: 1; animation: sol-slam .32s cubic-bezier(.2, .9, .3, 1.25) both; }
+.sol-dawn.sol-b2 .sol-title, .sol-finale.sol-b1 .sol-title { opacity: 1; animation: sol-slam .32s cubic-bezier(.2, .9, .3, 1.25) both; }
 .sol-dawn.sol-b3 .sol-tag { opacity: 1; animation: sol-pop .4s var(--pop) both; }
 .sol-dawn.sol-b3 .sol-track li:has(+ li.next)::after { transform: none; }
 .sol-dawn.sol-b3 .sol-track li.next { color: #fff3a0; }
 .sol-dawn.sol-b3 .sol-track li.next > span { background: var(--yellow); color: #2a1c00; animation: sol-ping 1.1s .6s ease-out infinite; }
 .sol-dawn.sol-b4 .sol-fact { opacity: 1; animation: sol-rise .4s ease-out both; }
-.sol-finale.sol-b4 .sol-star { opacity: 1; animation: sol-star .5s calc(var(--i) * .2s) var(--pop) both; }
-.sol-finale.sol-b5 .sol-stats > span { opacity: 1; animation: sol-rise .4s ease-out both; }
-.sol-finale.sol-b5 .sol-stats > span:nth-child(2) { animation-delay: .12s; }
-.sol-finale.sol-b5 .sol-stats > span:nth-child(3) { animation-delay: .24s; }
+.sol-finale.sol-b2 .sol-star { opacity: 1; animation: sol-star .5s calc(var(--i) * .2s) var(--pop) both; }
+.sol-finale.sol-b3 .sol-stats > span { opacity: 1; animation: sol-rise .4s ease-out both; }
+.sol-finale.sol-b3 .sol-stats > span:nth-child(2) { animation-delay: .12s; }
+.sol-finale.sol-b3 .sol-stats > span:nth-child(3) { animation-delay: .24s; }
 #modal .panel.sol-transition.sol-leaving { animation: sol-depart .32s ease-in both; }
 @keyframes sol-iris { from { clip-path: circle(0% at 50% 62%); } to { clip-path: circle(120% at 50% 62%); } }
 @keyframes sol-depart { to { opacity: 0; transform: scale(1.04); } }
@@ -91,5 +91,6 @@
 .sol-gentle, .sol-gentle * { animation: none !important; transition: none !important; }
 .sol-gentle .sol-night { display: none; }
 .sol-gentle .sol-ribbon, .sol-gentle .sol-title { transform: rotate(-2deg); }
-@media (max-width: 600px) { .sol-skip { left: 50%; right: auto; transform: translateX(-50%); white-space: nowrap; } .sol-foot { padding-bottom: 62px; } .sol-track li > span { width: 34px; height: 34px; font-size: 16px; } .sol-track li:not(:last-child)::before, .sol-track li:not(:last-child)::after { top: 14px; } }
+@media (max-width: 600px) { .sol-skip { left: 50%; right: auto; transform: translateX(-50%); white-space: nowrap; } .sol-foot, .sol-stats { padding-bottom: 62px; } .sol-track li > span { width: 34px; height: 34px; font-size: 16px; } .sol-track li:not(:last-child)::before, .sol-track li:not(:last-child)::after { top: 14px; } }
 @media (max-height: 560px) { .sol-fact, .sol-night, .sol-track small { display: none; } .sol-track { padding: 6px 10px; } .sol-ui { padding-top: 10px; } .sol-stats > span { padding: 2px 14px 4px; } }
+.sol-finale .sol-title { margin-top: clamp(14px, 6vh, 60px); }
