@@ -85,7 +85,7 @@ function trend(history) {
  * Open the dashboard. Resolves with 'crisis' (commander wants to decide), 'task' (do the job at this terminal) or 'close'.
  * opts: { canDecide, taskTitle, note }
  */
-export function openDashboard({ canDecide = false, taskTitle = null, note = null } = {}) {
+export function openDashboard({ canDecide = false, taskTitle = null, note = null, remote = false } = {}) {
   return new Promise((resolve) => {
     const tm = readTelemetry();
     if (tm.overall === 'crit') sfx('alert'); else sfx('ok');
@@ -115,6 +115,7 @@ export function openDashboard({ canDecide = false, taskTitle = null, note = null
           h('h4', {}, 'MISSION TREND'), trend(tm.history))),
       note && h('p', { class: 'note', style: 'text-align:center' }, note),
       h('div', { class: 'actions' },
+        remote && h('button', { class: 'btn go', onclick: () => done('visit') }, 'Bring Max to Command →'),
         canDecide && h('button', { class: 'btn warn mc-pulse', onclick: () => done('crisis') }, '🚨 Decide today\'s problem'),
         taskTitle && h('button', { class: 'btn go', onclick: () => done('task') }, `▶ ${taskTitle}`),
         h('button', { class: 'btn', onclick: () => done('close') }, 'Close')));

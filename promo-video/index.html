@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #c7532f; }
+      #root { position: relative; width: 1920px; height: 1080px; overflow: hidden; }
+      video.shot { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; object-fit: cover; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="30" data-width="1920" data-height="1080">
+      <!-- Footage: real captured play, cut on the bar (1.739 s) and half bar -->
+      <video id="v-lander" class="clip shot" src="assets/footage/01-landing-craft.mp4" data-start="0" data-duration="3.478" data-track-index="0" style="z-index:1" muted playsinline></video>
+      <video id="v-base" class="clip shot" src="assets/footage/02-base.mp4" data-start="3.478" data-duration="3.479" data-track-index="0" style="z-index:2" muted playsinline></video>
+      <video id="v-crisis" class="clip shot" src="assets/footage/03-crisis.mp4" data-start="6.957" data-duration="3.478" data-track-index="0" style="z-index:3" muted playsinline></video>
+      <video id="v-wires" class="clip shot" src="assets/footage/04-wires.mp4" data-start="10.435" data-duration="0.869" data-track-index="0" style="z-index:4" muted playsinline></video>
+      <video id="v-panels" class="clip shot" src="assets/footage/05-panels.mp4" data-start="11.304" data-duration="0.87" data-track-index="0" style="z-index:5" muted playsinline></video>
+      <video id="v-rocks" class="clip shot" src="assets/footage/06-rocks.mp4" data-start="12.174" data-duration="0.869" data-track-index="0" style="z-index:6" muted playsinline></video>
+      <video id="v-dna" class="clip shot" src="assets/footage/07-dna.mp4" data-start="13.043" data-duration="0.87" data-track-index="0" style="z-index:7" muted playsinline></video>
+      <video id="v-pipes" class="clip shot" src="assets/footage/08-pipes.mp4" data-start="13.913" data-duration="0.87" data-track-index="0" style="z-index:8" muted playsinline></video>
+      <video id="v-biosensor" class="clip shot" src="assets/footage/09-biosensor.mp4" data-start="14.783" data-duration="0.869" data-track-index="0" style="z-index:9" muted playsinline></video>
+      <video id="v-drill" class="clip shot" src="assets/footage/10-drill.mp4" data-start="15.652" data-duration="0.87" data-track-index="0" style="z-index:10" muted playsinline></video>
+      <video id="v-greenhouse" class="clip shot" src="assets/footage/11-greenhouse.mp4" data-start="16.522" data-duration="0.869" data-track-index="0" style="z-index:11" muted playsinline></video>
+      <video id="v-rover" class="clip shot" src="assets/footage/12-rover.mp4" data-start="17.391" data-duration="5.218" data-track-index="0" style="z-index:12" muted playsinline></video>
+      <video id="v-title" class="clip shot" src="assets/footage/13-title.mp4" data-start="22.609" data-duration="2.608" data-track-index="0" style="z-index:13" muted playsinline></video>
+
+      <!-- Titles over the footage, then the end card -->
+      <div id="titles" data-composition-id="titles" data-composition-src="compositions/titles.html" data-start="0" data-duration="25.217" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index:20"></div>
+      <div id="endcard" data-composition-id="endcard" data-composition-src="compositions/endcard.html" data-start="25.217" data-duration="4.783" data-track-index="1" data-track-kind="graphics" data-width="1920" data-height="1080" style="z-index:21"></div>
+
+      <!-- Sound: the game's own rover track and Rocky's own voice -->
+      <audio id="a-music" class="clip" src="assets/audio/music-rover.m4a" data-start="0" data-duration="30" data-track-index="2" data-volume="0.68" data-fade-out="1.5"></audio>
+      <audio id="a-rocky-commander" class="clip" src="assets/audio/rocky-commander.mp3" data-start="3.6" data-duration="3.92" data-track-index="3" data-volume="1"></audio>
+      <audio id="a-rocky-ready" class="clip" src="assets/audio/rocky-ready.mp3" data-start="23.0" data-duration="4.32" data-track-index="3" data-volume="1"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      window.__timelines["main"] = gsap.timeline({ paused: true });
+    </script>
+  </body>
+</html>

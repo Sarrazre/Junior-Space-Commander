@@ -1,5 +1,5 @@
 // Junior Space Commander sound engine. Every note of music and every effect is synthesized live
-// with the Web Audio API, so there are no audio files to load or license.
+// with the Web Audio API. Authored narration uses separate prepared recordings.
 //
 //   music.play('base')       cross-fades to a looping track (title, base, storm, rover, game)
 //   sfx('ok')                plays a one-shot effect (see SFX below)
@@ -7,12 +7,14 @@
 //   engine / wind            continuous rover-motor and Mars-wind loops
 //   settings + setVolume()   Music and Effects volume, mute; saved in localStorage
 
+import { voicePreferences } from './voice-core.js';
 const KEY = 'jsc-audio';
 const saved = (() => { try { return JSON.parse(localStorage.getItem(KEY)) || {}; } catch { return {}; } })();
-export const settings = { music: saved.music ?? 0.6, sfx: saved.sfx ?? 0.8, muted: !!saved.muted };
+const volume = (value, fallback) => typeof value === 'number' && Number.isFinite(value) ? Math.max(0, Math.min(1, value)) : fallback;
+export const settings = { music: volume(saved.music, 0.6), sfx: volume(saved.sfx, 0.8), muted: saved.muted === true, rocky: saved.rocky !== false, quietAlerts: saved.quietAlerts === true, ...voicePreferences(saved) };
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(settings)); } catch { /* private mode */ } };
 
-let ctx = null, unlocked = false, master, musicBus, musicTone, sfxBus, verb, noiseBuf, duck = 1;
+let ctx = null, unlocked = false, master, musicBus, musicTone, sfxBus, verb, noiseBuf, duck = 1, voiceBus, voicePlaying = false;
 const mtof = (m) => 440 * 2 ** ((m - 69) / 12);
 const rnd = (a, b) => a + Math.random() * (b - a);
 const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
@@ -35,7 +37,7 @@ function init() {
   if (new URLSearchParams(location.search).has('debug')) {      // ?debug: level meter for testing
     const an = ctx.createAnalyser(); an.fftSize = 4096; comp.connect(an);
     const buf = new Float32Array(an.fftSize);
-    window.__audio = { ctx, music, sfx, rockyTalk, engine, wind, settings,
+    window.__audio = { ctx, music, sfx, rockyTalk, engine, wind, ambience, settings,
       level() { an.getFloatTimeDomainData(buf); let p = 0, s = 0; for (const v of buf) { p = Math.max(p, Math.abs(v)); s += v * v; } return { peak: +p.toFixed(3), rms: +Math.sqrt(s / buf.length).toFixed(4) }; } };
   }
   verb = ctx.createConvolver(); verb.buffer = impulse(2.4);
@@ -44,6 +46,7 @@ function init() {
   musicBus.connect(musicTone).connect(master);
   const mSend = ctx.createGain(); mSend.gain.value = 0.28; musicTone.connect(mSend).connect(verb);
   sfxBus = ctx.createGain(); sfxBus.connect(master);
+  voiceBus = ctx.createGain(); voiceBus.connect(master);
   const sSend = ctx.createGain(); sSend.gain.value = 0.18; sfxBus.connect(sSend).connect(verb);
   const n = ctx.sampleRate * 2; noiseBuf = ctx.createBuffer(1, n, ctx.sampleRate);
   const d = noiseBuf.getChannelData(0); for (let i = 0; i < n; i++) d[i] = Math.random() * 2 - 1;
@@ -56,15 +59,17 @@ const musicLevel = () => (settings.muted ? 0 : settings.music * 0.85);
 function apply(now = false) {
   if (!ctx) return;
   const t = ctx.currentTime, k = now ? 0.001 : 0.08;
-  musicBus.gain.cancelScheduledValues(t); musicBus.gain.setTargetAtTime(musicLevel() * duck, t, k);
+  musicBus.gain.cancelScheduledValues(t); musicBus.gain.setTargetAtTime(musicLevel() * Math.min(duck, voicePlaying ? 0.25 : 1), t, k);
   sfxBus.gain.cancelScheduledValues(t); sfxBus.gain.setTargetAtTime(settings.muted ? 0 : settings.sfx, t, k);
+  voiceBus.gain.setTargetAtTime(settings.muted ? 0 : settings.voice, t, k);
 }
 
 /** Browsers only allow sound after a tap or key press, so the engine starts on the first one. */
 function unlock() {
   if (!init()) return;
-  if (ctx.state === 'suspended' && !document.hidden) ctx.resume();
-  if (!unlocked) { unlocked = true; if (want && !cur) cur = startTrack(want); }
+  if (ctx.state === 'suspended' && !document.hidden) ctx.resume().then(() => window.dispatchEvent(new Event('jsc-audio-ready'))).catch(() => {});
+  if (!unlocked) { unlocked = true; if (want && !cur) cur = startTrack(want); ambience.sync(); }
+  if (ctx.state === 'running') window.dispatchEvent(new Event('jsc-audio-ready'));
 }
 for (const ev of ['pointerdown', 'keydown', 'touchstart']) window.addEventListener(ev, unlock, { capture: true, passive: true });
 document.addEventListener('visibilitychange', () => {
@@ -243,8 +248,8 @@ export const music = {
   duck(sec = 2, level = 0.3) {
     if (!ctx) return;
     const t = ctx.currentTime, base = musicLevel();
-    duck = level; musicBus.gain.cancelScheduledValues(t); musicBus.gain.setTargetAtTime(base * level, t, 0.05);
-    clearTimeout(music._dt); music._dt = setTimeout(() => { duck = 1; musicBus.gain.setTargetAtTime(musicLevel(), ctx.currentTime, 0.4); }, sec * 1000);
+    duck = level; apply();
+    clearTimeout(music._dt); music._dt = setTimeout(() => { duck = 1; apply(); }, sec * 1000);
   },
 };
 
@@ -409,7 +414,8 @@ function babble(o, t, n, end) {
 let talkUntil = 0;
 /** Rocky "speaks" a line. Longer lines get a longer babble (capped so it never drags). */
 export function rockyTalk(text = '') {
-  if (settings.muted || !init() || !unlocked) return;
+  if (voicePlaying || settings.narration !== 'off') return;
+  if (settings.muted || !settings.rocky || !init() || !unlocked) return;
   const t = Math.max(ctx.currentTime + 0.02, talkUntil);
   if (t > ctx.currentTime + 0.5) return;                       // still talking: don't pile up
   const letters = text.replace(/[^\p{L}\p{N}]/gu, '').length;
@@ -418,9 +424,19 @@ export function rockyTalk(text = '') {
 }
 
 /** Play a one-shot effect by name. */
+const effectTimes = new Map();
 export function sfx(name, arg) {
+  if (['syll', 'syllEnd'].includes(name) && settings.narration !== 'off') return;
   if (settings.muted || !init() || !unlocked) return;
-  try { (SFX[name] || SFX.tap)(sfxBus, ctx.currentTime + 0.01, arg); } catch { /* sound is optional */ }
+  if (!settings.rocky && ['syll', 'syllEnd'].includes(name)) return;
+  const warning = ['alert', 'storm', 'dust'].includes(name), cooldown = warning ? 1800 : name === 'near' ? 900 : 0;
+  const now = performance.now();
+  if (cooldown && now - (effectTimes.get(name) ?? -Infinity) < cooldown) return;
+  effectTimes.set(name, now);
+  try {
+    const out = warning && settings.quietAlerts ? gain(0.35, sfxBus) : sfxBus;
+    (SFX[name] || SFX.tap)(out, ctx.currentTime + 0.01, arg);
+  } catch { /* sound is optional */ }
 }
 /** One short pluck at a given pitch (the memory and puzzle games use this). */
 export function tone(freq, dur = 0.15) {
@@ -432,6 +448,38 @@ export function tone(freq, dur = 0.15) {
 }
 
 // ---------- Continuous loops ----------
+// One quiet, reusable voice for the occupied room. Changing rooms retunes/fades this
+// graph rather than starting another loop. sfxBus supplies the volume/mute envelope;
+// the shared context's visibility handler suspends it with the rest of the audio.
+const ROOM_TONES = {
+  generator: [74, 240, 0.018], greenhouse: [148, 390, 0.009], medbay: [220, 460, 0.008],
+  lab: [185, 430, 0.009], air: [98, 280, 0.012], command: [110, 330, 0.008],
+  kitchen: [165, 360, 0.006], crew: [130, 240, 0.005], airlock: [82, 220, 0.007],
+};
+let roomVoice = null, wantedRoom = null;
+export const ambience = {
+  setRoom(id) {
+    const next = Object.hasOwn(ROOM_TONES, id) ? id : null;
+    if (wantedRoom === next) return;
+    wantedRoom = next; this.sync();
+  },
+  sync() {
+    if (!ctx || !unlocked || (!roomVoice && !wantedRoom)) return;
+    if (!roomVoice) {
+      const out = gain(0, sfxBus), filter = filt('lowpass', 280, 0.4, out);
+      const oscillator = ctx.createOscillator(); oscillator.type = 'triangle';
+      oscillator.frequency.value = 110; oscillator.connect(filter); oscillator.start();
+      roomVoice = { out, filter, oscillator };
+    }
+    const [frequency, cutoff, level] = ROOM_TONES[wantedRoom] || [110, 280, 0];
+    const t = ctx.currentTime;
+    roomVoice.oscillator.frequency.setTargetAtTime(frequency, t, 0.35);
+    roomVoice.filter.frequency.setTargetAtTime(cutoff, t, 0.35);
+    roomVoice.out.gain.setTargetAtTime(level, t, 0.45);
+  },
+  stop() { wantedRoom = null; this.sync(); },
+};
+
 /** Rover electric motor: pitch and brightness follow speed. */
 export const engine = {
   n: null,
@@ -480,7 +528,35 @@ export const wind = {
 };
 
 // ---------- Settings ----------
-export function setVolume(key, v) { settings[key] = Math.max(0, Math.min(1, v)); save(); apply(); }
-export function setMuted(m) { settings.muted = !!m; save(); apply(); if (m) { engine.set(-1); wind.pause(true); } else wind.pause(false); }
+export function setVolume(key, v) { if (!['music', 'sfx', 'voice'].includes(key)) return; settings[key] = volume(v, settings[key]); save(); apply(); window.dispatchEvent(new Event('jsc-audio-settings')); }
+export function setVoicePreference(key, value) {
+  if (key === 'narration' && ['guided', 'request', 'off'].includes(value)) settings.narration = value;
+  else return;
+  save(); window.dispatchEvent(new Event('jsc-audio-settings'));
+}
+export const speechAudio = {
+  ready: () => unlocked && ctx?.state === 'running' && !settings.muted,
+  async waitUntilReady() {
+    if (this.ready()) return true;
+    if (!unlocked || settings.muted) return false;
+    try { await ctx.resume(); } catch { return false; }
+    return this.ready();
+  },
+  decode: async bytes => { if (!init()) throw new Error('Audio unavailable'); return ctx.decodeAudioData(bytes.slice(0)); },
+  play(buffer) {
+    if (!this.ready()) throw new Error('Tap to enable audio');
+    const source = ctx.createBufferSource(); source.buffer = buffer; source.connect(voiceBus);
+    voicePlaying = true; apply();
+    let done;
+    const ended = new Promise(resolve => { done = resolve; });
+    let finished = false;
+    const finish = () => { if (finished) return; finished = true; voicePlaying = false; source.disconnect(); apply(); done(); };
+    source.onended = finish; source.start();
+    return { ended, stop() { try { source.stop(); } catch {} finish(); } };
+  },
+};
+export function setAudioPreference(key, enabled) { if (!['rocky', 'quietAlerts'].includes(key)) return; settings[key] = !!enabled; save(); }
+export function setMuted(m) { settings.muted = !!m; save(); apply(); window.dispatchEvent(new Event('jsc-audio-settings')); }
 /** Old API: `sound.on` is the opposite of mute. */
 export const sound = { get on() { return !settings.muted; }, set on(v) { setMuted(!v); } };
+export const audioUnlocked = () => unlocked && ctx?.state === 'running';

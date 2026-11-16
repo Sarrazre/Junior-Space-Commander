@@ -1,0 +1,248 @@
+{
+  "backup_directory": "/private/tmp/jsc-si-originals",
+  "results": [
+    {
+      "path": "assets/visual/base-night.jpg",
+      "status": "labelled",
+      "watermark_version": "plain-v2",
+      "size": [
+        1670,
+        941
+      ],
+      "mode": "RGB",
+      "watermark_rectangle": [
+        1571,
+        907,
+        1659,
+        930
+      ],
+      "before_bytes": 717652,
+      "after_bytes": 803033,
+      "original_sha256": "65c301af062a8c79f7e488a224a00e7c5919154e694c0ad39e057a19922b693b",
+      "sha256": "0c5981c0fa10ed316e92c15e55c0fd9ab4e8d02ef04bba6e0b76cd9be13bf2f2"
+    },
+    {
+      "path": "assets/visual/base-wilted.jpg",
+      "status": "labelled",
+      "watermark_version": "plain-v2",
+      "size": [
+        1671,
+        941
+      ],
+      "mode": "RGB",
+      "watermark_rectangle": [
+        1572,
+        907,
+        1660,
+        930
+      ],
+      "before_bytes": 719710,
+      "after_bytes": 808381,
+      "original_sha256": "da2f0821ac2867035ba2d24fb8441aff64c9c1d3bcdf2d30194eb66b12993537",
+      "sha256": "5a15470fd0fedebad70a730329d2c127a7b10f2ed66f2101fe188aa4b6d435ab"
+    },
+    {
+      "path": "assets/visual/base-night-wilted.jpg",
+      "status": "labelled",
+      "watermark_version": "plain-v2",
+      "size": [
+        1671,
+        941
+      ],
+      "mode": "RGB",
+      "watermark_rectangle": [
+        1572,
+        907,
+        1660,
+        930
+      ],
+      "before_bytes": 664311,
+      "after_bytes": 751700,
+      "original_sha256": "107b60c61195317d1730e55091045d39e3beb4c99d414820dc262a9e14503421",
+      "sha256": "3706bb873de044a97168c198ef4b781c5276e40b4b1e32c94440b3233edb4851"
+    },
+    {
+      "path": "assets/visual/tomato-healthy.png",
+      "status": "labelled",
+      "watermark_version": "plain-v2",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "watermark_rectangle": [
+        423,
+        485,
+        506,
+        506
+      ],
+      "before_bytes": 326253,
+      "after_bytes": 287849,
+      "original_sha256": "b99d6ab7ec0d3d3039a2a9a789e0f5089d9578826216d65282f55dd5c125c2d9",
+      "sha256": "384604fd6f1573e063240afbd750c2fc32fb0966b29a0bf8438050337abe00e7"
+    },
+    {
+      "path": "assets/visual/tomato-wilted.png",
+      "status": "labelled",
+      "watermark_version": "plain-v2",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "watermark_rectangle": [
+        423,
+        485,
+        506,
+        506
+      ],
+      "before_bytes": 294868,
+      "after_bytes": 263489,
+      "original_sha256": "d2e4be5839428930740d3d8920aa7bcd43367f518848480e5c68f49c000fbbb2",
+      "sha256": "07eeed04af85154c2be97fb6c556d88d4e48cff45186011d0c0b8a879105ac33"
+    },
+    {
+      "path": "assets/visual/tomato-spoiled.png",
+      "status": "labelled",
+      "watermark_version": "plain-v2",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "watermark_rectangle": [
+        423,
+        485,
+        506,
+        506
+      ],
+      "before_bytes": 313657,
+      "after_bytes": 285554,
+      "original_sha256": "63db139cb84eb163112a0bea78f86313911e6949e71a334cdcbe5c40919d61aa",
+      "sha256": "55137ad42848374f444a31438ad95d3658ebc67fa6eea04785987423420bd29a"
+    },
+    {
+      "path": "assets/greenhouse/lettuce-pod.png",
+      "status": "labelled",
+      "watermark_version": "plain-v2",
+      "size": [
+        1312,
+        1199
+      ],
+      "mode": "RGBA",
+      "watermark_rectangle": [
+        1187,
+        1160,
+        1298,
+        1185
+      ],
+      "before_bytes": 1239111,
+      "after_bytes": 1140613,
+      "original_sha256": "b8685a372c82efa86b87312bdfe4f265b8b9d994e19aa5ac35446992c8fccf2e",
+      "sha256": "19a7299ebe08d0d61bce28a52c04dc30d07e7ca46c6e90429d9e424a0c876aa0"
+    },
+    {
+      "path": "assets/greenhouse/lettuce-wilted.png",
+      "status": "labelled",
+      "watermark_version": "plain-v2",
+      "size": [
+        512,
+        468
+      ],
+      "mode": "RGBA",
+      "watermark_rectangle": [
+        423,
+        441,
+        506,
+        462
+      ],
+      "before_bytes": 196197,
+      "after_bytes": 170720,
+      "original_sha256": "78a44c828273879a3ea6c81d55e45d922ba950b123d47f519f911b1db1eca66b",
+      "sha256": "3f0f8a34ae9edd4510d61c4720c40818d6acb2ad829348d2036e68a3f9230a13"
+    },
+    {
+      "path": "assets/base.webp",
+      "status": "labelled",
+      "watermark_version": "plain-v2",
+      "size": [
+        1671,
+        941
+      ],
+      "mode": "RGB",
+      "watermark_rectangle": [
+        1572,
+        907,
+        1660,
+        930
+      ],
+      "before_bytes": 362950,
+      "after_bytes": 404152,
+      "original_sha256": "5450f53a9f45276b1747353a6a97d0e59b38c6346723a8a5d8c2ab8ebc4e3b1b",
+      "sha256": "508d0f5ef4a8db1cb0aa573e92ca052b413fb40c4ad94b3da7066790c08d81c4"
+    },
+    {
+      "path": "assets/landing-bg.webp",
+      "status": "labelled",
+      "watermark_version": "plain-v2",
+      "size": [
+        1672,
+        941
+      ],
+      "mode": "RGB",
+      "watermark_rectangle": [
+        1573,
+        907,
+        1661,
+        930
+      ],
+      "before_bytes": 273902,
+      "after_bytes": 301540,
+      "original_sha256": "d2f9438e8c5610f4c1533f202da03eb813b807e3f270694a045ea6e7f745c0d8",
+      "sha256": "3577a427bc9ed164702b28b6cbd9fefaa99e7a62444519403faa820152bd6ead"
+    },
+    {
+      "path": "assets/mission-logo.webp",
+      "status": "labelled",
+      "watermark_version": "plain-v2",
+      "size": [
+        1536,
+        1024
+      ],
+      "mode": "RGBA",
+      "watermark_rectangle": [
+        1427,
+        989,
+        1524,
+        1012
+      ],
+      "before_bytes": 68872,
+      "after_bytes": 77576,
+      "original_sha256": "e40e9d09b18df6ca4b89e135dd5453c8a87e488421643620cf77528f061f2c91",
+      "sha256": "743830dfc3af2387c1ff1b4dfbb137d3c6c9e1652160eeb69887e9a5a9fed115"
+    },
+    {
+      "path": "assets/intro.mp4",
+      "status": "labelled",
+      "watermark_version": "plain-v2",
+      "size": [
+        1916,
+        1080
+      ],
+      "duration": "5.041667",
+      "frames": "121",
+      "watermark_rectangle": [
+        1804,
+        1043,
+        1903,
+        1067
+      ],
+      "before_bytes": 9482112,
+      "after_bytes": 3737192,
+      "original_sha256": "2acd5acfd0675f585a463632e8f9dcb8c2177c8077a1d67ff5f28e09e76cc278",
+      "sha256": "937a2f267f9d6eb930730321d288a3573dd6cd9a3e1f49cb27ba1e3612527ba2",
+      "audio_packet_hash": "SHA256=531f27e9734d91ee82ce3f0fb95a405fa0ac12dfaf49dca2ccfb0b3070052fc8",
+      "original_aigc_metadata_retained": true
+    }
+  ]
+}

@@ -12,7 +12,7 @@ export const ROOMS = {
   engineering: [262, 556, 592, 612],
   crew: [958, 556, 1284, 612],
   air: [296, 800, 600, 852],
-  storage: [652, 836, 900, 878],
+  storage: [652, 830, 900, 878],
   kitchen: [948, 822, 1270, 866],
   greenhouse: [1376, 540, 1640, 596],
 };
@@ -25,7 +25,7 @@ export const LINKS = [
   { from: 'engineering', to: 'hub', a: [580, 572], b: [655, 540], w: 28 },
   { from: 'crew', to: 'hub', a: [970, 572], b: [905, 540], w: 28 },
   { from: 'air', to: 'hub', a: [585, 812], b: [665, 625], w: 26 },
-  { from: 'storage', to: 'hub', a: [775, 850], b: [775, 630], w: 30 },
+  { from: 'storage', to: 'hub', a: [775, 842], b: [775, 630], w: 36 },
   { from: 'kitchen', to: 'hub', a: [965, 834], b: [895, 625], w: 26 },
   { from: 'crew', to: 'greenhouse', a: [1272, 578], b: [1388, 574], w: 24 },
 ];
@@ -37,7 +37,7 @@ export const STATIONS = {
   medbay: { x: 1150, y: 342, icon: '🩺', label: 'Medical station' },
   generator: { x: 380, y: 584, icon: '⚡', label: 'Generator' },
   greenhouse: { x: 1500, y: 572, icon: '🌱', label: 'Greenhouse' },
-  airlock: { x: 775, y: 862, icon: '🚪', label: 'Airlock' },
+  airlock: { x: 775, y: 842, icon: '🚪', label: 'Airlock · Rover exit', labelY: 710, tapRadius: 64 },
   kitchen: { x: 1090, y: 846, icon: '🍽️', label: 'Kitchen', info: true },
   air: { x: 450, y: 828, icon: '💧', label: 'Air & Water', info: true },
   crew: { x: 1110, y: 590, icon: '🛏️', label: 'Crew Quarters', info: true },

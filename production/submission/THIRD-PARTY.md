@@ -1,0 +1,12 @@
+# Release credits and third-party material
+
+- Upstream game: https://github.com/Sarrazre/Junior-Space-Commander/ . Original code, base art, branding assets and intro video predate this release. The owner confirmed team ownership and reuse rights on 15 November 2026. The owner authorized open-source release; team-authored code and documentation use the MIT license in LICENSE. Agency and third-party materials retain their own terms.
+- Phaser (MIT): https://github.com/phaserjs/phaser ; complete installed license in licenses/Phaser.txt.
+- Three.js (MIT): https://github.com/mrdoob/three.js ; complete installed license in licenses/Three.txt.
+- Vite (build tool, MIT): https://github.com/vitejs/vite ; installed license and bundled third-party notices in licenses/Vite.txt.
+- Prepared narration: Tiny Voca and Dizione were used as offline asset-authoring tools. The game ships pre-recorded MP3s, with provenance and retained license notices in /assets/voice/NOTICE.txt. It ships no voice model or synthesis runtime.
+- Google Fonts Baloo 2 and VT323 are requested from Google's font service; system fallbacks are available. Source and OFL licenses: https://github.com/google/fonts/tree/main/ofl/baloo2 and https://github.com/google/fonts/tree/main/ofl/vt323 .
+- NASA and CSA data/educational references are itemized in SUBMISSION.md and the in-game Data Sources screen. NASA branding does not indicate endorsement.
+- SI-generated / SI-assisted code and fictional game content: OpenAI Codex and Anthropic Claude assisted coding, design iteration, tests and documentation. OpenAI image generation produced selected fictional plant and base lighting/damage variants; Kling generated the intro video (identified by AIGC metadata). The original station/menu backgrounds and mission logo are also team-confirmed AI-generated art; their original tools were not recorded. Images and intro include visible SI-generated watermarks. Tiny Voca / Dizione generated the narration, acknowledged in voice credits and MP3 metadata. Machine-readable provenance is in /SI-USE.json; prompts are recorded in public/assets/visual/README.md, public/assets/greenhouse/README.md and production/polish/FIRST-FLIGHT-AND-ATMOSPHERE.md. NASA/CSA source observations remain separately attributed.
+
+No human voice cloning, model training, or open-ended LLM gameplay is included. Preserve all license notices and check additional source-specific permissions when filing the official project submission. This document records provenance; it does not grant rights to upstream material.

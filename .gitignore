@@ -2,3 +2,13 @@ node_modules/
 dist/
 .claude/
 *.log
+.env.local
+.env.*.local
+__pycache__/
+*.pyc
+
+# OS and tool caches
+.DS_Store
+.hyperframes/
+.thumbnails/
+.transcode-cache/

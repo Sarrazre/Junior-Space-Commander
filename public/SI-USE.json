@@ -1,0 +1,104 @@
+{
+  "schemaVersion": 1,
+  "project": "Junior Space Commander",
+  "updated": "2026-11-15",
+  "siMeaning": "Super Intelligence (SI): AI tools including code assistants, generative image/video tools and synthetic speech.",
+  "code": {
+    "siAssisted": true,
+    "tools": [
+      "OpenAI Codex",
+      "Anthropic Claude"
+    ],
+    "uses": [
+      "implementation",
+      "design iteration",
+      "debugging",
+      "testing",
+      "documentation",
+      "release preparation"
+    ],
+    "description": "The project includes SI-generated and SI-assisted code reviewed and iterated during development. Gameplay does not call an open-ended LLM."
+  },
+  "data": {
+    "fictionalGameContent": {
+      "siAssisted": true,
+      "tools": [
+        "OpenAI Codex",
+        "Anthropic Claude"
+      ],
+      "description": "Mission text, resource costs, rewards, thresholds and teaching scenarios include SI assistance. They are invented game abstractions, not NASA measurements."
+    },
+    "externalScientificSources": {
+      "siGenerated": false,
+      "description": "NASA/CSA science references and retrieved NASA API observations retain their original attribution. SI assistance with explanations does not make those source observations SI-generated.",
+      "references": "production/submission/SUBMISSION.md and the in-game Sources & SI use screen"
+    }
+  },
+  "media": [
+    {
+      "type": "images",
+      "siGenerated": true,
+      "tool": "Original generation tools not recorded",
+      "paths": [
+        "assets/base.webp",
+        "assets/landing-bg.webp",
+        "assets/mission-logo.webp"
+      ],
+      "description": "Original station background, main-menu background and mission logo. Team confirmed all three were AI-generated on 2026-11-15. Do not infer a specific model or provider.",
+      "disclosure": "Visible SI-generated watermark in each image and readable scene/menu labels."
+    },
+    {
+      "type": "images",
+      "siGenerated": true,
+      "tool": "OpenAI image generation",
+      "paths": [
+        "assets/visual/base-night.jpg",
+        "assets/visual/base-wilted.jpg",
+        "assets/visual/base-night-wilted.jpg",
+        "assets/visual/tomato-healthy.png",
+        "assets/visual/tomato-wilted.png",
+        "assets/visual/tomato-spoiled.png",
+        "assets/greenhouse/lettuce-pod.png",
+        "assets/greenhouse/lettuce-wilted.png"
+      ],
+      "description": "Fictional game plants and base lighting/damage edits; not NASA imagery or measured crop conditions.",
+      "disclosure": "Visible SI-generated watermark embedded in each distributed image; readable in-game scene/experiment labels cover cropped or scaled displays.",
+      "provenance": [
+        "assets/visual/README.md",
+        "assets/greenhouse/README.md",
+        "production/polish/FIRST-FLIGHT-AND-ATMOSPHERE.md"
+      ]
+    },
+    {
+      "type": "video",
+      "siGenerated": true,
+      "tool": "Kling",
+      "paths": [
+        "assets/intro.mp4"
+      ],
+      "description": "Opening landing video. The original file identifies Kling in its AIGC generation metadata.",
+      "disclosure": "SI-generated watermark throughout the file, retained AIGC metadata, and an in-player SI-generated video label that remains readable when mobile cover cropping hides the file label."
+    },
+    {
+      "type": "audio",
+      "siGenerated": true,
+      "tools": [
+        "Tiny Voca",
+        "Dizione"
+      ],
+      "paths": [
+        "assets/voice/clips/*.mp3"
+      ],
+      "description": "SI-generated Rocky (M2) and Mission Control (F2) narration, prepared offline. No human voice cloning.",
+      "disclosure": "Credits text, embedded MP3 ID3 disclosure, and generation metadata in assets/voice/manifest.json.",
+      "provenance": [
+        "assets/voice/NOTICE.txt",
+        "assets/voice/manifest.json"
+      ]
+    }
+  ],
+  "branding": {
+    "description": "Generated content uses fictional Astro Base artwork. The separate inherited Space Apps logo is not included in generated media or altered by the disclosure changes.",
+    "visualReview": "Eight generated variants, the three original images, and a 4 fps contact sheet covering the full 5.04-second intro were checked for apparent NASA logos, flags or mission identifiers. See local review report for evidence and limits; this is not legal certification."
+  }
+}

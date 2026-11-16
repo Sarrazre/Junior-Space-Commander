@@ -10,6 +10,7 @@ export const EXPEDITION_STOPS = ['Weather station spot', 'Panorama point', 'Mete
 export const EXPEDITION_TASKS = [
   // 1) Put the weather station together, using the blueprint as a guide.
   (root) => siteShell(root, 'Build the weather station', (body, api) => {
+    api.coach('expedition', 'weather');
     const PARTS = { base: ['🔺 Tripod base', []], mast: ['📏 Mast', ['base']], panel: ['🔆 Solar panel', ['mast']], sensors: ['🌬️ Wind + temperature sensors', ['mast']], power: ['🔛 Power switch', ['panel', 'sensors']] };
     const LABELS = { base: ['Tripod base', 150, 16], mast: ['Mast', 96, -70], panel: ['Solar panel', 84, 62], sensors: ['Sensors', 26, -62], power: ['Power switch', 60, 52] };
     const built = new Set(), W = 560, H = 230, BX = 122, SX = 430, GROUND = 190, { c } = cv(W, H), msg = h('p', { class: 'msg' }, 'Look at the blueprint. Which part has to go on the ground first?'), pop = {};
@@ -62,13 +63,14 @@ export const EXPEDITION_TASKS = [
       if (missing.length) { api.miss(); wrong = key; wrongT = 0.9; msg.textContent = `Not yet! The ${name.replace(/^\S+ /, '').toLowerCase()} would have nothing to hold it. Check the blueprint: what is underneath it?`; return; }
       built.add(key); e.target.disabled = true; e.target.classList.add('ok'); tone(400 + built.size * 70, 0.12);
       msg.textContent = `✔ ${name.replace(/^\S+ /, '')} in place! What can be added now?`;
-      if (built.size === 5) { msg.textContent = '🌬️ It is measuring the wind!'; setTimeout(() => api.found('The weather station is sending data! The Perseverance rover carries a weather station too. It measures wind, temperature and dust on Mars every day.', '✔ STATION BUILT'), 1800); }
+      if (built.size === 5) { msg.textContent = '🌬️ It is measuring the wind!'; api.later(() => api.found('The weather station is sending data! The Perseverance rover carries a weather station too. It measures wind, temperature and dust on Mars every day.', '✔ STATION BUILT'), 1800); }
     } }, name));
     body.replaceChildren(h('p', {}, 'Build the weather station shown on the BLUEPRINT. The dashed shapes show where each part goes. Choose the parts in an order that works: nothing can float in the air!'), h('div', { class: 'row' }, c), h('div', { class: 'row' }, btns), msg);
   }),
 
   // 2) Pan the camera and photograph three things.
   (root) => siteShell(root, 'Photograph the panorama', (body, api) => {
+    api.coach('expedition', 'panorama');
     const W = 520, H = 220, WIDE = 1500, { c } = cv(W, H), msg = h('p', { class: 'msg' }, 'Drag the picture (or use ◀ ▶) to look around.');
     const targets = [{ name: 'the tall mesa', x: 300, icon: '⛰️' }, { name: 'the dust devil', x: 820, icon: '🌪️' }, { name: 'the big crater', x: 1260, icon: '🕳️' }];
     let cam = 520, drag = null, flash = 0;
@@ -97,12 +99,15 @@ export const EXPEDITION_TASKS = [
     c.addEventListener('pointerdown', (e) => { drag = pointerOn(c, e, W).x; c.setPointerCapture(e.pointerId); });
     c.addEventListener('pointermove', (e) => { if (drag == null) return; const x = pointerOn(c, e, W).x; move(drag - x); drag = x; });
     c.addEventListener('pointerup', () => { drag = null; });
+    c.addEventListener('pointercancel', () => { drag = null; });
+    c.addEventListener('lostpointercapture', () => { drag = null; });
     const snap = () => {
+      if (targets.every((t) => t.done)) return;
       flash = 1; tone(900, 0.06);
       const hit = targets.find((t) => !t.done && Math.abs(t.x - (cam + W / 2)) < 75);
       if (!hit) { api.miss(); msg.textContent = 'Nothing new inside the white corners. Move until a target is in the middle.'; return; }
       hit.done = true; drawList(); msg.textContent = `📸 Got ${hit.name}!`;
-      if (targets.every((t) => t.done)) setTimeout(() => api.found('Three great photos! Mars rovers build big panoramas by taking many small photos and joining them together, like a puzzle.', '✔ PANORAMA TAKEN'), 1000);
+      if (targets.every((t) => t.done)) api.later(() => api.found('Three great photos! Mars rovers build big panoramas by taking many small photos and joining them together, like a puzzle.', '✔ PANORAMA TAKEN'), 1000);
     };
     body.replaceChildren(h('p', {}, 'Mission Control wants 3 photos. Look around and put each target inside the white corners, then take the photo.'), list, h('div', { class: 'row' }, c),
       h('div', { class: 'row' }, h('button', { class: 'px-btn', onclick: () => move(-130) }, '◀'), h('button', { class: 'px-btn ok', onclick: snap }, '📸 TAKE PHOTO'), h('button', { class: 'px-btn', onclick: () => move(130) }, '▶')), msg);
@@ -110,6 +115,7 @@ export const EXPEDITION_TASKS = [
 
   // 3) Find the buried meteorite with a metal detector that gets louder when you are closer.
   (root) => siteShell(root, 'Meteorite hunt', (body, api) => {
+    api.coach('expedition', 'meteorite');
     const COLS = 7, ROWS = 5, C = 62, W = COLS * C + 20, H = ROWS * C + 20, FREE = 6, { c } = cv(W, H);
     const goal = [Math.floor(Math.random() * ROWS), Math.floor(Math.random() * COLS)], dug = new Map(), msg = h('p', { class: 'msg' }, 'Tap a square to scan it. More bars = closer!');
     let taps = 0, found = false, hover = null;
@@ -129,15 +135,33 @@ export const EXPEDITION_TASKS = [
     const cellAt = (e) => { const p = pointerOn(c, e, W), cc = Math.floor((p.x - 10) / C), rr_ = Math.floor((p.y - 10) / C); return cc < 0 || rr_ < 0 || cc >= COLS || rr_ >= ROWS ? null : [rr_, cc]; };
     c.style.cursor = 'crosshair';
     c.addEventListener('pointermove', (e) => { const k = cellAt(e); hover = k && k.join(','); });
-    c.addEventListener('pointerdown', (e) => {
-      const k = cellAt(e); if (!k || found || dug.has(k.join(','))) return;
+    const scan = (k) => {
+      if (!k || found || dug.has(k.join(','))) return;
       const dist = Math.max(Math.abs(k[0] - goal[0]), Math.abs(k[1] - goal[1])), bars = Math.max(1, 5 - dist);
       dug.set(k.join(','), bars); taps++;
-      if (dist === 0) { found = true; tone(1047, 0.3); setTimeout(() => api.found('You found a meteorite: a rock that fell from space! In 2005 the Opportunity rover found the first meteorite ever seen on another planet. It was made of iron.', '✔ METEORITE FOUND'), 1500); msg.textContent = `☄️ Found it in ${taps} scans!`; return; }
+      if (dist === 0) { found = true; tone(1047, 0.3); api.later(() => api.found('You found a meteorite: a rock that fell from space! In 2005 the Opportunity rover found the first meteorite ever seen on another planet. It was made of iron.', '✔ METEORITE FOUND'), 1500); msg.textContent = `☄️ Found it in ${taps} scans!`; return; }
       tone(300 + bars * 120, 0.1);
       if (taps > FREE) api.miss();
       msg.textContent = `${'▮'.repeat(bars)}${'▯'.repeat(5 - bars)}  ${['', 'Very far away.', 'Far.', 'Getting warmer…', 'Close!', 'Right next to it!'][bars]}${taps === FREE ? ' Careful: think before each scan now.' : ''}`;
+    };
+    c.addEventListener('pointerdown', e => scan(cellAt(e)));
+    let selected = [2, 3];
+    c.tabIndex = 0; c.setAttribute('role', 'group');
+    c.setAttribute('aria-label', 'Meteorite search grid, 5 rows and 7 columns. Arrow keys move; Enter or Space scans.');
+    msg.setAttribute('role', 'status');
+    const focusCell = () => {
+      hover = selected.join(',');
+      const previous = dug.get(hover);
+      msg.textContent = `Row ${selected[0] + 1}, column ${selected[1] + 1}. ${previous ? `Previous signal: ${previous} of 5 bars.` : 'Not scanned. Press Enter or Space to scan.'}`;
+    };
+    c.addEventListener('focus', focusCell);
+    c.addEventListener('keydown', e => {
+      if (!['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Enter',' '].includes(e.key)) return;
+      e.preventDefault(); e.stopPropagation();
+      if (e.key === 'Enter' || e.key === ' ') { scan(selected); return; }
+      selected = [Math.max(0, Math.min(ROWS - 1, selected[0] + (e.key === 'ArrowDown') - (e.key === 'ArrowUp'))), Math.max(0, Math.min(COLS - 1, selected[1] + (e.key === 'ArrowRight') - (e.key === 'ArrowLeft')))];
+      focusCell();
     });
-    body.replaceChildren(h('p', {}, `A meteorite is buried here. Scan squares with the metal detector: the signal has MORE BARS when you are closer. Try to find it in ${FREE} scans or fewer.`), h('div', { class: 'row' }, c), msg);
+    body.replaceChildren(h('p', {}, `A meteorite is buried here. Scan squares with the metal detector: the signal has MORE BARS when you are closer. Try to find it in ${FREE} scans or fewer. Tap a square, or focus the grid and use arrow keys then Enter.`), h('div', { class: 'row' }, c), msg);
   }),
 ];

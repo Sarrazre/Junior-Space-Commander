@@ -1,0 +1,251 @@
+{
+  "assumptions": "Crisis before tasks; task definitions in listed order, dependencies first; sickness fixed to Sol 3 when included. Does not model traversal, timing, or player comprehension. Numeric playtest targets are not yet established.",
+  "reports": [
+    {
+      "difficulty": "explorer",
+      "scenario": "All tasks, perfect puzzles",
+      "paths": 96,
+      "min": 89,
+      "max": 96,
+      "best": {
+        "choices": [
+          "dimGreen",
+          "wait",
+          "heatG",
+          "shieldOn",
+          "long"
+        ],
+        "score": 96,
+        "science": 50,
+        "resources": {
+          "power": 75,
+          "shield": 65,
+          "food": 77,
+          "health": 95
+        }
+      },
+      "worst": {
+        "choices": [
+          "dimLab",
+          "wait",
+          "heatN",
+          "shieldOff",
+          "short"
+        ],
+        "score": 89,
+        "science": 45,
+        "resources": {
+          "power": 90,
+          "shield": 35,
+          "food": 72,
+          "health": 80
+        }
+      }
+    },
+    {
+      "difficulty": "explorer",
+      "scenario": "Essential tasks only",
+      "paths": 96,
+      "min": 61,
+      "max": 68,
+      "best": {
+        "choices": [
+          "dimGreen",
+          "clean",
+          "heatG",
+          "shieldOn",
+          "long"
+        ],
+        "score": 68,
+        "science": 50,
+        "resources": {
+          "power": 20,
+          "shield": 60,
+          "food": 57,
+          "health": 65
+        }
+      },
+      "worst": {
+        "choices": [
+          "keep",
+          "wait",
+          "heatL",
+          "shieldOn",
+          "long"
+        ],
+        "score": 61,
+        "science": 44,
+        "resources": {
+          "power": 0,
+          "shield": 60,
+          "food": 52,
+          "health": 75
+        }
+      }
+    },
+    {
+      "difficulty": "explorer",
+      "scenario": "All tasks, learning through retries, scientist sick",
+      "paths": 96,
+      "min": 87,
+      "max": 94,
+      "best": {
+        "choices": [
+          "dimGreen",
+          "wait",
+          "heatG",
+          "shieldOn",
+          "long"
+        ],
+        "score": 94,
+        "science": 48,
+        "resources": {
+          "power": 75,
+          "shield": 65,
+          "food": 77,
+          "health": 95
+        }
+      },
+      "worst": {
+        "choices": [
+          "dimLab",
+          "wait",
+          "heatN",
+          "shieldOff",
+          "short"
+        ],
+        "score": 87,
+        "science": 43,
+        "resources": {
+          "power": 90,
+          "shield": 35,
+          "food": 72,
+          "health": 85
+        }
+      }
+    },
+    {
+      "difficulty": "commander",
+      "scenario": "All tasks, perfect puzzles",
+      "paths": 96,
+      "min": 83,
+      "max": 94,
+      "best": {
+        "choices": [
+          "dimGreen",
+          "clean",
+          "heatG",
+          "shieldOn",
+          "long"
+        ],
+        "score": 94,
+        "science": 50,
+        "resources": {
+          "power": 70,
+          "shield": 55,
+          "food": 60,
+          "health": 85
+        }
+      },
+      "worst": {
+        "choices": [
+          "keep",
+          "wait",
+          "heatB",
+          "shieldOn",
+          "long"
+        ],
+        "score": 83,
+        "science": 41,
+        "resources": {
+          "power": 25,
+          "shield": 55,
+          "food": 70,
+          "health": 95
+        }
+      }
+    },
+    {
+      "difficulty": "commander",
+      "scenario": "Essential tasks only",
+      "paths": 96,
+      "min": 48,
+      "max": 52,
+      "best": {
+        "choices": [
+          "dimLab",
+          "wait",
+          "heatG",
+          "shieldOn",
+          "short"
+        ],
+        "score": 52,
+        "science": 35,
+        "resources": {
+          "power": 15,
+          "shield": 50,
+          "food": 50,
+          "health": 60
+        }
+      },
+      "worst": {
+        "choices": [
+          "keep",
+          "wait",
+          "heatN",
+          "shieldOff",
+          "short"
+        ],
+        "score": 48,
+        "science": 35,
+        "resources": {
+          "power": 15,
+          "shield": 20,
+          "food": 35,
+          "health": 40
+        }
+      }
+    },
+    {
+      "difficulty": "commander",
+      "scenario": "All tasks, learning through retries, scientist sick",
+      "paths": 96,
+      "min": 59,
+      "max": 63,
+      "best": {
+        "choices": [
+          "dimLab",
+          "clean",
+          "heatG",
+          "shieldOn",
+          "short"
+        ],
+        "score": 63,
+        "science": 18,
+        "resources": {
+          "power": 75,
+          "shield": 55,
+          "food": 70,
+          "health": 95
+        }
+      },
+      "worst": {
+        "choices": [
+          "keep",
+          "wait",
+          "heatN",
+          "shieldOff",
+          "long"
+        ],
+        "score": 59,
+        "science": 18,
+        "resources": {
+          "power": 70,
+          "shield": 25,
+          "food": 55,
+          "health": 70
+        }
+      }
+    }
+  ]
+}

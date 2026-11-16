@@ -5,7 +5,7 @@ import { cv, loop, rnd, rr, ink, lg, rg, label, star, TAU } from '../art.js';
 
 const ROCKS = {
   basalt: { name: 'Basalt (lava rock)', base: ['#6a6a78', '#3a3a46'], pull: 0.45, cam: 'Dark grey with tiny bubble holes', mag: 'A little magnetic', mic: 'Tiny crystals: it cooled from hot lava', guide: ['dark grey, bubble holes', 'a little', 'tiny crystals'], story: 'cooled lava', why: 'Basalt! Much of Mars is covered with this volcanic rock.' },
-  hematite: { name: 'Hematite "blueberries"', base: ['#a8705a', '#70432f'], pull: 1, cam: 'Small round grey balls, like blueberries', mag: 'Full of iron', mic: 'Round shapes that grow in water', guide: ['little round grey balls', 'strong (iron!)', 'round shapes'], story: 'grew in water', why: 'Hematite "blueberries"! The Opportunity rover found them in 2004, a clue that water was once there.' },
+  hematite: { name: 'Hematite "blueberries"', base: ['#a8705a', '#70432f'], pull: 0, cam: 'Small round grey balls, like blueberries', mag: 'No noticeable pull — iron minerals are not all strongly magnetic', mic: 'Round concretions: minerals deposited by ancient groundwater', guide: ['little round grey balls', 'none', 'round shapes'], story: 'grew in groundwater', why: 'Hematite "blueberries"! The Opportunity rover found them in 2004, a clue that water was once there. Their iron content does not mean a hand magnet will attract them.' },
   clay: { name: 'Clay mudstone', base: ['#cfa67a', '#96704a'], pull: 0, cam: 'Thin flat layers, light brown', mag: 'Not magnetic', mic: 'Super-fine mud that settled in a lake', guide: ['flat thin layers', 'none', 'very fine mud'], story: 'bottom of a lake', why: 'Clay mudstone! The Curiosity rover found it in Gale crater, where an ancient lake used to be.' },
   sulfate: { name: 'Sulfate vein', base: ['#b47a5e', '#7a4a36'], pull: 0, cam: 'A bright white stripe through the rock', mag: 'Not magnetic', mic: 'Salt-like crystals left behind by water', guide: ['bright white stripe', 'none', 'salty crystals'], story: 'water in a crack', why: 'A sulfate vein! Water once flowed through a crack and left these minerals behind.' },
 };
@@ -69,6 +69,7 @@ export async function rocks(body, params, api) {
   const kinds = shuffle(Object.keys(ROCKS));
   const samples = kinds.slice(0, 3);
   for (let n = 0; n < samples.length; n++) {
+    api.setCoachStage?.('inspect', n);
     const kind = samples[n], r = ROCKS[kind], view = rockView(kind);
     const head = [h('p', {}, `ROCK SCANNER – sample ${n + 1} of 3. Be a rock detective! Use all three tools to collect 3 clues.`), n === 0 && h('p', { class: 'tip' }, '💡 You do not need to know the rocks already. After the clues, a ROCK GUIDE shows what each rock looks like. Just find the card that matches your 3 clues.')];
     const clues = h('div', {});
@@ -79,6 +80,7 @@ export async function rocks(body, params, api) {
       body.replaceChildren(...head.filter(Boolean), h('div', { class: 'row' }, view.c, h('div', { style: 'flex:1;min-width:240px' }, h('div', { class: 'row' }, tool('camera', '📷', 'Camera', r.cam), tool('magnet', '🧲', 'Magnet', r.mag), tool('microscope', '🔬', 'Microscope', r.mic)), clues)), h('div', { class: 'row' }, go));
     });
     // The Rock Guide: each card lists what the three tools would show for that rock.
+    api.setCoachStage?.('identify', n);
     const card = (k) => { const q = ROCKS[k]; return h('div', { class: 'guide' }, h('b', {}, q.name), h('div', {}, '📷 ' + q.guide[0]), h('div', {}, '🧲 magnet: ' + q.guide[1]), h('div', {}, '🔬 ' + q.guide[2]), h('div', { style: 'color:#9cffb3' }, '➜ ' + q.story)); };
     const differs = (k) => { const q = ROCKS[k]; return q.guide[1] !== r.guide[1] ? `Check the 🧲 magnet clue: this card says "${q.guide[1]}".` : `Check the 📷 camera clue: this card says "${q.guide[0]}".`; };
     await ask(body, api, 'ROCK GUIDE: tap the card where all 3 lines match your clues.', shuffle(Object.keys(ROCKS)).map((k) => ({ node: card(k), label: '', correct: k === kind, why: k === kind ? r.why : differs(k) })),
@@ -131,8 +133,8 @@ export async function gravity(body, params, api) {
       Object.keys(labels).map((k) => ({ label: labels[k], correct: k === r.ans, why: k === r.ans ? 'Good prediction! Watch it grow.' : 'Think again: how strong is gravity here?' })),
       { before: [rule, h('div', { class: 'row' }, view.c)] });
     // The seedling grows as soon as the right prediction is tapped.
-    const watch = setInterval(() => { if (body.querySelector('.px-btn.ok')) { clearInterval(watch); view.grow(BENDS[r.ans]); } }, 100);
-    api.onCleanup(() => clearInterval(watch));
+    const watch = api.every(() => { if (body.querySelector('.px-btn.ok')) { api.cancelTimer(watch); view.grow(BENDS[r.ans]); } }, 100);
+    api.onCleanup(() => api.cancelTimer(watch));
     await done;
   }
   api.finish('On the Space Station, scientists grew tiny plants at different gravity levels with blue light, to learn how plants would grow on the Moon and Mars.',
@@ -158,6 +160,7 @@ function well(color, growth) {
 }
 
 export async function biosensor(body, params, api) {
+  api.setCoachStage?.('match');
   const intro = h('p', { style: 'color:#ffd23f' }, 'YEAST BIOSENSOR. Living yeast turns the BLUE dye PINK as it grows. Radiation hurts the yeast, so more radiation = less growth = stays BLUE.');
   // Step 1: match each well to a dose.
   await new Promise((resolve) => {
@@ -168,15 +171,17 @@ export async function biosensor(body, params, api) {
     const wEls = wells.map(([col, id, grow], i) => h('div', { class: 'card', 'data-id': id, onclick: (e) => { const el = e.currentTarget; if (el.dataset.done) return; sel?.classList.remove('sel'); sel = el; el.classList.add('sel'); } }, well(col, grow), 'Well ' + (i + 1)));
     const dEls = doses.map(([id, name]) => h('button', { class: 'px-btn', onclick: (e) => {
       if (!sel) { msg.textContent = 'Tap a well first.'; return; }
-      if (sel.dataset.id === id) { sel.dataset.done = 1; sel.classList.remove('sel'); sel.classList.add('ok'); sel.append(h('div', {}, name)); e.target.disabled = true; sel = null; api.ok(); msg.textContent = 'Match!'; if (--left === 0) setTimeout(resolve, 700); }
+      if (sel.dataset.id === id) { sel.dataset.done = 1; sel.classList.remove('sel'); sel.classList.add('ok'); sel.append(h('div', {}, name)); e.target.disabled = true; sel = null; api.ok(); msg.textContent = 'Match!'; if (--left === 0) api.later(resolve, 700); }
       else { api.miss(); msg.textContent = 'Not that one. Pink = lots of growth, blue = very little growth.'; }
     } }, name));
     body.replaceChildren(intro, h('p', {}, 'Step 1: three wells got different amounts of radiation. Which is which?'), h('div', { class: 'row' }, wEls), h('div', { class: 'row' }, dEls), msg);
   });
+  api.setCoachStage?.('sensitive');
   await ask(body, api, 'Step 2: both wells got the SAME medium dose. Which yeast is the more sensitive radiation alarm?', [
     { node: well('#b77fd0', 0.55), label: 'Normal yeast (can repair its DNA)', why: 'It still grew quite well, so it is the less sensitive one.' },
     { node: well('#3f6fd8', 0.05), label: 'Yeast that CANNOT repair its DNA', correct: true, why: 'Yes! It cannot fix radiation damage, so it stops growing sooner. A great alarm!' },
   ], { cards: true, before: [intro] });
+  api.setCoachStage?.('shelter');
   await ask(body, api, 'Step 3: the sensor in our base just turned out BLUE. What should the crew do?', shuffle([
     { label: '🛡️ Move everyone to the shielded shelter', correct: true, why: 'Right call! Shielding puts material between the crew and the radiation.' },
     { label: '🚶 Go outside for a walk' }, { label: '🙈 Ignore the sensor' },

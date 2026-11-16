@@ -1,20 +1,58 @@
 // The small hands-on task at each rover sample site. Each returns a Promise of the mistakes made.
-import { h, sfx, shuffle } from '../ui.js';
+import { h, sfx, shuffle, G, onAbort } from '../ui.js';
+import { createGameClock } from '../game-clock.js';
+import { createCoach } from '../voice-ui.js';
+import { narration } from '../narration.js';
 import { cv, loop, pointerOn, rnd, rr, ink, lg, rg, label, star, drawAstro, drawRover, TAU } from '../art.js';
 
 export function siteShell(root, title, build) {
   return new Promise((resolve) => {
     let mistakes = 0;
+    let coach, mission;
     const body = h('div', { class: 'term-body' });
-    const box = h('div', { class: 'rv-task' }, h('div', { class: 'term' }, h('div', { class: 'term-bar' }, h('span', { class: 'leds' }, h('i'), h('i'), h('i')), h('span', { class: 'who' }, 'Charles'), title), body));
+    const box = h('div', { class: 'rv-task' }, h('div', { class: 'term' }, h('div', { class: 'term-bar' }, h('span', { class: 'leds' }, h('i'), h('i'), h('i')), h('span', { class: 'who' }, 'Charles'), title, h('button', { class: 'x', onclick: () => close(!completed), 'aria-label': 'Leave expedition task' }, '✕ LEAVE')), body));
     root.append(box);
+    let active = true, completed = false, readingReport = false, last = performance.now();
+    const clock = createGameClock();
+    const timer = setInterval(() => {
+      const now = performance.now();
+      clock.tick(Math.min(100, now - last), G.paused || G.helpOpen || document.hidden || readingReport);
+      last = now;
+    }, 16);
+    const close = (cancelled = false) => {
+      if (!active) return;
+      active = false; clock.clear(); clearInterval(timer); unAbort();
+      coach?.dispose(); narration.stop();
+      root.removeEventListener('rover-stop', abort);
+      box.remove(); resolve(cancelled ? null : mistakes);
+    };
+    const abort = () => close(true);
+    const unAbort = onAbort(abort);
+    root.addEventListener('rover-stop', abort);
+    // Gate pointer and keyboard events before puzzle-specific handlers run.
+    for (const event of ['click', 'pointerdown', 'pointermove', 'keydown']) box.addEventListener(event, (e) => {
+      if (!active || G.paused || document.hidden || G.helpOpen && !e.target.closest('.coach-help')) { e.preventDefault(); e.stopImmediatePropagation(); }
+    }, true);
     build(body, {
-      miss: () => { mistakes++; sfx('bad'); },
+      coach(name, stage) { mission = name; coach?.dispose(); coach = createCoach({ mission, owner: 'site-help', host: box.querySelector('.term'), pause: on => { body.inert = on; } }); coach.setStage(stage); },
+      setCoachStage: (stage, context) => coach?.setStage(stage, context),
+      later: (fn, ms) => active && clock.schedule(() => { if (active) fn(); }, ms),
+      miss: () => { if (active && !completed) { mistakes++; sfx('bad'); } },
       found: (text, doneTitle = '✔ SAMPLE COLLECTED') => {
+        if (!active || completed) return;
+        completed = true; clock.clear();
+        coach?.dispose();
         sfx('collect');
         const { c } = cv(150, 120);
         loop(c, (g, t) => { g.clearRect(0, 0, 150, 120); g.fillStyle = rg(g, 75, 60, 4, 70, ['#5fd4ff66', '#5fd4ff00']); g.fillRect(0, 0, 150, 120); for (let i = 0; i < 6; i++) { const a = t * 1.5 + i * TAU / 6; star(g, 75 + Math.cos(a) * 52, 52 + Math.sin(a) * 34, 5 + Math.sin(t * 4 + i) * 2, t, 4, 0.35); g.fillStyle = '#ffd23f'; g.fill(); } drawAstro(g, 75, 112, 0.95, '#4aa8ff', { t, mood: 'happy' }); });
-        body.replaceChildren(h('div', { class: 'row' }, c), h('p', { class: 'done-title' }, doneTitle), h('p', {}, text), h('div', { class: 'row' }, h('button', { class: 'px-btn ok', onclick: () => { box.remove(); resolve(mistakes); } }, 'BACK TO THE ROVER ▶')));
+        body.replaceChildren(h('div', { class: 'row' }, c), h('p', { class: 'done-title' }, doneTitle), h('p', {}, text), h('div', { class: 'row' },
+          h('button', { class: 'btn small', 'aria-pressed': 'false', onclick: e => {
+            readingReport = !readingReport;
+            e.currentTarget.textContent = readingReport ? 'Return automatically' : 'Keep reading';
+            e.currentTarget.setAttribute('aria-pressed', String(readingReport));
+          } }, 'Keep reading'),
+          h('button', { class: 'px-btn ok', onclick: () => close() }, 'BACK TO THE ROVER ▶')));
+        clock.schedule(() => close(), 4500);
       },
     });
   });
@@ -34,6 +72,7 @@ function spectrum(pattern, w = 150, hh = 66) {
 
 export const SITE_TASKS = [
   (root) => siteShell(root, 'Drill a core sample', (body, api) => {
+    api.coach('samples', 'drill');
     const W = 520, H = 230, SURF = 84, zone = 14 + Math.random() * 54, X = (p) => 40 + p * 4.4;
     let pos = 0, dir = 1, state = 'aim', depth = 0, spark = 0;
     const { c } = cv(W, H), r = rnd(12), debris = [];
@@ -44,7 +83,7 @@ export const SITE_TASKS = [
       if (state === 'drill') {
         depth = Math.min(1, depth + dt * 0.75);
         if (Math.random() < 0.6) debris.push({ x: X(pos), y: SURF, vx: (Math.random() - 0.5) * 120, vy: -60 - Math.random() * 120, life: 0.7 });
-        if (depth >= 1) { state = 'done'; setTimeout(() => api.found('Core sample safely stored! Rovers drill because rock under the surface is protected from the Sun\'s radiation, so clues about the past survive there.'), 350); }
+        if (depth >= 1) { state = 'done'; api.later(() => api.found('Core sample safely stored! Rovers drill because rock under the surface is protected from the Sun\'s radiation, so clues about the past survive there.'), 350); }
       }
       spark = Math.max(0, spark - dt * 3);
       g.fillStyle = lg(g, 0, 0, 0, SURF, ['#f7c896', '#ec9f66']); g.fillRect(0, 0, W, SURF);
@@ -66,14 +105,26 @@ export const SITE_TASKS = [
       if (spark > 0) for (let i = 0; i < 6; i++) { star(g, dx + Math.cos(i * 1.1 + t * 20) * 16 * (1.2 - spark), SURF - 4 - Math.abs(Math.sin(i * 2)) * 16 * (1.2 - spark), 5 * spark, i, 4, 0.3); g.fillStyle = '#fff6c8'; g.fill(); }
       for (let i = debris.length - 1; i >= 0; i--) { const d = debris[i]; d.life -= dt; d.vy += 420 * dt; d.x += d.vx * dt; d.y += d.vy * dt; if (d.life <= 0) { debris.splice(i, 1); continue; } g.fillStyle = '#e6b07a'; g.fillRect(d.x, d.y, 4, 4); }
     });
-    body.replaceChildren(h('p', {}, 'Stop the drill above the SOFT ROCK (green mark), where the rock is soft enough to drill.'), h('div', { class: 'row' }, c), h('div', { class: 'row' }, h('button', { class: 'px-btn ok', onclick: () => {
+    const drillButton = h('button', { class: 'px-btn ok', 'aria-keyshortcuts': 'Space', onclick: () => {
       if (state !== 'aim') return;
       if (pos >= zone && pos <= zone + 18) { state = 'drill'; sfx('drill'); msg.textContent = 'Drilling…'; }
       else { api.miss(); spark = 1; msg.textContent = 'Clang! Too hard there. Try again and watch the drill.'; }
-    } }, '⛏️ DRILL!')), msg);
+    } }, '⛏️ DRILL! · Space');
+    body.replaceChildren(h('p', {}, 'Stop the drill above the SOFT ROCK (green mark). Press Space or choose DRILL when it is lined up.'), h('div', { class: 'row' }, c), h('div', { class: 'row' }, drillButton), msg);
+    // Scope the shortcut to this task; the shell gates pause/help events first.
+    body.tabIndex = -1;
+    body.addEventListener('keydown', e => {
+      if (e.code !== 'Space') return;
+      const control = e.target.closest?.('button,a,input,textarea,select,summary,[role="button"]');
+      if (control && control !== drillButton) return;
+      e.preventDefault(); e.stopPropagation();
+      if (!e.repeat) drillButton.click();
+    });
+    body.focus({ preventScroll: true });
   }),
 
   (root) => siteShell(root, 'Read the rock layers', (body, api) => {
+    api.coach('samples', 'layers');
     const W = 520, H = 250, TOP = 44, BAND = 62;
     const bands = [['A', ['#f0c690', '#e0a36b']], ['B', ['#d58f58', '#c27444']], ['C', ['#a85f3a', '#864326']]];
     let hover = -1, wrong = -1, wrongT = 0, right = false;
@@ -108,15 +159,17 @@ export const SITE_TASKS = [
     c.style.cursor = 'pointer';
     c.addEventListener('pointermove', (e) => { const i = pick(e); hover = i >= 0 && i < 3 ? i : -1; });
     c.addEventListener('pointerleave', () => { hover = -1; });
-    c.addEventListener('pointerdown', (e) => {
-      const i = pick(e); if (right || i < 0 || i > 2) return;
-      if (i === 2) { right = true; sfx('ok'); setTimeout(() => api.found('Right! New layers pile on top of old ones, like pancakes, so the bottom layer is the oldest. Layers on Mars tell the story of ancient lakes and rivers.'), 900); }
+    const choose = (i) => {
+      if (right || i < 0 || i > 2) return;
+      if (i === 2) { right = true; sfx('ok'); api.later(() => api.found('Right! New layers pile on top of old ones, like pancakes, so the bottom layer is the oldest. Layers on Mars tell the story of ancient lakes and rivers.'), 900); }
       else { api.miss(); wrong = i; wrongT = 0.4; msg.textContent = 'Think of a stack of pancakes: which one was made first?'; }
-    });
-    body.replaceChildren(h('p', {}, 'This cliff has three layers. Tap the OLDEST layer to sample it.'), h('div', { class: 'row' }, c), msg);
+    };
+    c.addEventListener('pointerdown', e => choose(pick(e)));
+    body.replaceChildren(h('p', {}, 'This cliff has three layers. Choose the OLDEST layer to sample it.'), h('div', { class: 'row' }, c), h('div', { class: 'row' }, ['Top layer', 'Middle layer', 'Bottom layer'].map((name, i) => h('button', { class: 'px-btn', onclick: () => choose(i), onfocus: () => { hover = i; } }, name))), msg);
   }),
 
   (root) => siteShell(root, 'Laser mineral scan', (body, api) => {
+    api.coach('samples', 'laser');
     const target = shuffle(SPECTRUM), W = 520, H = 120;
     const swap = (p, i, j) => { const q = [...p]; [q[i], q[j]] = [q[j], q[i]]; return q; };
     const msg = h('p', { class: 'msg' });

@@ -15,10 +15,9 @@ export const SOLS = [
     n: 1, title: 'Welcome to Astro Base',
     brief: [
       'Beep boop! Welcome to Astro Base, Commander! I am Rocky, your very silly robot helper.',
-      'Pick an astronaut at the bottom of the screen. Walk with the arrow keys or WASD, or tap where you want to go.',
-      'Glowing circles are work stations. Walk there and press Interact to start a task!',
-      'The Command terminal opens Mission Control: dials and warning lights show how the base is doing. Green is fine, yellow needs attention, red means act now!',
-      'Uh-oh: the base is using too much power today. Send Max to the Command Center to decide what to do.',
+      'Tap the yellow Next button to send Max to Mission Control. When he arrives, press Interact or E.',
+      'Decide how to handle the power overload, then tap a crew task to head to its station. You can also walk with WASD, arrow keys, or a click on the floor.',
+      'Charles: head to the Airlock for your first rover drive. Collect soil samples at the marked sites, then park back at the garage.',
     ],
     crisis: {
       title: 'Power overload!', art: 'power', text: 'The base systems are drawing too much power. What should we do, Commander?',
@@ -31,7 +30,7 @@ export const SOLS = [
     tasks: [
       { id: 'gen', who: 'max', station: 'generator', title: 'Inspect the generator wiring', game: 'wires', params: { label: 'Generator' }, fx: BAL.smallRepair },
       { id: 'bones', who: 'elsa', station: 'medbay', title: 'Bone health scan', game: 'bones', fx: BAL.smallCheckup },
-      { id: 'rocks', who: 'charles', station: 'lab', title: 'Rock scanner', game: 'rocks', science: true },
+      { id: 'rover', who: 'charles', station: 'airlock', title: 'Rover: collect soil samples', game: 'rover', params: { sites: 3, dust: false }, science: true, fx: BAL.roverTrip },
       { id: 'plants', who: 'lea', station: 'greenhouse', title: 'Check plants and temperature', game: 'plants', tend: true },
     ],
     fact: { title: 'Giant Volcano!', art: 'volcano', text: 'Mars has the largest known volcano in our solar system: Olympus Mons. It is about 22 km high, more than twice as tall as Mount Everest!', source: 'NASA Science – Mars facts', url: 'https://science.nasa.gov/mars/facts/' },
@@ -41,7 +40,7 @@ export const SOLS = [
     brief: [
       'Bzzt! A big dust storm rolled in. The solar panels are covered in dust and make much less power.',
       'Max can go outside to clean them, but outdoor work is risky. Decide at the Command Center.',
-      'Charles: take the rover out through the Airlock and collect soil samples. Drive carefully in the dust!',
+      'Charles: stay inside the Science Lab during the storm. Use the rock scanner to compare clues from our Mars samples.',
     ],
     onStart: { flags: { panelsDirty: true } },
     crisis: {
@@ -54,7 +53,7 @@ export const SOLS = [
     tasks: [
       { id: 'panels', who: 'max', station: 'airlock', title: 'Clean the solar panels', game: 'panels', fx: BAL.cleanPanels, flagsAfter: { panelsDirty: false }, when: (f) => f.cleanPanels },
       { id: 'exposure', who: 'elsa', station: 'medbay', title: 'Routine crew checkup', game: 'vitals', fx: BAL.smallCheckup },
-      { id: 'rover', who: 'charles', station: 'airlock', title: 'Rover: collect soil samples', game: 'rover', params: { sites: 3, dust: true }, science: true, fx: BAL.roverTrip },
+      { id: 'rocks', who: 'charles', station: 'lab', title: 'Rock scanner', game: 'rocks', science: true },
       { id: 'harvest', who: 'lea', station: 'greenhouse', title: 'Test the lettuce harvest', game: 'harvest', tend: true },
     ],
     fact: { title: 'Planet-wide storms', art: 'storm', text: 'Dust storms on Mars can grow until they cover the whole planet. In 2018 a global storm blocked so much sunlight that the solar-powered Opportunity rover could not recharge.', source: 'NASA – Opportunity rover mission', url: 'https://science.nasa.gov/mission/mer-opportunity/' },
@@ -64,7 +63,7 @@ export const SOLS = [
     brief: [
       'Brrr! It got very cold last night. The plants are not growing well.',
       'Heating helps, but it costs power. Max decides at the Command Center. The water pipes froze too: Max can fix them in the Air & Water room.',
-      'Lea: the seedlings in Mars soil look sick. Find out why in the Greenhouse. That is today\'s science mission!',
+      'Lea: one lettuce plant still looks unhappy. Compare it with a healthy plant after Max repairs the water supply. That is today\'s science mission!',
     ],
     crisis: {
       title: 'Cold night on Mars', art: 'cold', text: 'Frost is forming. Where should we send extra heat?',
@@ -76,10 +75,10 @@ export const SOLS = [
       ],
     },
     tasks: [
-      { id: 'heater', who: 'max', station: 'air', title: 'Fix the frozen water pipes', game: 'pipes', params: { label: 'Water pipes' }, fx: BAL.smallRepair },
+      { id: 'heater', who: 'max', station: 'air', title: 'Restore greenhouse water supply', game: 'pipes', params: { label: 'Greenhouse supply pipes' }, fx: BAL.smallRepair, flagsAfter: { pipesRepaired: true } },
       { id: 'nutrition', who: 'elsa', station: 'medbay', title: 'Analyse a blood sample', game: 'cells', fx: BAL.smallCheckup },
       { id: 'gravity', who: 'charles', station: 'lab', title: 'Gravity Garden experiment', game: 'gravity' },
-      { id: 'greenhouse', who: 'lea', station: 'greenhouse', title: 'Save the Mars greenhouse', game: 'greenhouse', science: true, tend: true },
+      { id: 'greenhouse', who: 'lea', station: 'greenhouse', title: 'Save the Mars greenhouse', game: 'greenhouse', science: true, tend: true, requires: ['heater'], flagsAfter: { greenhouseRestored: true } },
     ],
     fact: { title: 'Space salad', art: 'salad', text: 'Astronauts have grown and eaten lettuce on the International Space Station. Fresh food is good for the body and for the mood!', source: 'NASA – Veggie plant growth system; CSA Food Production toolkit', url: 'https://www.asc-csa.gc.ca/eng/youth-educators/toolkits/food-production/' },
   },
@@ -125,9 +124,28 @@ export const SOLS = [
       { id: 'clearance', who: 'elsa', station: 'medbay', title: 'Mars gravity fitness test', game: 'fitness', fx: BAL.smallCheckup },
       { id: 'expedition', who: 'charles', station: 'airlock', title: 'Rover expedition', game: 'rover', params: { mode: 'expedition' }, science: true, needsCrisis: true },
       { id: 'foodcheck', who: 'lea', station: 'greenhouse', title: 'Keep the food systems stable', game: 'plants', tend: true },
-      { id: 'report', who: 'max', station: 'command', title: 'Send the report to Earth', game: 'report' },
+      { id: 'report', who: 'max', station: 'command', title: 'Send our discoveries to Earth', game: 'report', requires: ['expedition'] },
     ],
     fact: { title: 'Blue sunsets', art: 'sunset', text: 'On Mars the daytime sky is butterscotch-coloured, but sunsets look blue near the Sun! Fine dust scatters the light differently than Earth\'s air does.', source: 'NASA – Curiosity rover sunset images', url: 'https://science.nasa.gov/resource/curiosity-rover-views-a-martian-sunset/' },
+  },
+];
+
+
+// Saved campaigns that already earned science before the opening missions moved
+// keep their original order. New missions always start with Charles's rover drive.
+export const LEGACY_OPENING_SOLS = [
+  {
+    ...SOLS[0],
+    brief: SOLS[0].brief.slice(0, 3),
+    tasks: SOLS[0].tasks.map(task => task.science ? { ...SOLS[1].tasks.find(task => task.science) } : task),
+  },
+  {
+    ...SOLS[1],
+    brief: [
+      ...SOLS[1].brief.slice(0, 2),
+      'Charles: take the rover out through the Airlock and collect soil samples. Drive carefully in the dust!',
+    ],
+    tasks: SOLS[1].tasks.map(task => task.science ? { ...SOLS[0].tasks.find(task => task.science), params: { sites: 3, dust: true } } : task),
   },
 ];
 
@@ -140,6 +158,8 @@ export const STATION_FACTS = {
 
 export const DATA_SOURCES = [
   ['NASA DONKI – Space Weather Database', 'https://ccmc.gsfc.nasa.gov/tools/DONKI/', 'Solar flare shown on Sol 4. Live when reachable, otherwise a saved historical example (always labelled).'],
+  ['NASA – Martian blueberries', 'https://science.nasa.gov/resource/martian-blueberries-2/', 'Opportunity’s hematite-rich concretions provide evidence of an ancient watery environment.'],
+  ['University of Minnesota – Hematite', 'https://commonminerals.esci.umn.edu/minerals-g-m/hematite', 'Mineral guide: iron content alone does not mean a rock attracts a hand magnet.'],
   ['NASA OSDR – Open Science Data Repository', 'https://osdr.nasa.gov/bio/repo/', 'Mini-games are inspired by studies OSD-980, OSD-412, OSD-581, OSD-346, OSD-964 and OSD-658. Scores, treatments and puzzles are invented for the game.'],
   ['NASA RadLab', 'https://visualization.osdr.nasa.gov/radlab/gui/data-api/', 'Radiation education. These are International Space Station measurements, not Mars surface measurements.'],
   ['NASA Mars Trek / Mars facts', 'https://trek.nasa.gov/mars/', 'Mars facts: Olympus Mons, dust storms, gravity (38% of Earth), blue sunsets, sol length.'],

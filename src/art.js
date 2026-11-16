@@ -1,5 +1,6 @@
 // Shared drawing helpers and animated illustrations (all drawn in code, no image files).
 // Used by the mini-games, the fact cards and the daily crisis cards.
+import { G } from './ui.js';
 
 export const INK = '#1d2547';
 export const TAU = Math.PI * 2;
@@ -18,12 +19,13 @@ export function cv(w, h, cls = 'art') {
 export function loop(c, draw) {
   const g = c.getContext('2d');
   let seen = false, stopped = false, raf = 0;
-  const t0 = performance.now(); let last = t0;
+  const t0 = performance.now(); let last = t0, elapsed = 0;
   const tick = (now) => {
     if (stopped) return;
     if (c.isConnected) seen = true; else if (seen || now - t0 > 10000) return;
     raf = requestAnimationFrame(tick);
-    if (c.isConnected) draw(g, (now - t0) / 1000, Math.min(0.05, (now - last) / 1000));
+    const dt = Math.min(0.05, (now - last) / 1000);
+    if (c.isConnected && !G.paused && !G.helpOpen && !document.hidden) { elapsed += dt; draw(g, elapsed, dt); }
     last = now;
   };
   draw(g, 0, 0);
@@ -52,6 +54,7 @@ export function star(g, x, y, r, rot = 0, points = 5, inner = 0.45) {
 
 /** Cartoon astronaut, feet at (x, y). mood: 'ok' | 'sick' | 'happy'. */
 export function drawAstro(g, x, y, s, col, { t = 0, mood = 'ok', wave = false } = {}) {
+  if (G.reducedMotion) { t = 0; wave = false; }
   g.save(); g.translate(x, y); g.scale(s, s);
   for (const dx of [-9, 9]) { rr(g, dx - 6, -20, 12, 18, 5); g.fillStyle = '#f4f6fb'; g.fill(); ink(g, 2); rr(g, dx - 7, -8, 14, 9, 4); g.fillStyle = col; g.fill(); ink(g, 2); }
   g.translate(0, Math.sin(t * 2.2) * (mood === 'happy' ? 2.5 : 1.2));
@@ -231,12 +234,13 @@ const SCENES = {
 export function scene(kind, w = 640, h = 180) {
   const { c } = cv(w, h, 'art scene');
   const draw = SCENES[kind] || SCENES.volcano;
-  loop(c, (g, t) => { g.clearRect(0, 0, w, h); draw(g, w, h, t); });
+  loop(c, (g, t) => { g.clearRect(0, 0, w, h); draw(g, w, h, G.reducedMotion ? 0 : t); });
   return c;
 }
 
 /** Confetti burst over an element (used on "task complete"). */
 export function confetti(host) {
+  if (G.reducedMotion) return;
   const w = host.clientWidth || 600, h = host.clientHeight || 400;
   const { c } = cv(w, h, 'confetti');
   c.style.width = '100%'; c.style.height = '100%';

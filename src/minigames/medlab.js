@@ -90,7 +90,7 @@ export async function cells(body, params, api) {
       if (!o.white) { api.miss(); oops = 1; msg.textContent = 'That is a red blood cell. White ones are bigger, pale purple, with dark spots inside.'; return; }
       if (o.hit) return;
       o.hit = 1; found++; tone(500 + found * 90, 0.12); msg.textContent = `White blood cells found: ${found} of ${NEED}`;
-      if (found === NEED) setTimeout(resolve, 1100);
+      if (found === NEED) api.later(resolve, 1100);
     });
     body.replaceChildren(h('p', {}, 'BLOOD SAMPLE LAB. Elsa put a drop of blood under the microscope. Red cells carry oxygen. WHITE cells fight germs: they are bigger and pale purple with dark spots. Tap all 5 white cells!'), h('div', { class: 'row' }, c), msg);
   });
@@ -148,8 +148,8 @@ export async function fitness(body, params, api) {
     { label: 'About 2½ times higher than on Earth', correct: true, why: 'Yes! Watch the two jumps: less gravity pulling down means a much higher jump.' },
     { label: 'Exactly the same height', why: 'Gravity is weaker on Mars. What does that do to a jump?' }, { label: 'Lower than on Earth', why: 'It is the other way round: weaker gravity holds you down less.' },
   ], { before: [h('p', { style: 'color:#ffd23f' }, 'MARS GRAVITY LAB. Before the expedition, Doctor Elsa tests how the crew\'s bodies cope with Mars gravity.'), view] });
-  const watch = setInterval(() => { if (body.querySelector('.px-btn.ok')) { clearInterval(watch); st.jump = true; } }, 100);
-  api.onCleanup(() => clearInterval(watch));
+  const watch = api.every(() => { if (body.querySelector('.px-btn.ok')) { api.cancelTimer(watch); st.jump = true; } }, 100);
+  api.onCleanup(() => api.cancelTimer(watch));
   await q1;
   await ask(body, api, 'A backpack weighs 40 kg on the scale on Earth. What does the same scale show on Mars?', shuffle([
     { label: 'About 15 kg', correct: true, why: 'Right: 38% of 40 is about 15. The backpack is the same, it is just pulled down less.' }, { label: '40 kg, nothing changes', why: 'The backpack is the same, but the scale feels less pull.' }, { label: 'About 100 kg', why: 'Mars has LESS gravity than Earth.' },

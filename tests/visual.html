@@ -1,0 +1,26 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Room visual checks</title><link rel="stylesheet" href="/src/style.css"><link rel="stylesheet" href="/src/polish.css"><link rel="stylesheet" href="/src/visual-ui.css"></head>
+<body><div id="game"></div><div id="landing" class="hidden"></div><div id="rover" class="hidden"></div><div id="overlay" class="hidden"></div><div id="pause" class="hidden"></div>
+<nav id="visual-checks" style="position:fixed;top:8px;left:8px;right:8px;z-index:20;display:flex;gap:6px;flex-wrap:wrap"></nav><p id="visual-description" role="status" style="position:fixed;bottom:0;left:12px;right:12px;background:#102039ed;padding:10px;font-size:14px;z-index:10"></p>
+<script type="module">
+import { S, resetGame, startSol } from '/src/state.js';
+import { G, h } from '/src/ui.js';
+import { createBase } from '/src/base.js';
+import { atmosphere } from '/src/environment.js';
+if (!import.meta.env.DEV) throw new Error('Development checks only');
+let base;
+const descriptions=document.getElementById('visual-description');
+base=createBase({hidden:()=>document.hidden,paused:()=>G.paused,room:()=>{},near:()=>{},select:id=>{S.current=id;base.select(id);},stationState:()=> 'none',ready:()=>{scenario('healthy');base.overview();}});
+function scenario(kind) {
+  resetGame(); S.sick=null; S.sol=kind==='healthy'?1:kind==='storm'?4:kind==='samples'?5:3; startSol();
+  S.crisisDone=kind!=='storm';
+  if(kind==='recovered'||kind==='samples'){S.flags.pipesRepaired=true;S.flags.greenhouseRestored=true; S.tasks.forEach(t=>t.done=true);}
+  if(kind==='samples'){S.journal=[1,2,3,4,5].map(sol=>({sol,science:true}));S.log=[1,2,3,4].map(sol=>({sol}));}
+  if(kind==='storm')S.flags.panelsDirty=true;
+  base.refresh();base.overview();
+  descriptions.textContent=base.describeRooms().map(r=>`${r.label}: ${r.text}`).join(' · ');
+}
+for(const [label,key] of [['Healthy base','healthy'],['Damaged greenhouse','damaged'],['Rescued greenhouse','recovered'],['Storm and dust','storm'],['Returned samples','samples']])document.getElementById('visual-checks').append(h('button',{class:'btn small',onclick:()=>scenario(key)},label));
+for(const [label,night] of [['Day lighting',0],['Night lighting',1]])document.getElementById('visual-checks').append(h('button',{class:'btn small',onclick:()=>{atmosphere.night=night;}},label));
+for(const [label,id,who] of [['Inspect greenhouse','greenhouse','lea'],['Inspect generator','generator','max'],['Inspect water','air','max'],['Inspect lab','lab','charles']])document.getElementById('visual-checks').append(h('button',{class:'btn small',onclick:()=>{S.current=who;base.select(who);}},label));
+document.getElementById('visual-checks').append(h('button',{class:'btn small',onclick:()=>{base.taskComplete({id:'greenhouse',title:'Rescue',station:'greenhouse',who:'lea'});}},'Replay rescue feedback'),h('button',{class:'btn small',onclick:e=>{G.paused=!G.paused;e.target.textContent=G.paused?'Resume':'Pause';}},'Pause'),h('button',{class:'btn small',onclick:e=>{G.reducedMotion=!G.reducedMotion;e.target.textContent=G.reducedMotion?'Motion reduced':'Reduce motion';}},'Reduce motion'));
+</script></body></html>

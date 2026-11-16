@@ -1,0 +1,15 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Mission interaction checks</title><link rel="stylesheet" href="/src/style.css"><link rel="stylesheet" href="/src/fx.css"><link rel="stylesheet" href="/src/polish.css"></head>
+<body><link rel="stylesheet" href="/src/landing.css"><link rel="stylesheet" href="/src/visual-ui.css"><main style="padding:30px;max-width:850px"><h1>Mission interaction checks</h1><p>Isolated developer checks. This page never reads or writes the campaign save.</p><nav id="checks"></nav><p id="result" role="status"></p></main>
+<div id="rover" class="hidden"></div><div id="overlay" class="hidden"></div><div id="modal" class="hidden"></div><div id="rocky" class="hidden"></div><div id="toast"></div><div id="pause" class="hidden"></div>
+<button id="pause-check" class="btn" style="position:fixed;right:12px;top:12px;z-index:500">Pause check</button>
+<script type="module">
+import { runGame } from '/src/minigames/index.js';
+import { h, G, abortAll } from '/src/ui.js';
+import { EXPEDITION_TASKS } from '/src/minigames/expedition.js';
+import { SITE_TASKS } from '/src/minigames/sites.js';
+if (!import.meta.env.DEV) throw new Error('Development checks only');
+const cases = [['Greenhouse rescue','greenhouse',{}],['Rover samples','rover',{}],['Rover expedition','rover',{mode:'expedition'}],['Field instruments','rover',{instrumentOnly:true}],['Expedition instruments','rover',{mode:'expedition',instrumentOnly:true}],['Sequence','sequence',{}],['Mission report','report',{discoveries:['Our sample observations were recorded.','Our greenhouse experiment restored water flow.']}]];
+for (const [title,id,params] of cases) document.getElementById('checks').append(h('button',{class:'btn',onclick:async()=>{const result=await runGame(id,params,{who:'Lea',title});document.getElementById('result').textContent=JSON.stringify(result);}},title));
+for (const [title,task] of [['Core drilling',SITE_TASKS[0]],['Meteorite search',EXPEDITION_TASKS[2]],['Cliff layers',SITE_TASKS[1]]]) document.getElementById('checks').append(h('button',{class:'btn',onclick:async()=>{const root=document.getElementById('rover');root.classList.remove('hidden');const result=await task(root);root.classList.add('hidden');document.getElementById('result').textContent=JSON.stringify({mistakes:result,cancelled:result===null});}},title));
+document.getElementById('pause-check').onclick=()=>{G.paused=!G.paused; const el=document.getElementById('pause');el.classList.toggle('hidden',!G.paused);el.replaceChildren(h('div',{class:'panel'},h('h2',{},'Paused'),h('button',{class:'btn',onclick:()=>{G.paused=false;el.classList.add('hidden');}},'Resume check'),h('button',{class:'btn',onclick:()=>{abortAll();G.paused=false;el.classList.add('hidden');}},'Cancel check')));};
+</script></body></html>

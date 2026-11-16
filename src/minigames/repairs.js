@@ -75,7 +75,7 @@ export function pipes(body, { label: name = 'Water pipes' } = {}, api) {
     msg.textContent = `Turns: ${turns}. Blue pipes have water in them.`;
     if (wet.has(end + ',' + (COLS - 1)) && now(grid[end][COLS - 1]) & E) {
       won = true; api.ok(); msg.textContent = '💧 The water is flowing again!';
-      setTimeout(() => api.finish(`${name} fixed in ${turns} turns! On a space base almost every drop of water is cleaned and used again, so the pipes must never leak or freeze.`, 'On the International Space Station, most of the water is recycled. Source: NASA.'), 1500);
+      api.later(() => api.finish(`${name} fixed in ${turns} turns! On a space base almost every drop of water is cleaned and used again, so the pipes must never leak or freeze.`, 'On the International Space Station, most of the water is recycled. Source: NASA.'), 1500);
     }
   });
   body.replaceChildren(h('p', {}, `${name.toUpperCase()}: the cold night knocked the pipes out of place. Turn the tiles to make ONE path from the water tank 💧 to the recycler ♻️.`), h('div', { class: 'row' }, canvas), msg);
@@ -85,8 +85,8 @@ export function pipes(body, { label: name = 'Water pipes' } = {}, api) {
 export function sequence(body, { label: name = 'Shield generator', rounds = [3, 4, 5] } = {}, api) {
   const PADS = [['#ff5a5a', '▲', 330], ['#ffd23f', '●', 415], ['#58d66b', '■', 494], ['#4aa8ff', '◆', 587]];
   let round = 0, seq = [], input = 0, busy = true, lit = -1, charge = 0, timers = [];
-  const later = (fn, ms) => timers.push(setTimeout(fn, ms));
-  api.onCleanup(() => timers.forEach(clearTimeout));
+  const later = (fn, ms) => timers.push(api.later(fn, ms));
+  api.onCleanup(() => timers.forEach(api.cancelTimer));
   const msg = h('p', { class: 'msg' });
   const { c: view } = cv(520, 150);
   let shownCharge = 0;
@@ -155,8 +155,8 @@ export function charge(body, { label: name = 'Rover charger' } = {}, api) {
   const add = (n) => {
     if (cell >= 3 || locked) return;
     sum += n; tone(300 + sum * 6, 0.08);
-    if (sum > targets[cell]) { api.miss(); zap = 1; locked = true; msg.textContent = `Too much! ${sum} is more than ${targets[cell]}. The cell reset itself. Try again.`; setTimeout(() => { sum = 0; locked = false; }, 700); return; }
-    if (sum === targets[cell]) { api.ok(); cell++; sum = 0; if (cell === 3) setTimeout(() => api.finish(`${name}: all three fuel cells are full. A rover can only drive as far as its batteries allow, so engineers plan every trip around the energy they have.`), 1300); }
+    if (sum > targets[cell]) { api.miss(); zap = 1; locked = true; msg.textContent = `Too much! ${sum} is more than ${targets[cell]}. The cell reset itself. Try again.`; api.later(() => { sum = 0; locked = false; }, 700); return; }
+    if (sum === targets[cell]) { api.ok(); cell++; sum = 0; if (cell === 3) api.later(() => api.finish(`${name}: all three fuel cells are full. A rover can only drive as far as its batteries allow, so engineers plan every trip around the energy they have.`), 1300); }
     say();
   };
   say();

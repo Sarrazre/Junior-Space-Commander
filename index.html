@@ -2,9 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title>Junior Space Commander</title>
-  <link rel="icon" type="image/webp" href="/assets/mission-logo.webp">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Junior Space Commander · Astronaut Mission Trainer</title>
+  <meta name="description" content="Lead four astronauts through five sols on Mars. Balance power, food, shielding and crew health, run science experiments, and explore with a 3D rover.">
+  <meta name="si-disclosure" content="SI-assisted code and fictional game content: OpenAI Codex and Anthropic Claude. Selected SI-generated art: OpenAI image generation. Intro: Kling. Narration: Tiny Voca / Dizione. Details: SI-USE.json.">
+  <link rel="describedby" href="/SI-USE.json" type="application/json" title="AI / SI use and asset provenance">
+  <meta property="og:title" content="Junior Space Commander · Astronaut Mission Trainer">
+  <meta property="og:description" content="Your crew. Five sols. A whole world of discoveries. Play a Mars mission trainer inspired by NASA science.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://junior-space-commander.sentientstudios.chatgpt.site/assets/landing-bg.webp">
+  <meta name="theme-color" content="#102439">
+  <link rel="icon" href="/favicon.ico?v=2" sizes="any">
+  <link rel="icon" type="image/svg+xml" href="/icons/mars.svg?v=2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/mars-32.png?v=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/mars-180.png?v=2">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700&family=VT323&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/style.css">
@@ -28,13 +40,30 @@
     </header>
 
     <aside id="tasks">
+      <button id="objective" class="btn small">Your next mission</button>
       <button id="tasks-toggle" class="btn small">📋 Tasks</button>
       <div id="tasks-body"></div>
       <button id="btn-endsol" class="btn go" disabled>🌙 End the sol</button>
+      <p id="end-reason"></p>
+      <button id="btn-journal" class="btn small">🔬 Discoveries</button>
+      <button id="btn-rooms" class="btn small">🛰️ Around the base</button>
+      <small id="save-status" role="status"></small>
     </aside>
 
-    <nav id="crew"></nav>
-    <button id="btn-hint" class="btn rocky-btn">🤖 Ask Rocky</button>
+    <div id="mission-dock">
+      <nav class="dock-views" aria-label="Station views">
+        <button id="btn-panorama" class="btn" aria-pressed="false" aria-keyshortcuts="V" title="Whole base / follow crew (V)">Whole base <kbd>V</kbd></button>
+        <button id="btn-dashboard" class="btn" aria-keyshortcuts="C" title="Control dashboard (C)">Control <kbd>C</kbd></button>
+      </nav>
+      <nav id="crew" aria-label="Choose your crew"></nav>
+      <button id="btn-hint" class="btn rocky-btn" aria-keyshortcuts="R" title="Ask Rocky (R)"><span class="rocky-docked" aria-hidden="true"></span>Ask Rocky <kbd>R</kbd></button>
+    </div>
+    <nav id="camera-zoom" aria-label="Station zoom" title="Pinch or scroll over the station to zoom. Keyboard: − / +, 0 to reset.">
+      <button id="zoom-out" type="button" aria-label="Zoom out" title="Zoom out (−)" aria-keyshortcuts="-">−</button>
+      <button id="zoom-reset" type="button" aria-label="Reset zoom" title="Reset zoom (0)" aria-keyshortcuts="0">100%</button>
+      <button id="zoom-in" type="button" aria-label="Zoom in" title="Zoom in (+)" aria-keyshortcuts="+">+</button>
+      <span class="si-mark si-base-mark">Includes SI-generated artwork</span>
+    </nav>
     <button id="btn-interact" class="btn go hidden">✋ Interact <kbd>E</kbd></button>
   </div>
 
@@ -60,7 +89,7 @@
 
   <div id="overlay" class="hidden"></div>
   <div id="modal" class="hidden"></div>
-  <div id="toast"></div>
+  <div id="toast" role="status" aria-live="polite"></div>
   <button id="btn-menu" class="btn icon hidden" aria-label="Pause menu" title="Pause (Esc)">⏸</button>
   <div id="pause" class="hidden"></div>
   <div id="landing" class="hidden"></div>
