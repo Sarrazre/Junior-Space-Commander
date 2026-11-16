@@ -8,7 +8,7 @@ const queue = await response.json();
 await Promise.all(Array.from({length: 6}, async () => {
   while (queue.length) {
     const file = queue.shift();
-    if (!file.path.startsWith('assets/') && !['LICENSE.txt', 'THIRD-PARTY.txt'].includes(file.path) && !file.path.startsWith('licenses/')) continue;
+    if (!file.path.startsWith('assets/') && !['LICENSE.txt', 'THIRD-PARTY.txt', 'SI-USE.json'].includes(file.path) && !file.path.startsWith('licenses/')) continue;
     if (file.path.split('/').includes('..') || file.path.startsWith('/')) throw Error('Invalid asset path');
     const r = await fetch(new URL(file.path, origin));
     if (!r.ok) throw Error(`Could not download ${file.path}`);

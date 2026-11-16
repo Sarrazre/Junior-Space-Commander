@@ -15,7 +15,7 @@ Play: https://junior-space-commander.sentientstudios.chatgpt.site/
 Upstream: https://github.com/Sarrazre/Junior-Space-Commander/
 '''
 with zipfile.ZipFile('public/source.zip', 'w', zipfile.ZIP_DEFLATED) as archive:
-    for name in ['index.html','package.json','package-lock.json','vite.config.js','README.md','LICENSE','.gitignore']:
+    for name in ['index.html','package.json','package-lock.json','vite.config.js','README.md','LICENSE','.gitignore','public/SI-USE.json','public/THIRD-PARTY.txt','public/source-assets.json']:
         archive.write(name)
     for folder in ['src','scripts','tests','production/submission','public/icons']:
         for file in Path(folder).rglob('*'):

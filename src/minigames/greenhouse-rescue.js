@@ -1,5 +1,6 @@
 import { h, G } from '../ui.js';
 import '../greenhouse.css';
+import '../si-disclosure.css';
 
 const POD = `${import.meta.env.BASE_URL}assets/greenhouse/lettuce-pod.png`;
 const WILTED_POD = `${import.meta.env.BASE_URL}assets/greenhouse/lettuce-wilted.png`;
@@ -33,7 +34,7 @@ export function greenhouseRescue(body, params, api) {
   const content = h('div');
   const steps = h('ol', { class: 'gh-steps', 'aria-label': 'Experiment progress' }, ['Inspect', 'Repair', 'Verify'].map((text, i) => h('li', {}, h('span', {}, String(i + 1)), text)));
   const heading = h('h2', { tabindex: '-1' });
-  root.append(h('p', { class: 'gh-eyebrow' }, 'LEA’S FIELD LAB · SOL 3'), heading, steps, content, message,
+  root.append(h('p', { class: 'gh-eyebrow' }, 'LEA’S FIELD LAB · SOL 3', h('span', { class: 'si-mark gh-si-mark' }, 'SI-generated plant art')), heading, steps, content, message,
     h('p', { class: 'gh-disclaimer' }, 'A simplified plant-care experiment. Readings and the time-lapse are invented for this game.'));
   body.replaceChildren(root);
 

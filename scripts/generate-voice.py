@@ -1,5 +1,5 @@
 """Offline asset-authoring tool, never loaded by the game. Set JSC_VOICE_MODEL_DIR to a separately obtained Tiny Voca/Dizione model bundle."""
-import os, sys, json, subprocess, time, hashlib
+import os, sys, json, subprocess, time, hashlib, runpy
 sys.dont_write_bytecode = True
 from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1] / 'public/assets/voice'
@@ -51,4 +51,5 @@ for i, rec in enumerate(records):
     manifest['clips'][rec['key']] = entry
     print(f'{i+1}/{len(records)} {rec["voice"]}: {rec["text"][:65]}', flush=True)
 (ROOT / 'manifest.json').write_text(json.dumps(manifest, indent=2))
+runpy.run_path(str(Path(__file__).with_name('tag-si-audio.py')), run_name='__main__')
 print('Finished in', round(time.time() - started, 2), 'seconds')

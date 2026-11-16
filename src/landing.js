@@ -124,6 +124,8 @@ export function createLanding({ onStart, onSources, onContinue, hasSave = () => 
   const bubble = h('div', { class: 'ld-bubble hidden' }, h('b', {}, 'Rocky'), bubbleText, h('div', { class: 'ld-brow' }, dots, h('span', { class: 'ld-nav' }, backBtn, nextBtn)));
   const presents = h('div', { class: 'ld-presents hidden' }, h('img', { src: LOGO, alt: 'NASA Space Apps Challenge' }), h('p', {}, 'Space Apps Challenge 2026 presents'));
   const video = h('video', { class: 'ld-video hidden', playsinline: '', preload: 'none' });
+  // Keep the disclosure visible even when object-fit crops the file's watermark.
+  const mediaMark = h('span', { class: 'si-mark ld-art-mark hidden' }, 'Includes SI-generated artwork');
   const skip = h('button', { class: 'btn small ld-skip hidden', onclick: (e) => { e.stopPropagation(); if (beat === 0.5) endVideo(); else toTitle(); } }, 'Skip intro ⏭');
   // Capture the state before pointerdown unlocks audio: the first press enables
   // sound instead of immediately toggling the already-on preference to mute.
@@ -157,7 +159,7 @@ export function createLanding({ onStart, onSources, onContinue, hasSave = () => 
       h('div', { class: 'ld-row' },
         h('button', { class: 'btn ld-sec', onclick: () => { sfx('tap'); playIntro({ fromTitle: true }); } }, "🤖 Rocky's instructions"),
         h('button', { class: 'btn ld-sec', onclick: () => playIntro() }, '🎬 Watch intro'),
-        h('button', { class: 'btn ld-sec', onclick: () => onSources() }, '🛰️ Data sources'),
+        h('button', { class: 'btn ld-sec', onclick: () => onSources() }, '🛰️ Sources & SI use'),
         soundBtn)));
   const foot = h('footer', { class: 'ld-foot hidden' }, h('img', { src: LOGO, alt: 'NASA Space Apps Challenge' }), h('span', {}, 'Made for the NASA Space Apps Challenge 2026'));
   const count = h('div', { class: 'ld-count' });
@@ -187,7 +189,7 @@ export function createLanding({ onStart, onSources, onContinue, hasSave = () => 
       greetingTimer = setTimeout(() => { narration.stop('title-greeting'); greetingSpeaker = null; greeting.classList.add('hidden'); }, 6500);
     },
   })]));
-  root.replaceChildren(canvas, ...Object.values(hitButtons), video, presents, bubble, title, foot, skip, soundHint, count, greeting);
+  root.replaceChildren(canvas, ...Object.values(hitButtons), video, mediaMark, presents, bubble, title, foot, skip, soundHint, count, greeting);
   root.addEventListener('pointermove', (e) => { pointer.x = e.clientX; pointer.y = e.clientY; pointer.active = e.pointerType !== 'touch'; });
   root.addEventListener('pointerleave', () => { pointer.active = false; });
   function positionHit(id, x, y, width, height) {
@@ -511,6 +513,8 @@ export function createLanding({ onStart, onSources, onContinue, hasSave = () => 
     beat = 0.5; v.rise = 0;
     skip.textContent = 'Skip video ⏭';
     video.classList.remove('hidden', 'out', 'on'); video.currentTime = 0;
+    mediaMark.textContent = 'Includes SI-generated video';
+    mediaMark.classList.remove('hidden');
     video.muted = !sound.on; music.stop();
     // fade in only once frames really play (see the 'playing' listener); give up if it never starts
     clearTimeout(startTimer); startTimer = setTimeout(() => endVideo(), START_LIMIT);
@@ -538,7 +542,7 @@ export function createLanding({ onStart, onSources, onContinue, hasSave = () => 
     }
     setBeat(0);
     clearTimeout(videoTimer);
-    videoTimer = setTimeout(() => { video.pause(); video.classList.add('hidden'); video.classList.remove('out'); }, 1300);
+    videoTimer = setTimeout(() => { video.pause(); video.classList.add('hidden'); mediaMark.textContent = 'Includes SI-generated artwork'; video.classList.remove('out'); }, 1300);
   }
   video.addEventListener('timeupdate', () => { if (beat === 0.5 && video.duration && video.duration - video.currentTime < 0.7) endVideo(); });
 
@@ -561,6 +565,7 @@ export function createLanding({ onStart, onSources, onContinue, hasSave = () => 
     for (const g of Object.values(GREETINGS)) narration.preload([g.text], g.speaker);
     clearTimeout(autoTimer);
     clearTimeout(videoTimer); soundHint.classList.add('hidden'); video.pause(); video.classList.add('hidden'); video.classList.remove('on', 'out');
+    mediaMark.textContent = 'Includes SI-generated artwork'; mediaMark.classList.remove('hidden');
     phase = 'title'; beat = -1;
     const savedMission = hasSave(), completedMission = savedMission && hasCompletedSave();
     continueBtn.classList.toggle('hidden', !onContinue || !savedMission || completedMission);
@@ -583,6 +588,7 @@ export function createLanding({ onStart, onSources, onContinue, hasSave = () => 
     greetingSpeaker = null; greeting.classList.add('hidden');
     phase = 'intro'; crewDue = null; v.sci = 0; CREW_IDS.forEach((_, i) => { crewIn[i] = 0; });
     title.classList.add('hidden'); foot.classList.add('hidden'); skip.classList.remove('hidden');
+    mediaMark.textContent = 'Includes SI-generated artwork'; mediaMark.classList.remove('hidden');
     if (fromTitle) { music.play('title'); return setBeat(1); }
     rockyEntry = null; v.rise = 0; beat = -0.5; bubble.classList.add('hidden');
     checkVideo().then(() => { if (phase === 'intro' && beat === -0.5) { if (hasVideo) playVideo(); else if (videoOnly) toTitle(); else setBeat(0); } });
@@ -593,6 +599,7 @@ export function createLanding({ onStart, onSources, onContinue, hasSave = () => 
     narration.stop('title-greeting'); clearTimeout(greetingTimer);
     if (reducedMotion.matches) { hide(); onStart(); return; }
     phase = 'launch'; launchAt = performance.now();
+    mediaMark.textContent = 'Includes SI-generated artwork'; mediaMark.classList.remove('hidden');
     Object.values(hitButtons).forEach((button) => button.classList.add('hidden'));
     greetingSpeaker = null; greeting.classList.add('hidden');
     title.classList.add('hidden'); foot.classList.add('hidden');
@@ -630,6 +637,7 @@ export function createLanding({ onStart, onSources, onContinue, hasSave = () => 
   function hide() {
     ++introVoiceEpoch; narration.stop(); bubble.querySelector('.voice-controls')?.remove();
     phase = 'off'; clearTimeout(autoTimer); video.pause();
+    mediaMark.classList.add('hidden');
     clearTimeout(startTimer); clearTimeout(stallTimer); clearTimeout(videoTimer);
     clearTimeout(greetingTimer); greetingSpeaker = null; greetingAnimation?.cancel(); greeting.classList.add('hidden');
     Object.values(hitButtons).forEach((button) => button.classList.add('hidden'));

@@ -27,6 +27,7 @@ import { showMissionReport } from './mission-report.js';
 import { showDayReport } from './day-report.js';
 import './mission-controls.css';
 import { compactTasks, crewPortrait, openTaskSheet } from './mobile-tasks.js';
+import './si-disclosure.css';
 
 let nearStation = null, busy = false, started = false;
 let missionEpoch = 0;
@@ -407,18 +408,32 @@ function finalReport() {
     h('h3', {}, '🌟 What went well'), h('ul', {}, (good.length ? good : ['You finished five sols on Mars. That is not easy!']).map((x) => h('li', {}, x))),
     tips.length ? [h('h3', {}, '🚀 Rocky\'s tips for next time'), h('ul', {}, tips.map((x) => h('li', {}, x)))] : null,
     h('h3', {}, '🧠 What you learned'), h('ul', {}, h('li', {}, 'Every choice on a space mission is a trade-off.'), h('li', {}, 'Real experiments help us learn to live on Mars.'), h('li', {}, 'Mars is cold and dusty, with thin air and lots of radiation.')),
-    h('div', { class: 'actions' }, h('button', { class: 'btn', onclick: () => showSources(() => finalReport()) }, 'Data sources'), h('button', { class: 'btn', onclick: () => { m.close(); quitToTitle(); } }, '🏠 Title screen'), h('button', { class: 'btn go', onclick: () => { m.close(); newGame(); } }, 'Play again 🔁')));
+    h('div', { class: 'actions' }, h('button', { class: 'btn', onclick: () => showSources(() => finalReport()) }, 'Sources & SI use'), h('button', { class: 'btn', onclick: () => { m.close(); quitToTitle(); } }, '🏠 Title screen'), h('button', { class: 'btn go', onclick: () => { m.close(); newGame(); } }, 'Play again 🔁')));
   m.el.classList.add('mc', 'mc-sum');
   sfx('finale');
 }
 
 // ---------- Menus ----------
 function showSources(back) {
-  const m = modal(h('h2', {}, '🛰️ Science sources'),
+  const m = modal(h('h2', {}, '🛰️ Sources & SI use'),
+    h('h3', {}, 'Science references'),
     h('p', {}, 'Real science inspired this game. Game scores, costs and puzzles are simplified and invented for play. They are not NASA measurements.'),
     DATA_SOURCES.map(([name, url, note]) => h('p', {}, h('a', { href: url, target: '_blank', rel: 'noopener' }, name), h('br'), h('span', { class: 'note' }, note))),
-    h('p', {}, h('a', { href: `${import.meta.env.BASE_URL}source.zip`, target: '_blank', rel: 'noopener' }, 'Download game source'), ' · ', h('a', { href: `${import.meta.env.BASE_URL}LICENSE.txt`, target: '_blank', rel: 'noopener' }, 'MIT license'), ' · ', h('a', { href: `${import.meta.env.BASE_URL}THIRD-PARTY.txt`, target: '_blank', rel: 'noopener' }, 'Project credits')),
+    h('p', {}, h('a', { href: 'https://github.com/Sarrazre/Junior-Space-Commander/', target: '_blank', rel: 'noopener' }, 'GitHub repository'), ' · ', h('a', { href: `${import.meta.env.BASE_URL}LICENSE.txt`, target: '_blank', rel: 'noopener' }, 'MIT license'), ' · ', h('a', { href: `${import.meta.env.BASE_URL}THIRD-PARTY.txt`, target: '_blank', rel: 'noopener' }, 'Project credits')),
     h('p', {}, h('a', { href: `${import.meta.env.BASE_URL}assets/voice/NOTICE.txt`, target: '_blank', rel: 'noopener' }, 'Voice technology credits and licenses')),
+    h('section', { class: 'si-credits', 'aria-label': 'AI and SI disclosure' },
+      h('b', {}, 'Made with AI / SI assistance'),
+      h('p', {}, 'SI-assisted code and game content; SI-generated artwork, intro video and narration.'),
+      h('details', {}, h('summary', {}, 'Tools and credits'),
+        h('ul', {},
+          h('li', {}, 'OpenAI Codex and Anthropic Claude: code, design iteration, testing and documentation.'),
+          h('li', {}, 'OpenAI image generation: fictional plant artwork and base lighting/damage variants.'),
+          h('li', {}, 'Original base, menu background and mission logo: team-confirmed AI-generated artwork; original tools not recorded.'),
+          h('li', {}, 'Kling: the opening video, identified by its generation metadata.'),
+          h('li', {}, 'Tiny Voca / Dizione: SI-generated Rocky and Mission Control narration. No human voice cloning.'),
+          h('li', {}, 'Mission rules, values and teaching scenarios include SI assistance. NASA/CSA source data is credited separately above.')),
+        h('p', {}, h('a', { href: `${import.meta.env.BASE_URL}SI-USE.json`, target: '_blank', rel: 'noopener' }, 'Asset and generation metadata'), ' · ',
+          h('a', { href: `${import.meta.env.BASE_URL}assets/voice/NOTICE.txt`, target: '_blank', rel: 'noopener' }, 'Narration credits')))),
     h('div', { class: 'actions' }, h('button', { class: 'btn go', onclick: () => { m.close(); back?.(); } }, 'Back')));
 }
 
@@ -472,7 +487,7 @@ function showHelp() {
       h('p', {}, 'Pinch with two fingers to zoom the station, or use the − / + buttons and mouse wheel. Select the percentage to reset. Keyboard: − / + to zoom, 0 to reset. Whole base shows the full station.'),
       !busy && !overlayOpen() && !modalOpen() && h('button', { class: 'btn', onclick: () => { resume(); tour.start(); } }, '🤖 Replay guided tour'),
       h('ul', {}, h('li', {}, 'Walk: arrow keys or WASD, or tap the ground.'), h('li', {}, 'Interact: E or Space, or the green button.'), h('li', {}, 'Switch astronaut: crew portraits or keys 1–4.'), h('li', {}, 'Ask Rocky: R. Whole base: V. Control dashboard: C.'), h('li', {}, 'Rover: W/S drive, A/D steer, E collect.'), h('li', {}, 'Pause or go back: Esc. Mute: M.')),
-      !modalOpen() && !overlayOpen() && h('button', { class: 'btn small', onclick: () => { resume(); showSources(() => { showMenu(); showHelp(); }); } }, '🛰️ Science sources & credits')),
+      !modalOpen() && !overlayOpen() && h('button', { class: 'btn small', onclick: () => { resume(); showSources(() => { showMenu(); showHelp(); }); } }, '🛰️ Sources & SI use')),
   ], 'pause-help');
 }
 

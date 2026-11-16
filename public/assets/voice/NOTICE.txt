@@ -1,5 +1,9 @@
 Junior Space Commander — prepared narration credits
 
+SI-generated audio: Rocky and Mission Control narration was generated offline
+with Tiny Voca and Dizione. Each MP3 includes this disclosure in its ID3 comment;
+manifest.json records SI generation and the tools used. No human voice is cloned.
+
 The game plays authored, pre-recorded MP3 narration only. It contains no voice
 cloning, voice synthesis, downloadable inference model, browser worker, or
 personalized-voice feature. It never records a microphone.

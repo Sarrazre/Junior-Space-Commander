@@ -105,11 +105,22 @@ export const SITE_TASKS = [
       if (spark > 0) for (let i = 0; i < 6; i++) { star(g, dx + Math.cos(i * 1.1 + t * 20) * 16 * (1.2 - spark), SURF - 4 - Math.abs(Math.sin(i * 2)) * 16 * (1.2 - spark), 5 * spark, i, 4, 0.3); g.fillStyle = '#fff6c8'; g.fill(); }
       for (let i = debris.length - 1; i >= 0; i--) { const d = debris[i]; d.life -= dt; d.vy += 420 * dt; d.x += d.vx * dt; d.y += d.vy * dt; if (d.life <= 0) { debris.splice(i, 1); continue; } g.fillStyle = '#e6b07a'; g.fillRect(d.x, d.y, 4, 4); }
     });
-    body.replaceChildren(h('p', {}, 'Stop the drill above the SOFT ROCK (green mark), where the rock is soft enough to drill.'), h('div', { class: 'row' }, c), h('div', { class: 'row' }, h('button', { class: 'px-btn ok', onclick: () => {
+    const drillButton = h('button', { class: 'px-btn ok', 'aria-keyshortcuts': 'Space', onclick: () => {
       if (state !== 'aim') return;
       if (pos >= zone && pos <= zone + 18) { state = 'drill'; sfx('drill'); msg.textContent = 'Drilling…'; }
       else { api.miss(); spark = 1; msg.textContent = 'Clang! Too hard there. Try again and watch the drill.'; }
-    } }, '⛏️ DRILL!')), msg);
+    } }, '⛏️ DRILL! · Space');
+    body.replaceChildren(h('p', {}, 'Stop the drill above the SOFT ROCK (green mark). Press Space or choose DRILL when it is lined up.'), h('div', { class: 'row' }, c), h('div', { class: 'row' }, drillButton), msg);
+    // Scope the shortcut to this task; the shell gates pause/help events first.
+    body.tabIndex = -1;
+    body.addEventListener('keydown', e => {
+      if (e.code !== 'Space') return;
+      const control = e.target.closest?.('button,a,input,textarea,select,summary,[role="button"]');
+      if (control && control !== drillButton) return;
+      e.preventDefault(); e.stopPropagation();
+      if (!e.repeat) drillButton.click();
+    });
+    body.focus({ preventScroll: true });
   }),
 
   (root) => siteShell(root, 'Read the rock layers', (body, api) => {

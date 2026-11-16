@@ -78,11 +78,11 @@ The individual OSDR accession interpretations above are the documented inspirati
 
 - Original project and source: https://github.com/Sarrazre/Junior-Space-Commander/ . This submission builds on that project. Preserve upstream project credit. On 15 November 2026 the owner confirmed that the original code, artwork and intro were created by the team and that reuse rights are held.
 - JavaScript, Vite, Phaser and Three.js power the browser application and 2D/3D scenes. List their shipped licenses with the release.
-- OpenAI Codex assisted implementation, review, debugging, tests, design iteration, documentation, and deployment preparation.
-- OpenAI image generation created or edited selected fictional greenhouse specimens and base lighting/damage variants. Asset prompts/provenance are recorded in `public/assets/greenhouse/README.md`, `public/assets/visual/README.md`, and `production/polish/FIRST-FLIGHT-AND-ATMOSPHERE.md`. These assets are not NASA photographs.
+- SI-generated / SI-assisted code and fictional game content: OpenAI Codex and Anthropic Claude assisted implementation, review, debugging, tests, design iteration, documentation and release preparation. Code/data disclosure is also in HTML metadata, package.json and public/SI-USE.json.
+- OpenAI image generation created or edited selected fictional greenhouse specimens and base lighting/damage variants. These images have visible SI-generated watermarks. Kling generated the intro video, identified by its AIGC metadata; it carries a visible SI-generated watermark throughout playback. Asset prompts/provenance are recorded in `public/assets/greenhouse/README.md`, `public/assets/visual/README.md`, and `production/polish/FIRST-FLIGHT-AND-ATMOSPHERE.md`. These assets are not NASA photographs.
 - Tiny Voca and Dizione by Muhammed Nazeem (n4ze3m) provide synthetic speech. Rocky uses M2; Mission Control uses F2. Prepared MP3 speech is bundled; no voice cloning, personalized generation, model download or inference runtime is included. The authored guidance does not use an LLM, train on children, or listen through a microphone.
-- Prepared narration provenance and retained offline-authoring license texts are supplied in `public/assets/voice/NOTICE.txt` and its referenced files. Browser synthesis workers and inference models are not distributed.
-- The original landing/background/logo/intro assets are inherited from the upstream game. Their creators and distribution rights still need to be confirmed by the team; do not attribute them to NASA without evidence.
+- Narration is SI-generated, acknowledged in credits text, the voice manifest and each MP3’s ID3 metadata. Prepared narration provenance and retained offline-authoring license texts are supplied in `public/assets/voice/NOTICE.txt` and its referenced files. Browser synthesis workers and inference models are not distributed.
+- Original station/menu backgrounds and mission logo are inherited from the team’s upstream game. The team confirmed their AI origin and ownership/reuse; original generation tools were not recorded. These files have visible SI-generated watermarks. The intro’s Kling generation metadata is confirmed. Do not attribute fictional artwork to NASA.
 - Fonts used by the source are Baloo 2 and VT323, requested through Google Fonts. Include their upstream font-license notices in the release if self-hosting or bundling them.
 
 ## Honest limitations
@@ -101,7 +101,7 @@ The individual OSDR accession interpretations above are the documented inspirati
 2. Start a guided mission. Use the objective to send Max to the Command Center.
 3. Show the power-overload options and their visible costs. Pick one, then show the updated dashboard.
 4. Switch crew and complete a science interaction. Point out the distinction between a real reference and invented game values.
-5. Summon Rocky, use the route button, and show one quiz explanation.
+5. Summon Rocky, use the route button, and show the contextual task guidance.
 6. Toggle Whole base and open Control to show how state remains legible.
 7. Show a rover mission and the greenhouse investigation using a separate prepared demonstration session; do not overwrite the judging campaign save.
 8. Finish with the discovery cabinet, five-sol progression and Sources screen.
@@ -145,3 +145,9 @@ On 15 November 2026, the official 2026 overview confirmed the project-tab submis
 ## Owner handoff update — 15 November 2026
 
 The owner confirmed that all original repository content, base artwork and intro video were created by the team. Team name and registered local event are deferred. The owner authorized open-source release. Team-authored code and documentation now use the MIT license in LICENSE. Third-party components, fonts, agency materials and branding retain their own terms. The game was prepared and hosted; the official NASA project form has not been submitted.
+
+## Use of Super Intelligence (SI) — submission response
+
+Yes. OpenAI Codex and Anthropic Claude assisted code, game content, design iteration, testing and documentation. OpenAI image generation produced selected fictional plant art and base lighting/damage variants. Kling generated the intro video. Tiny Voca / Dizione generated the prepared narration. Generated images/video carry visible SI-generated watermarks; audio credits and embedded metadata acknowledge SI generation. Code/data disclosures and asset provenance are in Sources & SI use, project documentation, HTML/package metadata and SI-USE.json. NASA/CSA science sources are credited separately; fictional mission values are not NASA measurements.
+
+Local disclosure changes are prepared for review and have not been deployed. The team confirmed AI generation of the original base, menu background and mission logo; their specific generation tools were not recorded.

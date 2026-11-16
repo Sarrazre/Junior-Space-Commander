@@ -12,3 +12,7 @@ Generated with the built-in image generation tool on 15 November 2026 for this g
 Generated originals: `exec-31416c12-517a-41ae-9736-cfdc9bc015bb.png`, `exec-15b2a570-2de7-469d-a473-e70601624426.png`, `exec-71c0a991-880f-4a5f-b1d6-6645ecaf6413.png`, `exec-efd24df0-5d11-4935-8f3b-56c15ae01d63.png` under `/Users/wess/.codex/generated_images/01a1de8b-5562-7a40-b83b-b2ae0473f485/`.
 
 Equipment foregrounds, seedling, glass ribs, plant shadows and water-flow graphics are code-native drawings in `src/room-visuals.js`; they do not need generated bitmap assets.
+
+## SI disclosure
+
+Distributed generated images include a visible SI-generated watermark and generation metadata. Readable in-game labels also identify artwork when crop/scale hides the file watermark. The label is added mechanically; it is not a new generation or a change to the fictional subject. See `/SI-USE.json` for the full asset record.

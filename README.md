@@ -53,6 +53,12 @@ NASA requests use `DEMO_KEY` by default. A local `.env.local` can set `VITE_NASA
 
 Mini-games are inspired by NASA Open Science Data Repository studies OSD-980, OSD-412, OSD-581, OSD-346, OSD-964 and OSD-658. Game scores, costs, treatments and puzzles are invented for play and are not NASA measurements. See the in-game Data Sources screen for links.
 
+## AI / Super Intelligence (SI) use
+
+OpenAI Codex and Anthropic Claude assisted code generation, implementation, design iteration, testing and documentation, including fictional mission content and game values. OpenAI image generation produced selected plant assets and base lighting/damage variants; the team also confirmed AI origin for the original station background, menu background and mission logo (original tools not recorded). Kling generated the opening video. Tiny Voca / Dizione generated the prepared Rocky and Mission Control narration offline. No human voice cloning or open-ended LLM gameplay is included.
+
+Generated images and the intro carry visible **SI-generated** watermarks. In-game labels remain readable when artwork is cropped or scaled. Narration has embedded MP3 ID3 disclosure and credits. Machine-readable code, data and media provenance is in `public/SI-USE.json`, the HTML metadata and `package.json`. NASA/CSA source observations retain their original attribution; fictional game quantities are not NASA measurements. The existing Sources button opens **Sources & SI use**.
+
 ## Hosted game and submission
 
 The full release is hosted with Sites at https://junior-space-commander.sentientstudios.chatgpt.site . Submission copy and the final checklist are in `production/submission/SUBMISSION.md`.
